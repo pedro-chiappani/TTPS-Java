@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -52,14 +53,40 @@ public class Login extends HttpServlet {
                 .findFirst()
                 .orElse(null);
 		
-		if(usu == null) {
-			response.sendRedirect(request.getContextPath() + "/error.html");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Menu");
+		
+		if(usu == null) {			
+			//response.sendRedirect(request.getContextPath() + "/error.html");
+			 
+			if (dispatcher != null) {
+				request.setAttribute("menu","Error");
+				dispatcher.forward(request, response);
+			}
+			
 		} else if (usu.getPerfil()=="Publicador") {
-			response.sendRedirect(request.getContextPath() + "/publicador.html");
+			//response.sendRedirect(request.getContextPath() + "/publicador.html");
+			
+			if (dispatcher != null) {
+				request.setAttribute("menu","Publicador");
+				dispatcher.forward(request, response);
+			}
+			
 		} else if(usu.getPerfil()=="Administrador") {
-			response.sendRedirect(request.getContextPath() + "/administrador.html");
+			//response.sendRedirect(request.getContextPath() + "/administrador.html");
+			
+			if (dispatcher != null) {
+				request.setAttribute("menu","Administrador");
+				dispatcher.forward(request, response);
+			}
+			
 		}else {
-			response.sendRedirect(request.getContextPath() + "/error.html");
+			//response.sendRedirect(request.getContextPath() + "/error.html");
+			
+			if (dispatcher != null) {
+				request.setAttribute("menu","Error");
+				dispatcher.forward(request, response);
+			}
+						
 		}
 	}
 
