@@ -1,6 +1,7 @@
 package ttps.clasificados;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,21 +30,41 @@ public class Menu extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+				
 		String itemMenu = (String) request.getAttribute("menu"); 
 		
-		System.out.println(itemMenu);
+		//System.out.println(itemMenu);
 		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		
+		out.println("<!DOCTYPE html><html><head>");
+		
+		out.println("<meta charset=\"ISO-8859-1\">");
+		out.println("<title>" + itemMenu + "</title>");
+		
+		out.println("</head>");
+		out.println("<html><body>");
+		
+		out.println("<h1><p>" + itemMenu + "</p></h1>");
+		
+		if(itemMenu == "Error") {
+			out.println("<a href=\"/Clasificados/login.html\"> Login </a>");
+		}
+		
+		out.println("</body></html>");
+		
+		out.close();
+		
+		// Respuesta Practica 2 - ejercicio 3b
+		
+		// con sendRedirect no puedo enviar informacion al servlet que recibe el manejo
+		// con sendRedirect estamos enviando una nueva request
+		// en cambio con forward enviamos la misma request y response con la que estabamos trabajando
+		
+				
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+	
 
 }
