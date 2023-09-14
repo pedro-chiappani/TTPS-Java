@@ -4,8 +4,8 @@ package ttps.clasificados;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,6 +26,8 @@ public class Login extends HttpServlet {
      */
     public Login() {
         // TODO Auto-generated constructor stub
+    	usuarios.add(new Usuario("Pedro", "123456", "Publicador"));
+		usuarios.add(new Usuario("Joaquin", "123456", "Administrador"));
     }
 
 	/**
@@ -41,22 +43,26 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		usuarios.add(new Usuario("Pedro", "123456", "Publicador"));
-		usuarios.add(new Usuario("Joaquin", "123456", "Administrador"));
+		response.setContentType("text/html");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Menu");
+		
 		String nombre = request.getParameter("nombre");
 		String pass = request.getParameter("password");
+		
 		Usuario usu = usuarios.stream()
 				.filter(u -> u.getNombre().equals(nombre) & u.getPassword().equals(pass))
 				.findFirst()
 				.orElse(null);
-		if (usu != null)
-			if (usu.getPerfil() == "Publicador")
-				response.sendRedirect("/clasificados/publicador.html");
-			else
-				response.sendRedirect("/clasificados/administrador.html");
-		else
-			response.sendRedirect("/clasificados/error.html");
-			
+		if (dispatcher != null) {
+			if (usu == null)
+				request.setAttribute("err", "Error");
+			else 
+				request.setAttribute("usu", new Usuario(usu));
+			dispatcher.forward(request, response);
+		}
+		else {
+			System.out.print("bobo");
+		}
 	}
 
 }

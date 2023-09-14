@@ -12,6 +12,12 @@ public class Usuario {
 		this.clave = clave;
 		this.perfil = perfil;
 	}
+	
+	public Usuario(Usuario usu) {
+		this.nombre = usu.getNombre();
+		this.clave = usu.getPassword();
+		this.perfil = usu.getPerfil();
+	}
 
 	public String getNombre() {
 		return nombre;
