@@ -2,8 +2,8 @@
 # https://www.toptal.com/developers/gitignore?templates=eclipse,java
 ### Eclipse ###
 .metadata/
-Servers/
 .metadata bin/ tmp/ *.tmp *.bak *.swp *~.nib local.properties .settings/ .loadpath .recommenders
+Servers/
 # External tool builders
 .externalToolBuilders/
 # Locally stored "Eclipse launch configurations"
