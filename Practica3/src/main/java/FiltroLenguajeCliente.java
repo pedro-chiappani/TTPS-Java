@@ -41,7 +41,7 @@ public class FiltroLenguajeCliente extends HttpFilter implements Filter {
 		}
 		
 		//seteo nombre de atributo
-		if (acceptLanguage == "es") {
+		if (acceptLanguage.equals("es")) {
 			archivoProperties = "textos_es.properties";
 		}else {
 			archivoProperties = "textos_en.properties";
