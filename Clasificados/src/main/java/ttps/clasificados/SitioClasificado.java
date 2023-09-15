@@ -5,9 +5,9 @@ public class SitioClasificado {
 
 	private String nombre;
 	private String email;
-	private int telefono;
+	private String telefono;
 	
-	public SitioClasificado(String unNombre, String unEmail, int unTelefono) {
+	public SitioClasificado(String unNombre, String unEmail, String unTelefono) {
 		this.email = unEmail;
 		this.nombre = unNombre;
 		this.telefono = unTelefono;
@@ -29,11 +29,11 @@ public class SitioClasificado {
 		this.email = email;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	

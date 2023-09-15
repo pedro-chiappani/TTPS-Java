@@ -3,6 +3,7 @@ package ttps.clasificados;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,19 +20,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Menu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public Menu() {
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		String itemMenu = (String) request.getAttribute("menu"); 
+		String itemMenu = (String) request.getAttribute("menu");
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Encabezado");
+		
 		
 		//System.out.println(itemMenu);
 		
@@ -45,6 +40,10 @@ public class Menu extends HttpServlet {
 		
 		out.println("</head>");
 		out.println("<html><body>");
+
+		if (dispatcher != null) {
+			dispatcher.include(request, response); 
+		}
 		
 		out.println("<h1><p>" + itemMenu + "</p></h1>");
 		

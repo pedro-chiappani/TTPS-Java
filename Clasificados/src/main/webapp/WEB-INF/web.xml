@@ -21,4 +21,9 @@
  	<param-name>telefono</param-name>
  	<param-value>2215423607</param-value>
   </context-param>
+  <listener>
+  	<listener-class>
+  		ttps.clasificados.ContextListener
+  	</listener-class>
+  </listener>  
 </web-app>
