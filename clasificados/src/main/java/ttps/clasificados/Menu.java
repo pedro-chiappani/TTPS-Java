@@ -3,6 +3,7 @@ package ttps.clasificados;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,6 +30,8 @@ public class Menu extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Usuario usu = (Usuario) request.getAttribute("usu");	
+		
+		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/Encabezado");
 
 		String err = (String) request.getAttribute("Error");
 		PrintWriter out = response.getWriter();
@@ -39,6 +42,9 @@ public class Menu extends HttpServlet {
 		else {
 			out.print("<html>\n"
 					+ "<head>");
+			if (dispatcher != null)
+				dispatcher.include(request,response);
+			
 			out.print(
 					 "<title>Insert title here</title>\n"
 					+ "</head>");
