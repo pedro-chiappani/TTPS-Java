@@ -81,12 +81,12 @@ public class MensajeDAOjdbc implements MensajeDAO {
 
    @Override
    public void actualizar(Mensaje msj) {
-       String query = "UPDATE mensajes SET nombre = ?, dni = ? WHERE id = ?";
+       String query = "UPDATE mensajes SET mensaje = ?, usuario_id = ? WHERE id = ?";
        
        try (Connection con = MiDataSource.getDataSource().getConnection();
        		CallableStatement statement = con.prepareCall(query)) {
-           statement.setString(1, msj.getNombre());
-           statement.setInt(2, msj.getDni());
+           statement.setString(1, msj.getMensaje());
+           statement.setLong(2, msj.getUsuario().getId());
            statement.setLong(3, msj.getId());
            statement.executeUpdate();
            statement.close();
@@ -97,12 +97,12 @@ public class MensajeDAOjdbc implements MensajeDAO {
    }
 
    @Override
-   public void borrar(Usuario u) {
+   public void borrar(Mensaje msj) {
        String query = "DELETE FROM usuarios WHERE id = ?";
        
        try (Connection con = MiDataSource.getDataSource().getConnection();
        		CallableStatement statement = con.prepareCall(query)) {
-           statement.setLong(1, u.getId());
+           statement.setLong(1, msj.getId());
            statement.executeUpdate();
            statement.close();
   		 con.close();
@@ -111,5 +111,5 @@ public class MensajeDAOjdbc implements MensajeDAO {
        }
    }
 
-}
+
 }
