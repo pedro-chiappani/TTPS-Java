@@ -1,5 +1,5 @@
-package ttps.clasesDAO;
-import ttps.clasesDeObjetosDelSistema.Mensaje;
+package src.main.java.ttps.clasesDAO;
+import main.java.ttps.clasesDeObjetosDelSistema.Mensaje;
 
 import java.util.List;
 
