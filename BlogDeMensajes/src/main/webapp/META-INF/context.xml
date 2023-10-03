@@ -2,7 +2,7 @@
 <Context debug="5" reloadable="true" crossContext="true">
  <Resource name="jdbc/MySQLDS" auth="Container" type="javax.sql.DataSource"
  maxActive="100" maxIdle="30" maxWait="10000"
- username="root" password="Pepe.1011"
+ username="root" password="rootpass"
  driverClassName="com.mysql.jdbc.Driver"
- url="jdbc:mysql://localhost:3306/ttps_practica4"/>
+ url="jdbc:mysql://localhost:3306/ttpspractica4"/>
 </Context>

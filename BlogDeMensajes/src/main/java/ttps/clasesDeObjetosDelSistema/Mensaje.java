@@ -16,6 +16,10 @@ public class Mensaje {
 	public Mensaje() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String toString() {
+		return this.getMensaje() + " Usuario: " + this.getUsuario().getNombre() + " - " + this.getUsuario().getDni();
+	}
 
 	public String getMensaje() {
 		return mensaje;

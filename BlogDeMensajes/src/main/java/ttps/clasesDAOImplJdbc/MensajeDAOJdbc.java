@@ -18,7 +18,7 @@ public class MensajeDAOJdbc implements MensajeDAO {
 		 try{
 		 Connection con = MiDataSource.getDataSource().getConnection(); 
 		 Statement st = con.createStatement();
-		 ResultSet rs= st.executeQuery("Select u from mensajes where u.id='"+identificacion+"'");
+		 ResultSet rs= st.executeQuery("Select u from mensaje where u.id='"+identificacion+"'");
 		 if (rs.next()==true) {
 
 			 mensaje = new Mensaje();
