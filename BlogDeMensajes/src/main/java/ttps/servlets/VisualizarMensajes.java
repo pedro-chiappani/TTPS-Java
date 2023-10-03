@@ -13,6 +13,7 @@ import ttps.clasesDeObjetosDelSistema.Mensaje;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Servlet implementation class VisualizarMensajes
@@ -33,10 +34,8 @@ public class VisualizarMensajes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		MensajeDAOJdbc mDAO = new MensajeDAOJdbc(); 
-		Mensaje mensaje1 = mDAO.recuperar((long) 1);
-		
-		System.out.print(mensaje1.toString());
+//		MensajeDAOJdbc mDAO = new MensajeDAOJdbc(); 
+//		List<Mensaje> mensajes = mDAO.recuperarTodos();			
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -48,15 +47,17 @@ public class VisualizarMensajes extends HttpServlet {
 		
 		out.println("</head>");
 		out.println("<html><body>");
-
-		out.println("<p>");
 		
-		out.println("Mensajes: ");
+		out.println("<a href='agregarMensaje.html'> Agregar Mensaje </a>");
 		
-		
-		
-		out.println("</p>");
-		
+		out.println("<p> Mensajes: </p>");
+//		out.println("<ul>");
+//		
+//		for (Mensaje msj: mensajes) {
+//			out.println("<li>" + msj.toString() + "</li>");
+//		}
+//		
+//		out.println("</ul>");
 		out.println("</body></html>");
 		
 		out.close();

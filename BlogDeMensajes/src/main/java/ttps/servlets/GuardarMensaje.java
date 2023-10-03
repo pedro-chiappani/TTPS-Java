@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Servlet implementation class GuardarMensaje
@@ -25,16 +26,40 @@ public class GuardarMensaje extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<!DOCTYPE html><html><head>");
+		
+		out.println("<meta charset=\"ISO-8859-1\">");
+		out.println("<title> Visualizar Mensaje </title>");
+		
+		out.println("</head>");
+		out.println("<html><body>");
+		
+		out.println("GUARDAR MENSAJE GET");
+		
+		out.println("</body></html>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<!DOCTYPE html><html><head>");
+		
+		out.println("<meta charset=\"ISO-8859-1\">");
+		out.println("<title> Visualizar Mensaje </title>");
+		
+		out.println("</head>");
+		out.println("<html><body>");
+		
+		out.println("GUARDAR MENSAJE POST");
+		
+		out.println("</body></html>");
 	}
 
 }

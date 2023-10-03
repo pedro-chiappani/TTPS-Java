@@ -1,24 +1,23 @@
 package ttps.clasesDeObjetosDelSistema;
 
+
 public class Mensaje {
 
 	private Long id;
 	private String mensaje;
-	private Usuario usuario;
+	private String usuario;
 	
-	public Mensaje(Long id, String mensaje, Usuario usuarioId) {
+	public Mensaje(Long id, String mensaje, String usuario) {
 		super();
 		this.setId(id);
 		this.setMensaje(mensaje);
-		this.setUsuario(usuarioId);
+		this.setUsuario(usuario);
 	}
 
-	public Mensaje() {
-		// TODO Auto-generated constructor stub
-	}
+	public Mensaje() {}
 	
 	public String toString() {
-		return this.getMensaje() + " Usuario: " + this.getUsuario().getNombre() + " - " + this.getUsuario().getDni();
+		return this.getMensaje() + " - Usuario: " + this.getUsuario();
 	}
 
 	public String getMensaje() {
@@ -29,12 +28,12 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
-	public Usuario getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuarioId) {
-		this.usuario = usuarioId;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
