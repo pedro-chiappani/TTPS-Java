@@ -1,10 +1,19 @@
 package ttps.clasesDeObjetosDelSistema;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name="Mensaje")
 public class Mensaje {
 
+	@Id @GeneratedValue
+	@Column(name="mensaje_id")
 	private Long id;
+	
+	@Column
 	private String mensaje;
+	
+	@Column
 	private String usuario;
 	
 	public Mensaje(Long id, String mensaje, String usuario) {
