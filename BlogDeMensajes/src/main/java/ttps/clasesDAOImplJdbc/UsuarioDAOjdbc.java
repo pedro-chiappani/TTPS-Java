@@ -18,7 +18,7 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
 		 try{
 		 Connection con = MiDataSource.getDataSource().getConnection(); 
 		 Statement st = con.createStatement();
-		 ResultSet rs= st.executeQuery("Select u from usuarios where u.id='"+identificacion+"'");
+		 ResultSet rs= st.executeQuery("Select * from usuarios where idusuarios='"+identificacion+"'");
 		 if (rs.next()==true) {
 		 usuario = new Usuario();
 		 usuario.setId(rs.getLong(1));
@@ -27,6 +27,29 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
 		 rs.close();
 		 st.close();
 		 con.close();
+		 } catch (java.sql.SQLException e) {
+		 System.out.println("Error de SQL: "+e.getMessage());
+		 }
+		 return usuario;
+		 }
+	
+	public Usuario recuperar(String nom) {
+		 Usuario usuario = null;
+		 try{
+			 System.out.println("Entro a recuperar Usuario por nombre");
+			 Connection con = MiDataSource.getDataSource().getConnection(); 
+			 System.out.println("Me conecto al DataSource");
+			 Statement st = con.createStatement();
+			 ResultSet rs= st.executeQuery("SELECT * FROM usuarios WHERE nombre='Pepe'");
+			 if (rs.next()==true) {
+				 System.out.println("creo usuario");
+			 	usuario = new Usuario();
+			 	usuario.setId(rs.getLong(1));
+			 	usuario.setNombre(rs.getString(2));
+			 }
+			 rs.close();
+			 st.close();
+			 con.close();
 		 } catch (java.sql.SQLException e) {
 		 System.out.println("Error de SQL: "+e.getMessage());
 		 }

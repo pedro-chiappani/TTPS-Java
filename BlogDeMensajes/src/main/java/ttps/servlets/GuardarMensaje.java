@@ -5,6 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ttps.clasesDAO.MensajeDAO;
+import ttps.clasesDAO.UsuarioDAO;
+import ttps.clasesDAOImplJdbc.FactoryDAO;
+import ttps.clasesDeObjetosDelSistema.Mensaje;
+import ttps.clasesDeObjetosDelSistema.Usuario;
+
 import java.io.IOException;
 
 /**
@@ -34,9 +40,18 @@ public class GuardarMensaje extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String men = (String) request.getAttribute("mensaje");
-		String pers = (String) request.getAttribute("persona");
+		String men = (String) request.getParameter("mensaje");
+		String pers = (String) request.getParameter("persona");
 		
+		System.out.println(men + pers);
+		
+		UsuarioDAO uDAO = FactoryDAO.getUsuario();
+		MensajeDAO mDAO = FactoryDAO.getMensaje();
+		Usuario u = uDAO.recuperar(pers);
+		System.out.print(u);
+		Mensaje m = new Mensaje(men, u.getId());
+		mDAO.guardar(m);
+		response.sendRedirect("/BlogDeMensajes/VisualizarMensajes");
 	}
 
 }

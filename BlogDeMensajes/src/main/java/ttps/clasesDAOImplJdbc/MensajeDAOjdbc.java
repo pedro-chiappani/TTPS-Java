@@ -25,10 +25,11 @@ public class MensajeDAOjdbc implements MensajeDAO {
 			 mensaje.setId(rs.getLong(1));
 			 mensaje.setMensaje(rs.getString(2));
 			 UsuarioDAOjdbc u = new UsuarioDAOjdbc();
-			 mensaje.setUsuario(u.recuperar(rs.getLong(3)));
+			 mensaje.setUsuario((rs.getLong(3)));
 		 }
 		 rs.close();
 		 st.close();
+		 con.commit();
 		 con.close();
 		 } catch (java.sql.SQLException e) {
 		 System.out.println("Error de SQL: "+e.getMessage());
@@ -63,15 +64,16 @@ public class MensajeDAOjdbc implements MensajeDAO {
 
    @Override
    public void guardar(Mensaje msj) {
-       String query = "INSERT INTO mensajes (mensaje, usuario_id) VALUES (?, ?)";
+       String query = "INSERT INTO mensajes (mensaje, usuario) VALUES (?, ?)";
        
        try (Connection con = MiDataSource.getDataSource().getConnection();
        		CallableStatement statement = con.prepareCall(query)) {
            statement.setString(1, msj.getMensaje());
-           statement.setLong(2, msj.getUsuario().getId());
+           statement.setLong(2, msj.getUsuario());
            statement.executeUpdate();
            statement.close();
-  		 	con.close();
+           con.commit();
+  		 con.close();
        } catch (java.sql.SQLException e) {
            e.printStackTrace();
        }
@@ -84,7 +86,7 @@ public class MensajeDAOjdbc implements MensajeDAO {
        try (Connection con = MiDataSource.getDataSource().getConnection();
        		CallableStatement statement = con.prepareCall(query)) {
            statement.setString(1, msj.getMensaje());
-           statement.setLong(2, msj.getUsuario().getId());
+           statement.setLong(2, msj.getUsuario());
            statement.setLong(3, msj.getId());
            statement.executeUpdate();
            statement.close();

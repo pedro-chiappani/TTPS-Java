@@ -5,6 +5,7 @@ import java.util.List;
 public interface UsuarioDAO {
 
 	Usuario recuperar(Long id);
+	Usuario recuperar(String nom);
 	List<Usuario> recuperarTodos();
 	void guardar(Usuario u);
 	void actualizar(Usuario u);

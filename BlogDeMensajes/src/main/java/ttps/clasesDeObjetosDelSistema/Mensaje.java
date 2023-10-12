@@ -4,11 +4,10 @@ public class Mensaje {
 	
 	private Long id;
 	private String mensaje;
-	private Usuario usuario;
+	private Long usuario;
 	
-	public Mensaje(Long id, String mensaje, Usuario usuarioId) {
+	public Mensaje(String mensaje, Long usuarioId) {
 		super();
-		this.setId(id);
 		this.setMensaje(mensaje);
 		this.setUsuario(usuarioId);
 	}
@@ -25,11 +24,11 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
-	public Usuario getUsuario() {
+	public Long getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuarioId) {
+	public void setUsuario(Long usuarioId) {
 		this.usuario = usuarioId;
 	}
 

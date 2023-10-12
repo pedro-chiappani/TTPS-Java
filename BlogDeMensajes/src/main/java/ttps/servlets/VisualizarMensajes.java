@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import ttps.clasesDAO.UsuarioDAO;
 import ttps.clasesDAOImplJdbc.FactoryDAO;
 import ttps.clasesDeObjetosDelSistema.Mensaje;
 
@@ -31,12 +32,13 @@ public class VisualizarMensajes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<Mensaje> mensajes = FactoryDAO.getMensaje().recuperarTodos();
+		UsuarioDAO uDAO = FactoryDAO.getUsuario();
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 
 		out.print("<h1>Mensajes</h1>");
 		for (Mensaje men: mensajes) {
-			out.print("<p>Mensaje:"+ men.getMensaje() + "</p>");
+			out.print("<p> Mensaje: "+ men.getMensaje() +"    /      Usuario: "+ uDAO.recuperar(men.getUsuario()).getNombre() +"</p>");
 		}
 		out.println("<a href='agregarMensajes.html'> Agregar Mensaje </a>");
 		out.close();}
