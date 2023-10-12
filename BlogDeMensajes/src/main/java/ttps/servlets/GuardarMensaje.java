@@ -5,8 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ttps.clasesDAOImplJdbc.FactoryDAO;
+import ttps.clasesDeObjetosDelSistema.Mensaje;
+import ttps.clasesDeObjetosDelSistema.Usuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Servlet implementation class GuardarMensaje
@@ -26,40 +31,28 @@ public class GuardarMensaje extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
-		out.println("<!DOCTYPE html><html><head>");
-		
-		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("<title> Visualizar Mensaje </title>");
-		
-		out.println("</head>");
-		out.println("<html><body>");
-		
-		out.println("GUARDAR MENSAJE GET");
-		
-		out.println("</body></html>");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		String mensaje = (String) request.getParameter("mensaje");
+		String persona = (String) request.getParameter("persona");
 		
-		out.println("<!DOCTYPE html><html><head>");
+		Usuario usu = FactoryDAO.getUsuario().recuperarPorNombre(persona);	
 		
-		out.println("<meta charset=\"ISO-8859-1\">");
-		out.println("<title> Visualizar Mensaje </title>");
+		if(usu != null) {
+			//System.out.print(usu.getId());
+			Mensaje msj = new Mensaje((long) 10,mensaje,usu);
+			FactoryDAO.getMensaje().guardar(msj);
+		}else {
+			System.out.print("No existe dicho usu");
+		}
 		
-		out.println("</head>");
-		out.println("<html><body>");
+		response.sendRedirect("/practica4/VisualizarMensajes");	
 		
-		out.println("GUARDAR MENSAJE POST");
-		
-		out.println("</body></html>");
 	}
 
 }

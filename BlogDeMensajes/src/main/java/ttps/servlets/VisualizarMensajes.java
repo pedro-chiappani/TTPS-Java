@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import ttps.clasesDAO.MensajeDAO;
+import ttps.clasesDAOImplJdbc.FactoryDAO;
 import ttps.clasesDAOImplJdbc.MensajeDAOJdbc;
 import ttps.clasesDeObjetosDelSistema.Mensaje;
 
@@ -34,8 +35,7 @@ public class VisualizarMensajes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		MensajeDAOJdbc mDAO = new MensajeDAOJdbc(); 
-		List<Mensaje> mensajes = mDAO.recuperarTodos();			
+		List<Mensaje> mensajes = FactoryDAO.getMensaje().recuperarTodos();		
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();

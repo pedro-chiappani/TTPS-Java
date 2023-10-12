@@ -1,32 +1,30 @@
 package ttps.clasesDeObjetosDelSistema;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="Mensaje")
+//import javax.persistence.*;
+//
+//@Entity
+//@Table(name="Mensaje")
 public class Mensaje {
 
-	@Id @GeneratedValue
-	@Column(name="mensaje_id")
+//	@Id @GeneratedValue
+//	@Column(name="mensaje_id")
 	private Long id;
 	
-	@Column
+//	@Column
 	private String mensaje;
 	
-	@Column
-	private String usuario;
+//	@Column
+	private Usuario usuario;
 	
-	public Mensaje(Long id, String mensaje, String usuario) {
+	public Mensaje(Long id, String mensaje, Usuario usuario) {
 		super();
 		this.setId(id);
 		this.setMensaje(mensaje);
 		this.setUsuario(usuario);
 	}
 
-	public Mensaje() {}
-	
-	public String toString() {
-		return this.getMensaje() + " - Usuario: " + this.getUsuario();
+	public Mensaje() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getMensaje() {
@@ -37,11 +35,11 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
@@ -51,6 +49,10 @@ public class Mensaje {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String toString() {
+		return this.getMensaje() + " - " + this.getUsuario().getNombre();
 	}
 	
 }
