@@ -23,7 +23,6 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
 		 usuario = new Usuario();
 		 usuario.setId(rs.getLong(1));
 		 usuario.setNombre(rs.getString(2));
-		 usuario.setDni(rs.getInt(3));
 		 }
 		 rs.close();
 		 st.close();
@@ -48,7 +47,6 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
                 Usuario user = new Usuario();
                 user.setId(resultSet.getLong(1));
                 user.setNombre(resultSet.getString(2));
-                user.setDni(resultSet.getInt(3));
                 users.add(user);
             }
             st.close();
@@ -62,12 +60,11 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
 
     @Override
     public void guardar(Usuario user) {
-        String query = "INSERT INTO usuarios (nombre, dni) VALUES (?, ?)";
+        String query = "INSERT INTO usuarios (nombre) VALUES (?)";
         
         try (Connection con = MiDataSource.getDataSource().getConnection();
         		CallableStatement statement = con.prepareCall(query)) {
             statement.setString(1, user.getNombre());
-            statement.setInt(2, user.getDni());
             statement.executeUpdate();
             statement.close();
    		 	con.close();
@@ -78,12 +75,11 @@ public class UsuarioDAOjdbc implements UsuarioDAO {
 
     @Override
     public void actualizar(Usuario user) {
-        String query = "UPDATE usuarios SET nombre = ?, dni = ? WHERE id = ?";
+        String query = "UPDATE usuarios SET nombre = ? WHERE id = ?";
         
         try (Connection con = MiDataSource.getDataSource().getConnection();
         		CallableStatement statement = con.prepareCall(query)) {
             statement.setString(1, user.getNombre());
-            statement.setInt(2, user.getDni());
             statement.setLong(3, user.getId());
             statement.executeUpdate();
             statement.close();

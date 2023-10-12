@@ -34,7 +34,9 @@ public class GuardarMensaje extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String men = (String) request.getAttribute("mensaje");
+		String pers = (String) request.getAttribute("persona");
+		
 	}
 
 }

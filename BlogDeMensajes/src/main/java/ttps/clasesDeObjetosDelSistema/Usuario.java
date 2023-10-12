@@ -4,11 +4,9 @@ public class Usuario {
 	
 	private Long id;
 	private String nombre;
-	private int dni;
 	
-	public Usuario (Long id, String nom, int dni) {
+	public Usuario (Long id, String nom) {
 		this.setId(id);
-		this.setDni(dni);
 		this.setNombre(nom);
 	}
 	
@@ -21,12 +19,6 @@ public class Usuario {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public int getDni() {
-		return dni;
-	}
-	public void setDni(int dni) {
-		this.dni = dni;
 	}
 
 	public Long getId() {

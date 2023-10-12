@@ -39,19 +39,17 @@ public class MensajeDAOjdbc implements MensajeDAO {
 	@Override
    public List<Mensaje> recuperarTodos() {
        List<Mensaje> mensajes = new ArrayList<>();
-       String query = "SELECT * FROM usuarios";
+       String query = "SELECT * FROM mensajes";
        
        try ( 
        		Connection con = MiDataSource.getDataSource().getConnection(); 
       		 Statement st = con.createStatement();
-            ResultSet resultSet = st.executeQuery("select * from mensaje")) {
+            ResultSet resultSet = st.executeQuery("select * from mensajes")) {
            
            while (resultSet.next()) {
                Mensaje mensaje = new Mensaje();
                mensaje.setId(resultSet.getLong(1));
                mensaje.setMensaje(resultSet.getString(2));
-               UsuarioDAOjdbc u = new UsuarioDAOjdbc();
-               mensaje.setUsuario(u.recuperar(resultSet.getLong(3)));
                mensajes.add(mensaje);
            }
            st.close();
@@ -98,7 +96,7 @@ public class MensajeDAOjdbc implements MensajeDAO {
 
    @Override
    public void borrar(Mensaje msj) {
-       String query = "DELETE FROM usuarios WHERE id = ?";
+       String query = "DELETE FROM mensajes WHERE id = ?";
        
        try (Connection con = MiDataSource.getDataSource().getConnection();
        		CallableStatement statement = con.prepareCall(query)) {
