@@ -1,8 +1,22 @@
 package ttps.clasesDeObjetosDelSistema;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuario")
 public class Usuario {
-	
+
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, name="usuario_id")
 	private Long id;
+	
+	@Column
 	private String nombre;
 	
 	public Usuario (Long id, String nom) {
@@ -10,9 +24,7 @@ public class Usuario {
 		this.setNombre(nom);
 	}
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
+	public Usuario() {}
 
 	public String getNombre() {
 		return nombre;

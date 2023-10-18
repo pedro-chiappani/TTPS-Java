@@ -1,15 +1,10 @@
 package ttps.servlets;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import ttps.clasesDAO.MensajeDAO;
-import ttps.clasesDAOImplJdbc.FactoryDAO;
-import ttps.clasesDAOImplJdbc.MensajeDAOJdbc;
+import ttps.clasesDAO.FactoryDAO;
 import ttps.clasesDeObjetosDelSistema.Mensaje;
 
 import java.io.IOException;
