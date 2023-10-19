@@ -42,8 +42,11 @@ public class MensajeDAOJPA implements MensajeDAO {
         try {
             em.getTransaction().begin();
             TypedQuery<Mensaje> query = em.createQuery("SELECT * FROM mensaje", Mensaje.class);
+            System.out.println("Debug 1");
             mensajes = query.getResultList();
+            System.out.println("Debug 2");
             em.getTransaction().commit();
+            System.out.println("Debug 3");
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

@@ -43,9 +43,11 @@ public class GuardarMensaje extends HttpServlet {
 		
 		Usuario usu = FactoryDAO.getUsuario().recuperarPorNombre(persona);	
 		
+		
 		if(usu != null) {
 			//System.out.print(usu.getId());
-			Mensaje msj = new Mensaje((long) 10,mensaje,usu);
+			Mensaje msj = new Mensaje((long) 9,mensaje,usu);
+			System.out.println(mensaje.toString());
 			FactoryDAO.getMensaje().guardar(msj);
 		}else {
 			System.out.print("No existe dicho usu");

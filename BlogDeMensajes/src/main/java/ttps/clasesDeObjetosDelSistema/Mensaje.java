@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Mensaje {
 
 	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(nullable = false, name="mensaje_id")
 	private Long id;
 	
@@ -20,6 +20,12 @@ public class Mensaje {
 	public Mensaje(Long id, String mensaje, Usuario usuario) {
 		super();
 		this.setId(id);
+		this.setMensaje(mensaje);
+		this.setUsuario(usuario);
+	}
+	
+	public Mensaje(String mensaje, Usuario usuario) {
+		super();
 		this.setMensaje(mensaje);
 		this.setUsuario(usuario);
 	}

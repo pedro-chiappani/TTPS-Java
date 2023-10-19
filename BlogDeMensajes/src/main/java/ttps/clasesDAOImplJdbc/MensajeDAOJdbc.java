@@ -63,7 +63,7 @@ public class MensajeDAOJdbc implements MensajeDAO {
 
 	@Override
 	public void guardar(Mensaje msj) {
-		String query = "INSERT INTO mensaje (id, mensaje, usuario_id) VALUES (?, ?, ?)";
+		String query = "INSERT INTO mensaje (id, texto, usuario_id) VALUES (?, ?, ?)";
 
 		try (Connection con = MiDataSource.getDataSource().getConnection();
 				CallableStatement statement = con.prepareCall(query)) {
