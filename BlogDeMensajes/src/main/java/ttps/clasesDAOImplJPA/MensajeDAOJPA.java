@@ -59,13 +59,8 @@ public class MensajeDAOJPA implements MensajeDAO {
 	public void guardar(Mensaje m) {		
 		try {
             em.getTransaction().begin();
-            System.out.println("pre persists");
-            System.out.println(m.getId() + " / " + m.toString());
             em.persist(m);
-            System.out.println("precommit");
             em.getTransaction().commit();
-            
-            System.out.println("post");
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
