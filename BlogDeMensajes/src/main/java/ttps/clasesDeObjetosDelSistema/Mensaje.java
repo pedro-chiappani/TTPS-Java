@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Mensaje {
 
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = false, name="mensaje_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private Long id;
 	
 	@Column
@@ -16,21 +16,14 @@ public class Mensaje {
 	
 	@ManyToOne
 	private Usuario usuario;
-	
-	public Mensaje(Long id, String mensaje, Usuario usuario) {
-		super();
-		this.setId(id);
-		this.setMensaje(mensaje);
-		this.setUsuario(usuario);
-	}
-	
+
+	public Mensaje() {}
+		
 	public Mensaje(String mensaje, Usuario usuario) {
-		super();
 		this.setMensaje(mensaje);
 		this.setUsuario(usuario);
 	}
 
-	public Mensaje() {}
 
 	public String getMensaje() {
 		return mensaje;

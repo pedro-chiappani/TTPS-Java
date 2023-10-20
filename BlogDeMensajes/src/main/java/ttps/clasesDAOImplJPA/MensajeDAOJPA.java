@@ -41,12 +41,9 @@ public class MensajeDAOJPA implements MensajeDAO {
 		List<Mensaje> mensajes = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<Mensaje> query = em.createQuery("SELECT * FROM mensaje", Mensaje.class);
-            System.out.println("Debug 1");
+            TypedQuery<Mensaje> query = em.createQuery("SELECT m FROM Mensaje m", Mensaje.class);
             mensajes = query.getResultList();
-            System.out.println("Debug 2");
             em.getTransaction().commit();
-            System.out.println("Debug 3");
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
@@ -62,8 +59,13 @@ public class MensajeDAOJPA implements MensajeDAO {
 	public void guardar(Mensaje m) {		
 		try {
             em.getTransaction().begin();
+            System.out.println("pre persists");
+            System.out.println(m.getId() + " / " + m.toString());
             em.persist(m);
+            System.out.println("precommit");
             em.getTransaction().commit();
+            
+            System.out.println("post");
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

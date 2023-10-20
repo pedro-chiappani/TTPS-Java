@@ -12,19 +12,20 @@ import javax.persistence.Table;
 public class Usuario {
 
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = false, name="usuario_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false)
 	private Long id;
 	
 	@Column
 	private String nombre;
+	
+	public Usuario() {}
 	
 	public Usuario (Long id, String nom) {
 		this.setId(id);
 		this.setNombre(nom);
 	}
 	
-	public Usuario() {}
 
 	public String getNombre() {
 		return nombre;

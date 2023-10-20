@@ -41,7 +41,7 @@ public class UsuarioDAOJPA implements UsuarioDAO {
 		List<Usuario> usuarios = null;
         try {
             em.getTransaction().begin();
-            TypedQuery<Usuario> query = em.createQuery("SELECT * FROM usuario", Usuario.class);
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
             usuarios = query.getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class UsuarioDAOJPA implements UsuarioDAO {
         try {
             em.getTransaction().begin();
             
-            TypedQuery<Usuario> query = em.createQuery("SELECT * FROM usuario where nombre= ?1", Usuario.class);
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u where nombre= ?1", Usuario.class);
             query.setParameter(1, unNombre);
             usuario = query.getSingleResult();
             em.getTransaction().commit();

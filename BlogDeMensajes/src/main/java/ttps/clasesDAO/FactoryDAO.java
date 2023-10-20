@@ -19,10 +19,10 @@ public class FactoryDAO {
 	
 	public static MensajeDAO getMensaje() {
 		String daoImpl="JPA";
-		
+
 		if( daoImpl.equals("JPA") ){
 			return new MensajeDAOJPA();
-		}else {		
+		}else {
 			return new MensajeDAOJdbc();
 		}
 	}

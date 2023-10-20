@@ -29,9 +29,8 @@ public class VisualizarMensajes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		List<Mensaje> mensajes = FactoryDAO.getMensaje().recuperarTodos();		
-		
+			
+		List<Mensaje> mensajesXDXD = FactoryDAO.getMensaje().recuperarTodos();	
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
@@ -49,7 +48,7 @@ public class VisualizarMensajes extends HttpServlet {
 		
 		out.println("<ul>");
 		
-		for (Mensaje msj: mensajes) {
+		for (Mensaje msj: mensajesXDXD) {
 			out.println("<li>" + msj.toString() + "</li>");
 		}
 		
