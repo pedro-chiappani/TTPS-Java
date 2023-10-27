@@ -1,5 +1,7 @@
 package ttps.clasesDAO;
 
-public interface GastoDAO {
+import ttps.clasesDeObjetosDelSistema.Gasto;
+
+public interface GastoDAO extends GenericDAO<Gasto>{
 
 }
