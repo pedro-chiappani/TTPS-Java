@@ -1,7 +1,8 @@
+package model;
 
 import java.util.HashSet;
 
-public class DivisionFija implements EstrategiaDivision {
+public class DivisionPorcentaje implements EstrategiaDivision {
 
 	@Override
 	public HashSet<Usuario> obtenerDivision() {

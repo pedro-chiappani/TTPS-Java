@@ -1,3 +1,4 @@
+
 import java.util.HashSet;
 
 public class DivisionIgual implements EstrategiaDivision {

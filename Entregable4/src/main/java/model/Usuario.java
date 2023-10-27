@@ -1,16 +1,67 @@
+package model;
 
 import java.util.List;
 
-public class Usuario {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
+
+
+@Entity
+@Table(name = "usuarios")
+public class Usuario {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, name="usuario_id")
+	private long id;
+	
+	@Column
 	private String nombreUsuario;
+	
+	@Column
 	private String email;
+	
+	@Column
 	private String nombre;
+	
+	@Column
 	private String apellido;
+	
+	@Column
 	private String clave;
+	
+	@ManyToMany()
+	@JoinTable(name="usuarios_gastos",
+			   joinColumns = @JoinColumn(name = "usuarios_id"), 
+			   inverseJoinColumns = @JoinColumn(name = "gastos_id")
+	)
 	private List<Gasto> gastos;
+	
+	@ManyToMany()
+	@JoinTable(name="usuarios_grupos",
+			   joinColumns = @JoinColumn(name = "usuarios_id"), 
+			   inverseJoinColumns = @JoinColumn(name = "grupos_id")
+	)
 	private List<Grupo> grupos;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
 	private List<Pago> pagos;
+	
+	@ManyToMany()
+	@JoinTable(name="amigos",
+			   joinColumns = @JoinColumn(name = "usuarios_id"), 
+			   inverseJoinColumns = @JoinColumn(name = "usuarios_id")
+	)
 	private List<Usuario> amigos;
 	
 	public Usuario() {
