@@ -1,5 +1,7 @@
 package ttps.clasesDAO;
 
-public interface CategoriaDAO extends GenericDAO<CategoriaDAO>{
+import ttps.clasesDeObjetosDelSistema.Categoria;
+
+public interface CategoriaDAO extends GenericDAO<Categoria>{
 
 }
