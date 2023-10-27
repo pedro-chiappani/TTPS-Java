@@ -1,6 +1,6 @@
 package ttps.clasesDAOImplJPA;
 
-import ttps.clasesDAO.UsuarioDAO;
+import ttps.clasesDAO.*;
 
 public class FactoryDAO {
 

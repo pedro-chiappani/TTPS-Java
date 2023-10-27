@@ -6,7 +6,6 @@
  version="2.1">
 <persistence-unit name="miUP">
  <provider>org.hibernate.ejb.HibernatePersistence</provider>
- <class>mipaquete.Mensaje</class>
  <properties>
  <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
  <property name="hibernate.connection.password" value="1011"/>
@@ -14,6 +13,7 @@
  <property name="hibernate.connection.username" value="root" />
  <property name="hibernate.default_schema" value="stock" />
  <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+ <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
  </properties>
 </persistence-unit>
 </persistence>
