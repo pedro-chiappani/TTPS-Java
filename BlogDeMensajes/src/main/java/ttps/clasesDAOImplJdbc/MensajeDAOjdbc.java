@@ -13,6 +13,10 @@ import ttps.dataSource.MiDataSource;
 
 public class MensajeDAOjdbc implements MensajeDAO {
 	
+	public Mensaje persistir(Mensaje m) {
+		return m;
+	}
+	
 	public Mensaje recuperar(Long identificacion) {
 		 Mensaje mensaje = null;
 		 try{
@@ -38,7 +42,7 @@ public class MensajeDAOjdbc implements MensajeDAO {
 		 }
 	
 	@Override
-   public List<Mensaje> recuperarTodos() {
+   public List<Mensaje> recuperarTodos(String s) {
        List<Mensaje> mensajes = new ArrayList<>();
        String query = "SELECT * FROM mensajes";
        
