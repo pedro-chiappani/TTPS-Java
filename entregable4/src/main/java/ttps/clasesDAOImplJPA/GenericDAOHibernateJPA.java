@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	protected Class<T> clasePersistente;
-	private EntityManager em;
+	private EntityManager em = EMF.getEMF().createEntityManager();	
 	
 	public GenericDAOHibernateJPA(Class<T> clase) {
 		clasePersistente = clase;
