@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "grupos")
 public class Grupo {
 
 	@Id
@@ -31,7 +35,7 @@ public class Grupo {
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 	
-	@ManyToMany(mappedBy = "usuarios")
+	@ManyToMany(mappedBy = "grupos")
 	private List<Usuario> usuarios;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")

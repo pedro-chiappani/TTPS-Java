@@ -61,7 +61,7 @@ public class Usuario {
 	@ManyToMany()
 	@JoinTable(name="amigos",
 			   joinColumns = @JoinColumn(name = "usuarios_id"), 
-			   inverseJoinColumns = @JoinColumn(name = "usuarios_id")
+			   inverseJoinColumns = @JoinColumn(name = "amigo_id")
 	)
 	private List<Usuario> amigos;
 	

@@ -8,15 +8,12 @@ import ttps.clasesDeObjetosDelSistema.Usuario;
 
 public class UsuarioDAOHibernateJPATest {
 	
-	private UsuarioDAOHibernateJPA usuario;
-	
-	public void setUp() {
-		usuario = new UsuarioDAOHibernateJPA();
-	}
+	private UsuarioDAOHibernateJPA usu;
 	
 	@Test
 	public void testCreateUsuario() {
-		usuario.guardar(new Usuario());
+		usu = new UsuarioDAOHibernateJPA();
+		usu.guardar(new Usuario());
 		Assertions.assertEquals(1,1);
 	}
 	
