@@ -5,7 +5,11 @@
  http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
  version="2.1">
 <persistence-unit name="unlp">
+<<<<<<<< HEAD:entregable4/src/main/resources/META-INF/persistence.xml
  <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+========
+ <provider>org.hibernate.ejb.HibernatePersistence</provider>
+>>>>>>>> 907ec8992f388c3ea14c4b6c216101d22f42fcc6:entregable4/src/main/resources/META-INF/persistance.xml
  <properties>
  <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
  <property name="hibernate.connection.password" value="1011"/>
