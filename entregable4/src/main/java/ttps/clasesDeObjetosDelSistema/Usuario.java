@@ -149,23 +149,16 @@ public class Usuario {
 	}
 
 
-
-
-
-
 	public List<Usuario> getAmigos() {
 		return amigos;
 	}
-
-
-
-
-
 
 	public void setAmigos(List<Usuario> amigos) {
 		this.amigos = amigos;
 	}
 	
-	
+	public void agregarAmigo(Usuario amigo) {
+		this.amigos.add(amigo);
+	}
 	
 }
