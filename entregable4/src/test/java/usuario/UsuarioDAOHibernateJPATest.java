@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 
 import ttps.clasesDAOImplJPA.UsuarioDAOHibernateJPA;
 import ttps.clasesDeObjetosDelSistema.Usuario;
@@ -18,7 +19,7 @@ public class UsuarioDAOHibernateJPATest {
 	private UsuarioDAOHibernateJPA usu;
 	
 	
-	@Before
+	@BeforeEach
 	public void setUp(){
 		usu = new UsuarioDAOHibernateJPA();
 		Usuario usuario1 = new Usuario("usuario1", "usuario1@gmail.com", "usuario1Nombre", "usuario1Apellido", "123456", null, null, null, null);
