@@ -16,12 +16,11 @@ import ttps.clasesDeObjetosDelSistema.Usuario;
 
 public class UsuarioDAOHibernateJPATest {
 	
-	private UsuarioDAOHibernateJPA usu;
+	private UsuarioDAOHibernateJPA usu = new UsuarioDAOHibernateJPA();
 	
 	
 	@BeforeEach
 	public void setUp(){
-		usu = new UsuarioDAOHibernateJPA();
 		Usuario usuario1 = new Usuario("usuario1", "usuario1@gmail.com", "usuario1Nombre", "usuario1Apellido", "123456", null, null, null, null);
 		
 		usu.guardar(usuario1);
@@ -29,13 +28,13 @@ public class UsuarioDAOHibernateJPATest {
 	
 	@Test
 	public void testCreateUsuario() {
-			
-		Usuario usuDB = usu.recuperarPorNombreUsuario("usuario1");
+		usu.guardar(new Usuario("usuario3", "usuario3@gmail.com", "usuario3Nombre", "usuario3Apellido", "123456", null, null, null, null));
+		Usuario usuDB = usu.recuperarPorNombreUsuario("usuario3");
 		
-		Assertions.assertEquals("usuario1", usuDB.getNombreUsuario());
-		Assertions.assertEquals("usuario1@gmail.com", usuDB.getEmail());
-		Assertions.assertEquals("usuario1Nombre", usuDB.getNombre());
-		Assertions.assertEquals("usuario1Apellido", usuDB.getApellido());
+		Assertions.assertEquals("usuario3", usuDB.getNombreUsuario());
+		Assertions.assertEquals("usuario3@gmail.com", usuDB.getEmail());
+		Assertions.assertEquals("usuario3Nombre", usuDB.getNombre());
+		Assertions.assertEquals("usuario3Apellido", usuDB.getApellido());
 	}
 	
 	@Test
@@ -70,7 +69,7 @@ public class UsuarioDAOHibernateJPATest {
 		Usuario usu1DB = usu.recuperarPorNombreUsuario("usuario1");
 		Usuario usu2DB = usu.recuperarPorNombreUsuario("usuario2");
 		
-		usu1DB.agregarAmigo(usu2DB);
+		usu1DB.agregarAmigos(usu2DB);
 		usu.actualizar(usu1DB);
 		
 //		Assertions.assertEquals("usuario1", usuDB.getNombreUsuario());
