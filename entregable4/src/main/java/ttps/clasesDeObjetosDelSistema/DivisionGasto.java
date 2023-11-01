@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,15 +30,20 @@ public class DivisionGasto {
 	@JoinColumn(name = "gasto_id",nullable = false)
 	private Gasto gasto;
 	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "divisionGasto")
+	private List<DetalleDivisionGasto> detalleDivisionGasto;
+		
+	
 	
 	public DivisionGasto() {
 		
 	}
 	
-	public DivisionGasto(int unTipo, Gasto unGasto) {
-		
+	public DivisionGasto(int unTipo, Gasto unGasto) {		
 		this.setTipo(unTipo);
 		this.setGasto(unGasto);
+		
+		
 	}
 	
 	public Long getId() {

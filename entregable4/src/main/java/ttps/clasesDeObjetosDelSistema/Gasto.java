@@ -51,10 +51,9 @@ public class Gasto {
 	private Usuario realizaGasto;
 
 	
-	
-//	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JoinColumn(name = "estrategia_id")
-//	private EstrategiaDivision estrategia;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "divisiones_gasto_id")
+	private DivisionGasto divisionGasto;
 	
 	
 	public Long getId() {
@@ -119,6 +118,14 @@ public class Gasto {
 
 	public void setRealizaGasto(Usuario realizaGasto) {
 		this.realizaGasto = realizaGasto;
+	}
+
+	public DivisionGasto getDivisionGasto() {
+		return divisionGasto;
+	}
+
+	public void setDivisionGasto(DivisionGasto divisionGasto) {
+		this.divisionGasto = divisionGasto;
 	}
 	
 
