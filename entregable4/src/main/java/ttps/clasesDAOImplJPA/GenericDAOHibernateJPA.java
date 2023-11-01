@@ -70,12 +70,13 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	@Override
 	public void actualizar(T entity) {
-		 EntityTransaction etx= em.getTransaction();
-		 etx.begin();
-		 em.merge(entity);
-		 etx.commit();
-		 em.close();
-		 }
+		EntityManager emm = EMF.getEMF().createEntityManager();
+		EntityTransaction etx= emm.getTransaction();
+		etx.begin();
+		emm.merge(entity);
+		etx.commit();
+		emm.close();
+	}
 	
 	@Override
 	public void borrar(T entity) {

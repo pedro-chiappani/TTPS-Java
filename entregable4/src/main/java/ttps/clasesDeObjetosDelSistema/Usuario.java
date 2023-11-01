@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
 	private List<Pago> pagos;
 	
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="amigos",
 			   joinColumns = @JoinColumn(name = "usuarios_id"), 
 			   inverseJoinColumns = @JoinColumn(name = "amigo_id")
@@ -69,11 +70,6 @@ public class Usuario {
 		
 	}
 	
-	
-	
-
-
-
 	public Usuario(String nombreUsuario, String email, String nombre, String apellido, String clave, List<Gasto> gastos,
 			List<Grupo> grupos, List<Pago> pagos, List<Usuario> amigos) {
 		super();
@@ -148,24 +144,16 @@ public class Usuario {
 		this.pagos = pagos;
 	}
 
-
-
-
-
-
 	public List<Usuario> getAmigos() {
 		return amigos;
 	}
-
-
-
-
-
 
 	public void setAmigos(List<Usuario> amigos) {
 		this.amigos = amigos;
 	}
 	
-	
+	public void agregarAmigos(Usuario amigo) {
+		this.amigos.add(amigo);
+	}
 	
 }
