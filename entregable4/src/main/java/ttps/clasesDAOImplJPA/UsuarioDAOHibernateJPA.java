@@ -14,6 +14,35 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 		super(Usuario.class);
 	}
 	
+	public Usuario recuperarNomPass(String nom, String pass) {
+		
+		EntityManager emm = EMF.getEMF().createEntityManager();
+		EntityTransaction tx = null;
+		
+		Usuario us = null;
+		try {
+			tx = emm.getTransaction();
+			tx.begin();
+			
+			TypedQuery<Usuario> query = emm.createQuery("SELECT u FROM Usuario u WHERE nombreUsuario = ?1 AND clave = ?2", Usuario.class);
+			
+			query.setParameter(1, nom);
+			query.setParameter(2, pass);
+			
+			us = (Usuario) query.getSingleResult();
+			
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			throw e;
+		} finally {
+			emm.close();
+		}
+		return us;
+	}
+	
 	public Usuario recuperarPorNombreUsuario (String nom) {
 		Usuario usuario = null;
 		EntityManager em = EMF.getEMF().createEntityManager();
@@ -22,7 +51,7 @@ public class UsuarioDAOHibernateJPA extends GenericDAOHibernateJPA<Usuario> impl
 			tx = em.getTransaction();
 			tx.begin();
 			
-			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u where u.nombreUsuario = ?1", Usuario.class);
+			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE nombreUsuario = ?1", Usuario.class);
 			
 			query.setParameter(1, nom);
 			

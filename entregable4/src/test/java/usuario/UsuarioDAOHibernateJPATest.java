@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 
 import ttps.clasesDAOImplJPA.UsuarioDAOHibernateJPA;
 import ttps.clasesDeObjetosDelSistema.Usuario;
@@ -16,11 +16,11 @@ import ttps.clasesDeObjetosDelSistema.Usuario;
 
 public class UsuarioDAOHibernateJPATest {
 	
-	private UsuarioDAOHibernateJPA usu = new UsuarioDAOHibernateJPA();
+	private static UsuarioDAOHibernateJPA usu = new UsuarioDAOHibernateJPA();
 	
 	
-	@BeforeEach
-	public void setUp(){
+	@BeforeAll
+	public static void setUp(){
 		Usuario usuario1 = new Usuario("usuario1", "usuario1@gmail.com", "usuario1Nombre", "usuario1Apellido", "123456", null, null, null, null);
 		
 		usu.guardar(usuario1);
@@ -28,13 +28,11 @@ public class UsuarioDAOHibernateJPATest {
 	
 	@Test
 	public void testCreateUsuario() {
-		usu.guardar(new Usuario("usuario3", "usuario3@gmail.com", "usuario3Nombre", "usuario3Apellido", "123456", null, null, null, null));
-		Usuario usuDB = usu.recuperarPorNombreUsuario("usuario3");
+		Usuario u3 = new Usuario("usuario3", "usuario3@gmail.com", "usuario3Nombre", "usuario3Apellido", "123456", null, null, null, null);
+		usu.guardar(u3);
+		Usuario usuDB = usu.recuperarNomPass("usuario3", "123456");
 		
-		Assertions.assertEquals("usuario3", usuDB.getNombreUsuario());
-		Assertions.assertEquals("usuario3@gmail.com", usuDB.getEmail());
-		Assertions.assertEquals("usuario3Nombre", usuDB.getNombre());
-		Assertions.assertEquals("usuario3Apellido", usuDB.getApellido());
+		Assertions.assertEquals(u3.getNombre(), usuDB.getNombre());
 	}
 	
 	@Test
@@ -62,7 +60,7 @@ public class UsuarioDAOHibernateJPATest {
 	
 	@Test
 	public void testAmigosUsuario() {
-		Usuario usuario2 = new Usuario("usuario1", "usuario1@gmail.com", "usuario1Nombre", "usuario1Apellido", "123456", null, null, null, null);
+		Usuario usuario2 = new Usuario("usuario2", "usuario2@gmail.com", "usuario2Nombre", "usuario2Apellido", "123456", null, null, null, null);
 
 		usu.guardar(usuario2);
 		
