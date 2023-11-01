@@ -1,6 +1,5 @@
 package ttps.clasesDAOImplJPA;
 
-
 import ttps.clasesDAO.DivisionGastoDAO;
 import ttps.clasesDeObjetosDelSistema.DivisionGasto;
 

@@ -9,7 +9,6 @@ import javax.persistence.*;
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	protected Class<T> clasePersistente;
-	private EntityManager em = EMF.getEMF().createEntityManager();
 	
 	public GenericDAOHibernateJPA(Class<T> clase) {
 		clasePersistente = clase;
@@ -18,6 +17,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	@Override
 	public T recuperar(Long id){
 		T entity = null;
+		EntityManager em = EMF.getEMF().createEntityManager();
 		try {
 			em.getTransaction().begin();
 			TypedQuery<T> query = em.createQuery("select e from " +  getPersistentClass().getSimpleName() + " where id = ?1", clasePersistente);
@@ -37,10 +37,13 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	@Override
 	public void guardar(T entity) {
+		EntityManager em = EMF.getEMF().createEntityManager();
+		EntityTransaction tx = null;
 		try {
-			em.getTransaction().begin();
+			tx = em.getTransaction();
+			tx.begin();
 			em.persist(entity);
-			em.getTransaction().commit();
+			tx.commit();
 		}
 		catch (Exception e){
 			if (em.getTransaction().isActive()) {
@@ -60,26 +63,19 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 		this.clasePersistente = clase;
 	}
 	
-	public EntityManager getEntityManager() {
-		return this.em;
-	}
-	
-	public void setEntityManager(EntityManager em){
-		this.em = em;
-	}
-	
 	@Override
 	public void actualizar(T entity) {
-		EntityManager emm = EMF.getEMF().createEntityManager();
-		EntityTransaction etx= emm.getTransaction();
+		EntityManager em = EMF.getEMF().createEntityManager();
+		EntityTransaction etx= em.getTransaction();
 		etx.begin();
-		emm.merge(entity);
+		em.merge(entity);
 		etx.commit();
-		emm.close();
+		em.close();
 	}
 	
 	@Override
 	public void borrar(T entity) {
+		EntityManager em = EMF.getEMF().createEntityManager();
 		EntityTransaction tx = null;
 	 try {
 		 tx = em.getTransaction();
@@ -96,6 +92,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	}
 	
 	public List<T> recuperarTodos(String columnOrder){
+		EntityManager em = EMF.getEMF().createEntityManager();
 		Query consulta= em.createQuery("select e from "+ getPersistentClass().getSimpleName()+" e order by e."+columnOrder);
 		List<T> resultado = (List<T>) consulta.getResultList();
 		return resultado;

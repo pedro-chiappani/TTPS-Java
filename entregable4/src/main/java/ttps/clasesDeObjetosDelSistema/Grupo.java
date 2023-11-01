@@ -43,6 +43,7 @@ public class Grupo {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")
 	private List<Pago> pagos;
+	
 
 	public Long getId() {
 		return id;
@@ -99,7 +100,4 @@ public class Grupo {
 	public void setPagos(List<Pago> pagos) {
 		this.pagos = pagos;
 	}
-	
-	
-	
 }

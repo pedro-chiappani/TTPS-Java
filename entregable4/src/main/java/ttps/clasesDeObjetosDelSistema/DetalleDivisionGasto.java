@@ -13,29 +13,29 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "detalle_divisiones_gasto")
+@Table(name = "detalles_divisions_gastos")
 public class DetalleDivisionGasto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false, name="divisiones_gasto_id")
+	@Column(nullable = false, name="detalle_division_gasto_id")
 	private Long id;
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name="division_gasto_id", nullable=false)
 	private Grupo divisionGasto;
-	
-	
+
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	@Column
-	private int valor;
-	
+	private double valor;
+
 	//1-Fijo, 2-Porcentaje, 3-Igual
-	
+
 	/*
 	 Dependiendo del tipo de division, 
 	 al crearse una division gasto cuando se cargue el detalle,
@@ -46,7 +46,4 @@ public class DetalleDivisionGasto {
 	 	2(porcentaje) - un valor que representa un porcentaje, que sirve para evaluar el monto a pagar de un gasto
 	 	3(monto igual)- un valor que representa un monto, cuyo monto es igual entre los usuaroios q comparten el gasto
 	*/
-	
-	
-	
 }
