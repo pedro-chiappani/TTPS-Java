@@ -28,13 +28,12 @@ public class UsuarioDAOHibernateJPATest {
 	
 	@Test
 	public void testCreateUsuario() {
-		usu.guardar(new Usuario("usuario3", "usuario3@gmail.com", "usuario3Nombre", "usuario3Apellido", "123456", null, null, null, null));
-		Usuario usuDB = usu.recuperarPorNombreUsuario("usuario3");
+		Usuario usuDB = usu.recuperar((long) 1);//usu.recuperarPorNombreUsuario("usuario1");
 		
-		Assertions.assertEquals("usuario3", usuDB.getNombreUsuario());
-		Assertions.assertEquals("usuario3@gmail.com", usuDB.getEmail());
-		Assertions.assertEquals("usuario3Nombre", usuDB.getNombre());
-		Assertions.assertEquals("usuario3Apellido", usuDB.getApellido());
+		Assertions.assertEquals("usuario1", usuDB.getNombreUsuario());
+		Assertions.assertEquals("usuario1@gmail.com", usuDB.getEmail());
+		Assertions.assertEquals("usuario1Nombre", usuDB.getNombre());
+		Assertions.assertEquals("usuario1Apellido", usuDB.getApellido());
 	}
 	
 	@Test
@@ -62,20 +61,19 @@ public class UsuarioDAOHibernateJPATest {
 	
 	@Test
 	public void testAmigosUsuario() {
-		Usuario usuario2 = new Usuario("usuario1", "usuario1@gmail.com", "usuario1Nombre", "usuario1Apellido", "123456", null, null, null, null);
+		Usuario usuario2 = new Usuario("usuario2", "usuario2@gmail.com", "usuario2Nombre", "usuario2Apellido", "123456", null, null, null, null);
 
 		usu.guardar(usuario2);
 		
 		Usuario usu1DB = usu.recuperarPorNombreUsuario("usuario1");
 		Usuario usu2DB = usu.recuperarPorNombreUsuario("usuario2");
 		
+		Assertions.assertEquals(0, usu1DB.getAmigos().size());
+		
 		usu1DB.agregarAmigos(usu2DB);
 		usu.actualizar(usu1DB);
 		
-//		Assertions.assertEquals("usuario1", usuDB.getNombreUsuario());
-//		Assertions.assertEquals("usuario1@gmail.com", usuDB.getEmail());
-//		Assertions.assertEquals("usuario1Nombre", usuDB.getNombre());
-//		Assertions.assertEquals("usuario1Apellido", usuDB.getApellido());
+		Assertions.assertEquals(1, usu1DB.getAmigos().size());
 	}
 	
 	

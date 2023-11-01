@@ -156,4 +156,9 @@ public class Usuario {
 		this.amigos.add(amigo);
 	}
 	
+	public String toString() {
+		return this.getNombre() + this.getApellido() + " - " + this.getEmail();
+	}
+	
+	
 }
