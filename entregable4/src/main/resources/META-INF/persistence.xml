@@ -13,7 +13,7 @@
 			<property name="hibernate.connection.url"
 				value="jdbc:mysql://localhost:3306/entregable4" />
 			<property name="hibernate.connection.username" value="root" />
-			<property name="hibernate.default_schema" value="stock" />
+			<property name="hibernate.default_schema" value="entregable4" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
