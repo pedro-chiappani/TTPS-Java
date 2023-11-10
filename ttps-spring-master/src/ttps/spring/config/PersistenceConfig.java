@@ -37,8 +37,8 @@ public class PersistenceConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setUsername("root");
-		driverManagerDataSource.setPassword("root");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mibd");
+		driverManagerDataSource.setPassword("rootpass");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/entregable4?useSSL=false");
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return driverManagerDataSource;
 	}
@@ -46,16 +46,16 @@ public class PersistenceConfig {
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-		//jpaTransactionManager.setEntityManagerFactory(emf);
+		jpaTransactionManager.setEntityManagerFactory(emf);
 		return jpaTransactionManager;
 	}
 	
 	
 	private Properties additionalProperties() {
 		Properties properties = new Properties();		
-		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-		properties.setProperty("hibernate.default_schema", "mibd");
+		properties.setProperty("hibernate.default_schema", "entregable4");
 		return properties;
 	}
 		
