@@ -91,7 +91,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	public List<T> recuperarTodos(){
 		EntityManager em = this.getEntityManager();
-		Query consulta= em.createQuery("select e from "+ getPersistentClass().getSimpleName()+" e order by e.");
+		Query consulta= em.createQuery("select e from "+ getPersistentClass().getSimpleName()+" e");
 		List<T> resultado = (List<T>) consulta.getResultList();
 		return resultado;
 	}

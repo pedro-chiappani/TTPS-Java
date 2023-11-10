@@ -30,6 +30,7 @@ public class PersistenceConfig {
 		JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 		emf.setJpaVendorAdapter(jpaVendorAdapter);
 		emf.setJpaProperties(additionalProperties());
+		System.out.println("entityManagerFactory");
 		return emf;		
 	}
 		
@@ -38,24 +39,27 @@ public class PersistenceConfig {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setUsername("root");
 		driverManagerDataSource.setPassword("1011");
-		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/practica6");
-		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/practica6?useSSL=false");
+		driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		System.out.println("dartaSource");
 		return driverManagerDataSource;
 	}
 	
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
 		JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-		//jpaTransactionManager.setEntityManagerFactory(emf);
+		System.out.println("transactionManager");
+		jpaTransactionManager.setEntityManagerFactory(emf);
 		return jpaTransactionManager;
 	}
 	
 	
 	private Properties additionalProperties() {
 		Properties properties = new Properties();		
-		properties.setProperty("hibernate.hbm2ddl.auto", "create");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-		properties.setProperty("hibernate.default_schema", "mibd");
+		properties.setProperty("hibernate.default_schema", "practica6");
+		System.out.println("additionalProperties");
 		return properties;
 	}
 		
