@@ -21,7 +21,6 @@ public class DivisionGasto {
 	@Column(nullable = false, name="division_gasto_id")
 	private Long id;
 	
-	@Column
 	private int tipo; //1-Fijo, 2-Porcentaje, 3-Igual
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

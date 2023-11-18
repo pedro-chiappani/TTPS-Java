@@ -22,10 +22,8 @@ public class Auditoria {
 	@Column(nullable = false, name="auditoria_id")
 	private long id;
 	
-	@Column
 	private Date fecha;
 	
-	@Column
 	private String descripcion;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

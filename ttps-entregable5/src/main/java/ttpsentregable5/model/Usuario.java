@@ -28,26 +28,16 @@ public class Usuario {
 	@Column(nullable = false, name="usuario_id")
 	private long id;
 	
-	@Column
 	private String nombreUsuario;
 	
-	@Column
 	private String email;
 	
-	@Column
 	private String nombre;
 	
-	@Column
 	private String apellido;
 	
-	@Column
 	private String clave;
 	
-//	@ManyToMany()
-//	@JoinTable(name="usuarios_gastos",
-//			   joinColumns = @JoinColumn(name = "usuarios_id"), 
-//			   inverseJoinColumns = @JoinColumn(name = "gastos_id")
-//	)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "realizaGasto")
 	private List<Gasto> gastos;
 	

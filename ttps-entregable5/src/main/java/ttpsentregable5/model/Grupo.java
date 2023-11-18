@@ -24,10 +24,8 @@ public class Grupo {
 	@Column(nullable = false, name="grupo_id")
 	private Long id;
 	
-	@Column
 	private String nombre;
 	
-	@Column
 	private double miSaldo;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

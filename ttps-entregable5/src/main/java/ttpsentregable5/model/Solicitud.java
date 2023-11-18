@@ -22,10 +22,8 @@ public class Solicitud {
 	@Column(nullable = false, name="solicitud_id")
 	private Long id;
 	
-	@Column
 	private Date fecha;
 	
-	@Column
 	private boolean estado;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

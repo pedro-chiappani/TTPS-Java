@@ -25,14 +25,13 @@ public class DetalleDivisionGasto {
 
 	@ManyToOne
 	@JoinColumn(name="division_gasto_id", nullable=false)
-	private Grupo divisionGasto;
+	private DivisionGasto divisionGasto;
 
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-	@Column
 	private double valor;
 
 	//1-Fijo, 2-Porcentaje, 3-Igual

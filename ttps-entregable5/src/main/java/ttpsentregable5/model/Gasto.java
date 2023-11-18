@@ -25,13 +25,10 @@ public class Gasto {
 	@Column(nullable = false, name="gasto_id")
 	private Long id;
 	
-	@Column
 	private double monto;
 	
-	@Column
 	private File imagen;
 	
-	@Column
 	private Date fecha;
 	
 	@ManyToOne

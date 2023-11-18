@@ -18,13 +18,10 @@ public class Categoria {
 	@Column(nullable = false, name="categoria_id")
 	private Long id;
 	
-	@Column
 	private String nombre;
 	
-	@Column
 	private File imagen;
 	
-	@Column
 	private int tipo;
 
 }
