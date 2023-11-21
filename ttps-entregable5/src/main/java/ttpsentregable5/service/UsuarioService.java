@@ -21,11 +21,15 @@ public class UsuarioService {
 		return usuarioRepository.save(usuario);
 	}
 	
-	public boolean validarCredencialesLogin(String nombreUsuario, String contraseña) {
+	public boolean validarCredencialesLogin(String nombreUsuario, String clave) {
 		
 		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsuario);
-					
-		return usu.getClave().equals(contraseña);
+		
+		if( usu == null ) {
+			return false;
+		}
+		
+		return usu.getClave().equals(clave);
 	}
 	
 	public void validarCredencialesRegistrar(String nombreUsuario, String contraseña, String email) throws Exception {
@@ -34,11 +38,11 @@ public class UsuarioService {
 			throw new Exception("Contraseña muy corta");
 		}
 		
-		if( usuarioRepository.recuperarPorEmail(email).equals(email) ) {
+		if( usuarioRepository.recuperarPorEmail(email)!=null) {
 			throw new Exception("Email existente");
 		}
 		
-		if( usuarioRepository.recuperarPorNombreUsuario(nombreUsuario).equals(nombreUsuario) ) {
+		if( usuarioRepository.recuperarPorNombreUsuario(nombreUsuario)!=null ) {
 			throw new Exception("Nombre usuario existente");
 		}
 					

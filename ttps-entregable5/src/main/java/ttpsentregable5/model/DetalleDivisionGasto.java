@@ -25,7 +25,7 @@ public class DetalleDivisionGasto {
 
 	@ManyToOne
 	@JoinColumn(name="division_gasto_id", nullable=false)
-	private Grupo divisionGasto;
+	private DivisionGasto divisionGasto;
 
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

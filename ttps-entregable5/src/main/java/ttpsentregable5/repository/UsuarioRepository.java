@@ -8,9 +8,9 @@ import ttpsentregable5.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
-	@Query("SELECT u FROM User u WHERE LOWER(u.nombreUsuario)=LOWER(:name)")
+	@Query("SELECT u FROM Usuario u WHERE LOWER(u.nombreUsuario)=LOWER(:name)")
 	Usuario recuperarPorNombreUsuario(@Param("name") String name);
 	
-	@Query("SELECT u FROM User u WHERE LOWER(u.email)=LOWER(:email)")
+	@Query("SELECT u FROM Usuario u WHERE LOWER(u.email)=LOWER(:email)")
 	Usuario recuperarPorEmail(@Param("email") String email);
 }
