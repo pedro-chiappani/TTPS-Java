@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ttpsentregable5.DTO.GrupoCrearDTO;
 import ttpsentregable5.Mapper.GrupoCrearMapper;
 import ttpsentregable5.model.Categoria;
+import ttpsentregable5.model.Gasto;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.GrupoService;
@@ -52,4 +54,16 @@ public class GrupoRestController {
 		}
 	}
 
+	@GetMapping("/{id}/gastos")
+	public ResponseEntity<List<Gasto>> listarGastos(@PathVariable("id") Long id) {
+		try {
+			Grupo gru = grupoService.obtenerPorId(id);
+			if (gru.getGastos().isEmpty())
+				return new ResponseEntity<List<Gasto>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<Gasto>>(gru.getGastos(), HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<List<Gasto>>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
