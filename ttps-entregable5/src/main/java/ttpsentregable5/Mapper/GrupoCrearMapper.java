@@ -24,25 +24,25 @@ public abstract class GrupoCrearMapper {
 	private CategoriaRepository categoriaRepository;
 	
 	@Autowired
-	private UsuarioRepository usuarioReporitory;
+	private UsuarioRepository usuarioRepository;
 	
 
 	
 	GrupoCrearMapper INSTANCE = Mappers.getMapper(GrupoCrearMapper.class);
 	
-	@Mapping(source = "categoria", target = "categoria", qualifiedByName = "nomCategoriaACategoria")
-	@Mapping(source = "nombreUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
-    public Grupo grupoMapper(GrupoCrearDTO dto) {
+//	@Mapping(source = "categoria", target = "categoria", qualifiedByName = "nomCategoriaACategoria")
+//	@Mapping(source = "nombreUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
+//    public Grupo grupoMapper(GrupoCrearDTO dto) {
 	
-	@Named("nomCategoriaACategoria")
-	public static Categoria nomCategoriaACategoria(String nombreCat) {
+//	@Named("nomCategoriaACategoria")
+	public Categoria nomCategoriaACategoria(String nombreCat) {
 		return categoriaRepository.recuperarPorNombreCategoria(nombreCat);
 	}
-	
-	@Named("agregarUsuario")
-	public static List<Usuario> agregarUsuario(String nombreUsu) {
+//	
+//	@Named("agregarUsuario")
+	public List<Usuario> agregarUsuario(String nombreUsu) {
 		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsu);
 		return Arrays.asList(usu);
-	}
+//	}
 	}
 }
