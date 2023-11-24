@@ -41,6 +41,18 @@ public class Grupo {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")
 	private List<Pago> pagos;
 	
+	public Grupo() {
+		
+	}
+	
+	public Grupo(String nombre, Categoria cat, List<Usuario> usuarios) {
+		this.nombre = nombre;
+		this.categoria = cat;
+		this.usuarios = usuarios;
+		this.miSaldo = 0;
+		this.gastos = null;
+		this.pagos = null;
+	}
 
 	public Long getId() {
 		return id;
