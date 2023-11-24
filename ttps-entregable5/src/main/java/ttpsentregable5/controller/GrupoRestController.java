@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,24 +26,35 @@ public class GrupoRestController {
 	@Autowired
 	private PreGrupoMapper grupoMapper;
 	
-	@PostMapping("/registrarUsuario")
+	
+	@GetMapping("/grupo")
+	public ResponseEntity<String> holaGrupos() {
+		return new ResponseEntity<>("Grupo creado", HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/crearGrupo")
 	public ResponseEntity<String> crearGrupo(@RequestBody PreGrupoDTO grupoDTO) {
 			
 		try {
-			Grupo grupo = grupo
+			System.out.print("Inicio");
+			System.out.print(grupoDTO.toString());
 			//Validar campos completos
-			if( grupoDTO.getCategoria() == null
-					|| grupoDTO.getNombre() == null
-					|| grupoDTO.getNombreUsuario() == null){
-				
-				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
-			}
+//			if( grupoDTO.getCategoria() == null
+//					|| grupoDTO.getNombre() == null
+//					|| grupoDTO.getNombreUsuario() == null){
+//				
+//				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
+//			}
 			
 			//Validacion
 			//grupoService.validarCredencialesRegistrar();
 				
 			//Mapeo
+			Grupo grupo = grupoMapper.toGrupo(grupoDTO);
 			
+			System.out.print("Grupo?: " + grupo.toString());
+			
+			grupo
 			return new ResponseEntity<>("Grupo creado", HttpStatus.CREATED);
 			
 		} catch ( Exception e ) {

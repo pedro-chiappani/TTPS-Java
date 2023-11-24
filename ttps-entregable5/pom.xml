@@ -35,18 +35,18 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.11</version>
-		</dependency>
-		<dependency>
-			<groupId>ttps</groupId>
-			<artifactId>practica4</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 	    	<groupId>org.mapstruct</groupId>
 	    	<artifactId>mapstruct</artifactId>
-	    	<version>1.6.0.Beta1</version> 
+	    	<version>1.5.5.Final</version> 
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    </dependency>
+
 		
 	</dependencies>
 
@@ -61,6 +61,31 @@
 					</image>
 				</configuration>
 			</plugin>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <annotationProcessorPaths>
+                <path>
+				    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+    				<version>1.18.30</version>
+                </path>
+                <path>
+                    <groupId>org.mapstruct</groupId>
+                    <artifactId>mapstruct-processor</artifactId>
+                    <version>1.5.5.Final</version>
+                </path>
+            </annotationProcessorPaths>
+            <compilerArgs>
+                <compilerArg>
+                       -Amapstruct.defaultComponentModel=spring
+                </compilerArg>
+            </compilerArgs>
+        </configuration>
+    </plugin>
 		</plugins>
 	</build>
 
