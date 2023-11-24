@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttpsentregable5.DTO.PreGrupoDTO;
+import ttpsentregable5.mapper.PreGrupoMapper;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.service.GrupoService;
 
@@ -21,12 +22,14 @@ public class GrupoRestController {
 	@Autowired
 	private GrupoService grupoService;
 
+	@Autowired
+	private PreGrupoMapper grupoMapper;
 	
 	@PostMapping("/registrarUsuario")
 	public ResponseEntity<String> crearGrupo(@RequestBody PreGrupoDTO grupoDTO) {
 			
 		try {
-			
+			Grupo grupo = grupo
 			//Validar campos completos
 			if( grupoDTO.getCategoria() == null
 					|| grupoDTO.getNombre() == null
