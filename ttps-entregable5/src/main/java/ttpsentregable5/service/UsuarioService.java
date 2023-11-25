@@ -1,5 +1,7 @@
 package ttpsentregable5.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	
+	public List<Usuario> listarUsuarios(){
+		return usuarioRepository.findAll();
+	}
 	
 	
 	public Usuario crear(Usuario usuario) {
@@ -45,7 +50,6 @@ public class UsuarioService {
 		if( usuarioRepository.recuperarPorNombreUsuario(nombreUsuario)!=null ) {
 			throw new Exception("Nombre usuario existente");
 		}
-					
 		
 	}
 	

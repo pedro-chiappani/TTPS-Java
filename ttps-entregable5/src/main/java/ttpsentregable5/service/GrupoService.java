@@ -1,5 +1,8 @@
 package ttpsentregable5.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.GrupoRepository;
+import ttpsentregable5.repository.UsuarioRepository;
 
 @Service
 @Transactional
@@ -15,8 +19,41 @@ public class GrupoService {
 	@Autowired
 	private GrupoRepository grupoRepository;
 	
-	public Grupo crear(Grupo grupo) {
-		return grupoRepository.save(grupo);
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
+	public List<Grupo> listarGrupos(){
+		return grupoRepository.findAll();
 	}
+	
+	public Grupo obtenerPorId(Long id) throws Exception {
+		Optional<Grupo> gru = grupoRepository.findById(id);
+		if (!gru.isPresent()) {
+			throw new Exception("No se encontro el grupo");
+		}	
+		return gru.get();
+	}
+	
+	public Grupo crear(Grupo grupo) {
+		Usuario usuario = usuarioRepository.recuperarPorNombreUsuario(grupo.getUsuarios().get(0).getNombreUsuario());
+		usuario.getGrupos().add(grupo);
+		grupoRepository.save(grupo);
+		usuarioRepository.save(usuario);
+		return grupo;
+	}
+	
+	public void validarCamposAltaGrupo(String nombreUsuario, String nombre) throws Exception {
+		
+		if( grupoRepository.recuperarPorNombre(nombre)!=null) {
+			throw new Exception("Nombre de grupo existente");
+		}
+		
+		if( usuarioRepository.recuperarPorNombreUsuario(nombreUsuario)==null ) {
+			throw new Exception("Nombre usuario inexistente");
+		}
+					
+		
+	}
+	
 	
 }

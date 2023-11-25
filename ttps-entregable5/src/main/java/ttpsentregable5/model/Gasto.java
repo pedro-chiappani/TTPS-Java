@@ -38,8 +38,8 @@ public class Gasto {
 	@JoinColumn(name="group_id", nullable=false)
 	private Grupo grupo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoria_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
 	private Categoria categoria;	
 	
 	@ManyToOne

@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -30,11 +31,11 @@ public class Grupo {
 	@Column
 	private double miSaldo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoria_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 	
-	@ManyToMany(mappedBy = "grupos")
+	@ManyToMany(mappedBy = "grupos", cascade = CascadeType.ALL)
 	private List<Usuario> usuarios;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")

@@ -1,6 +1,7 @@
 package ttpsentregable5.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,16 @@ public class UsuarioRestController {
 	private UsuarioService usuarioService;
 
 	
-	
+	@GetMapping("/listarUsuarios")
+	public ResponseEntity<List<Usuario>> listAllUsers() {
+		List<Usuario> usuarios = usuarioService.listarUsuarios();
+		if(usuarios.isEmpty()){
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	}
+
+
 	
 	@PostMapping("/registrarUsuario")
 	public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {

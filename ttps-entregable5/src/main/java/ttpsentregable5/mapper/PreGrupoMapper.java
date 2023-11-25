@@ -31,7 +31,7 @@ public abstract class PreGrupoMapper {
 	
 	@Named("nomCategoriaACategoria")
 	Categoria nomCategoriaACategoria(String nombreCat) {
-		return categoriaRepository.recuperarPorNombreCategoria(nombreCat);
+		return categoriaRepository.recuperarPorNombreCategoriaGrupo(nombreCat);
 	}
 	
 	@Named("agregarUsuario")
