@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ttpsentregable5.model.Grupo;
+import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.GrupoRepository;
 
 @Service
@@ -13,6 +15,8 @@ public class GrupoService {
 	@Autowired
 	private GrupoRepository grupoRepository;
 	
-	
+	public Grupo crear(Grupo grupo) {
+		return grupoRepository.save(grupo);
+	}
 	
 }

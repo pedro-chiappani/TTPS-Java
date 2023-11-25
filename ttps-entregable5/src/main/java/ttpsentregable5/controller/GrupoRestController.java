@@ -36,15 +36,14 @@ public class GrupoRestController {
 	public ResponseEntity<String> crearGrupo(@RequestBody PreGrupoDTO grupoDTO) {
 			
 		try {
-			System.out.print("Inicio");
-			System.out.print(grupoDTO.toString());
+			
 			//Validar campos completos
-//			if( grupoDTO.getCategoria() == null
-//					|| grupoDTO.getNombre() == null
-//					|| grupoDTO.getNombreUsuario() == null){
-//				
-//				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
-//			}
+			if( grupoDTO.getCategoria() == null
+					|| grupoDTO.getNombre() == null
+					|| grupoDTO.getNombreUsuario() == null){
+				
+				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
+			}
 			
 			//Validacion
 			//grupoService.validarCredencialesRegistrar();
@@ -52,9 +51,11 @@ public class GrupoRestController {
 			//Mapeo
 			Grupo grupo = grupoMapper.toGrupo(grupoDTO);
 			
-			System.out.print("Grupo?: " + grupo.toString());
+			System.out.println("Grupo: " + grupo.toString());
+			System.out.println("usuariosgrupo: " + grupo.getUsuarios().size() + "//" + grupo.getUsuarios().get(0).toString());
 			
-			grupo
+			this.grupoService.crear(grupo);
+			
 			return new ResponseEntity<>("Grupo creado", HttpStatus.CREATED);
 			
 		} catch ( Exception e ) {

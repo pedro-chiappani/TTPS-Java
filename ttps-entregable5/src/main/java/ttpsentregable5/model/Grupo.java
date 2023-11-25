@@ -99,4 +99,9 @@ public class Grupo {
 	public void setPagos(List<Pago> pagos) {
 		this.pagos = pagos;
 	}
+	
+	
+	public String toString() {
+		return this.getNombre() + "-" + this.getCategoria().getNombre() + "// usuarios:" + this.getUsuarios().size();
+	}
 }

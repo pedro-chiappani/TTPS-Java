@@ -25,4 +25,9 @@ public class PreGrupoDTO {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	
+	public String toString() {
+		return this.getNombre() + "-" + this.getCategoria() + " creado por: " + this.getNombreUsuario();
+	}
 }

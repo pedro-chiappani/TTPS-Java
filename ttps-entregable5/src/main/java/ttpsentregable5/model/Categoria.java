@@ -27,4 +27,36 @@ public class Categoria {
 	@Column
 	private int tipo;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public File getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(File imagen) {
+		this.imagen = imagen;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
 }
