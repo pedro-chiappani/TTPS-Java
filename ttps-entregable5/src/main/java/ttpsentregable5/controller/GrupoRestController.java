@@ -44,10 +44,12 @@ public class GrupoRestController {
 	@PostMapping("/crearGrupo")
 	public ResponseEntity<String> crearGrupo(@RequestBody GrupoCrearDTO grupodto) {
 		try {
-			Categoria cat = grupoMapper.nomCategoriaACategoria(grupodto.getCategoria());
-			List<Usuario> usus = grupoMapper.agregarUsuario(grupodto.getNombreUsuario());
-			Grupo grupo = new Grupo();
-			this.grupoService.crear(null);
+//			Categoria cat = grupoMapper.nomCategoriaACategoria(grupodto.getCategoria());
+//			List<Usuario> usus = grupoMapper.agregarUsuario(grupodto.getNombreUsuario());
+//			Grupo grupo = new Grupo();
+//			this.grupoService.crear(null);
+			Grupo grupo = grupoMapper.grupoMapper(grupodto);
+			System.out.println("Grupo: " + grupo.toString());
 			return new ResponseEntity<>("Grupo Creado", HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

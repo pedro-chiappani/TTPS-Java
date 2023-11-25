@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication()
+@SpringBootApplication(scanBasePackages = "ttpsentregable5")
 @EnableJpaRepositories
 public class TtpsEntregable5Application {
 
