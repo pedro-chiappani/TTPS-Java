@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ttpsentregable5.DTO.PreGrupoDTO;
 import ttpsentregable5.mapper.PreGrupoMapper;
+import ttpsentregable5.model.Categoria;
 import ttpsentregable5.model.Gasto;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
+import ttpsentregable5.service.CategoriaService;
 import ttpsentregable5.service.GrupoService;
 
 @RestController
@@ -30,6 +32,10 @@ public class GrupoRestController {
 	@Autowired
 	private GrupoService grupoService;
 
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	
 	@Autowired
 	private PreGrupoMapper grupoMapper;
 	
@@ -68,7 +74,7 @@ public class GrupoRestController {
 //			System.out.println("Grupo: " + grupo.toString());
 //			System.out.println("usuariosgrupo: " + grupo.getUsuarios().size() + "//" + grupo.getUsuarios().get(0).toString());
 			
-			this.grupoService.crear(grupo);
+			this.grupoService.guardar(grupo);
 			
 			return new ResponseEntity<>("Grupo creado", HttpStatus.CREATED);
 			
@@ -93,9 +99,37 @@ public class GrupoRestController {
 	
 	
 	@PutMapping("/id")
-	public ResponseEntity<String> actualizarGrupo() {
-
+	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody Map<String, String> request) {
 		try {
+			
+			String nombre = request.get("nombre");
+			String categoria = request.get("categoria");
+			
+			if( nombre == null && categoria == null){
+				
+				return new ResponseEntity<>("Envie algun dato para actualizar", HttpStatus.BAD_REQUEST);
+			}
+			
+			 // Verificar si el grupo existe
+			Grupo grupo = grupoService.obtenerPorId(id);
+
+			
+			// Verificar categoria
+			Categoria nuevaCategoria = categoriaService.obtenerCategoriaDeGrupoPorNombre(categoria);
+			if (nuevaCategoria == null) {
+				return new ResponseEntity<>("Categoria de grupo inexistente", HttpStatus.BAD_REQUEST);
+			}else {
+				grupo.setCategoria(nuevaCategoria);				
+			}
+			
+            // Actualizar los campos del grupo
+			if (nombre != null) {
+				grupo.setNombre(nombre);		
+			}
+						           
+            // Guardar el grupo actualizado en la base de datos
+            grupoService.guardar(grupo);
+			
 			return new ResponseEntity<>("Grupo actualzado", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

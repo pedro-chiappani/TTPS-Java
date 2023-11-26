@@ -34,7 +34,7 @@ public class GrupoService {
 		return gru.get();
 	}
 	
-	public Grupo crear(Grupo grupo) {
+	public Grupo guardar(Grupo grupo) {
 		Usuario usuario = usuarioRepository.recuperarPorNombreUsuario(grupo.getUsuarios().get(0).getNombreUsuario());
 		usuario.getGrupos().add(grupo);
 		grupoRepository.save(grupo);
@@ -54,6 +54,8 @@ public class GrupoService {
 					
 		
 	}
+	
+	
 	
 	
 }
