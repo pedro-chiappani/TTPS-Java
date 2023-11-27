@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ttpsentregable5.DTO.PreGastoDTO;
 import ttpsentregable5.DTO.PreGrupoDTO;
-import ttpsentregable5.model.Categoria;
+import ttpsentregable5.mapper.PreGastoMapper
+import ttpsentregable5.model.Gasto;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.GastoService;
@@ -26,53 +28,46 @@ public class GastoRestController {
 	@Autowired
 	private GastoService gastoService;
 	
+	@Autowired
+	private PreGastoMapper gastoMapper;
+	
 	//Ejemplo msj: suponiendo que el grupo1 tiene 3 miembros: idusu1,idusu2,idusu5 y idusu8
-	//{
-//		"monto": 1000,
-//		"imagen": "asdasd",
-//		"fecha": "sysdate",
-//		"grupo": idgrupo1,
-//		"categoria": "nombrecategoria",
-//		"cargaGasto" : idusu1,
-//		"realizaGasto" : idusu2,
-//		"divisiongasto": {
-//			"tipo": "fijo",
-//			"detalle": {
-//				{
-//					"usu1": idusu1,
-//					"valor": 100
-//				},
-//				{
-//					"usu2": idusu2,
-//					"valor": 500
-//				},
-//				{
-//					"usu3": idusu5,
-//					"valor": 500
-//				},
-//				{
-//					"usu4": idusu8,
-//					"valor": 900
+			//{
+//				"monto": 1000,
+//				"imagen": "asdasd",
+//				"fecha": "sysdate",
+//				"grupo": idgrupo1,
+//				"categoria": "nombrecategoria",
+//				"cargaGasto" : idusu1,
+//				"realizaGasto" : idusu2,
+//				"tipoDivisionGasto": 1	
+//				"divisiongasto": {									
+//						{
+//							"usu1": idusu1,
+//							"valor": 100
+//						},
+//						{
+//							"usu2": idusu2,
+//							"valor": 500
+//						},
+//						{
+//							"usu3": idusu5,
+//							"valor": 500
+//						},
+//						{
+//							"usu4": idusu8,
+//							"valor": 900
+//						}
+//					}
 //				}
-//			}
-//		}
-	//}
+			//}
 	@PostMapping("/cargarGasto")
 	public ResponseEntity<String> registrarUsuario(@RequestBody PreGastoDTO gastoDTO) {
 			
 		try {
 			
 			//Validar campos completos
-			if( gastoDTO.monto == null || 
-					gastoDTO.imagen==null ||
-					gastoDTO.fecha==null ||
-					gastoDTO.grupo==null ||
-					gastoDTO.cargaGasto==null ||
-					gastoDTO.realizaGasto==null ||
-					gastoDTO.divisiongasto==null ){
-				
-				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
-			}
+			
 			
 			//Validacion
 			gastoService.validarCamposAltaGasto(gastoDTO);
