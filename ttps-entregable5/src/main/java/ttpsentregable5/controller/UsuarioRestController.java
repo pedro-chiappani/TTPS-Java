@@ -28,7 +28,7 @@ public class UsuarioRestController {
 	private UsuarioService usuarioService;
 
 	
-	@GetMapping
+	@GetMapping("/listarUsuarios")
 	public ResponseEntity<List<Usuario>> listAllUsers() {
 		List<Usuario> usuarios = usuarioService.listarUsuarios();
 		if(usuarios.isEmpty()){
@@ -41,6 +41,15 @@ public class UsuarioRestController {
 	public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
 			
 		try {
+			
+			if (usuario.getNombreUsuario()==null
+					|| usuario.getClave()==null
+					|| usuario.getEmail()==null
+					|| usuario.getNombre()==null
+					|| usuario.getApellido()==null
+					)
+				
+				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			
 			usuarioService.validarCredencialesRegistrar(usuario.getNombreUsuario(), usuario.getClave(), usuario.getEmail());
 				

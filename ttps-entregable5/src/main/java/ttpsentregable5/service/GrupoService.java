@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ttpsentregable5.model.Grupo;
+import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.GrupoRepository;
+import ttpsentregable5.repository.UsuarioRepository;
 
 @Service
 @Transactional
 public class GrupoService {
-	
+
 	@Autowired
 	private GrupoRepository grupoRepository;
 	
-	public Grupo crear(Grupo grupo) {
-		return grupoRepository.save(grupo);
-	}
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	public List<Grupo> listarGrupos(){
 		return grupoRepository.findAll();
@@ -32,5 +33,29 @@ public class GrupoService {
 		}	
 		return gru.get();
 	}
-
+	
+	public Grupo guardar(Grupo grupo) {
+		Usuario usuario = usuarioRepository.recuperarPorNombreUsuario(grupo.getUsuarios().get(0).getNombreUsuario());
+		usuario.getGrupos().add(grupo);
+		grupoRepository.save(grupo);
+		usuarioRepository.save(usuario);
+		return grupo;
+	}
+	
+	public void validarCamposAltaGrupo(long idUsuario, String nombre) throws Exception {
+		
+		if( grupoRepository.recuperarPorNombre(nombre)!=null) {
+			throw new Exception("Nombre de grupo existente");
+		}
+		
+		if( usuarioRepository.findById(idUsuario)==null ) {
+			throw new Exception("Nombre usuario inexistente");
+		}
+					
+		
+	}
+	
+	
+	
+	
 }

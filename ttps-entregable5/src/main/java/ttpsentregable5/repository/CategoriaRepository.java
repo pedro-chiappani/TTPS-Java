@@ -8,7 +8,10 @@ import ttpsentregable5.model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 	
-	@Query("SELECT c FROM Categoria c WHERE LOWER(c.nombre)=LOWER(:name)")
-	Categoria recuperarPorNombreCategoria(@Param("name") String name);
+	@Query("SELECT c FROM Categoria c WHERE LOWER(c.nombre)=LOWER(:name) AND tipo=1")
+	Categoria recuperarPorNombreCategoriaGrupo(@Param("name") String name);
+	
+	@Query("SELECT c FROM Categoria c WHERE LOWER(c.nombre)=LOWER(:name) AND tipo=2")
+	Categoria recuperarPorNombreCategoriaGasto(@Param("name") String name);
 
 }

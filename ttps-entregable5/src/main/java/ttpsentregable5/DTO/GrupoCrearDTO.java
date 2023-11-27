@@ -3,19 +3,20 @@ package ttpsentregable5.DTO;
 public class GrupoCrearDTO {
 	
 	private String nombre;
-	private String nombreUsuario;
+	private Long idUsuario;
 	private String categoria;
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setidUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	public String getCategoria() {
 		return categoria;
