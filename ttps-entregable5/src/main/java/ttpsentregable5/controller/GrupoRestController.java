@@ -60,13 +60,13 @@ public class GrupoRestController {
 			//Validar campos completos
 			if( grupoDTO.getCategoria() == null
 					|| grupoDTO.getNombre() == null
-					|| grupoDTO.getNombreUsuario() == null){
+					|| grupoDTO.getIdUsuario() == null){
 				
 				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			}
 			
 			//Validacion
-			grupoService.validarCamposAltaGrupo(grupoDTO.getNombreUsuario(), grupoDTO.getNombre());
+			grupoService.validarCamposAltaGrupo(grupoDTO.getIdUsuario(), grupoDTO.getNombre());
 				
 			//Mapeo
 			Grupo grupo = grupoMapper.toGrupo(grupoDTO);

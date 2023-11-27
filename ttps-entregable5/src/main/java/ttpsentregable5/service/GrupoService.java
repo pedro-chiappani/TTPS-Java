@@ -42,13 +42,13 @@ public class GrupoService {
 		return grupo;
 	}
 	
-	public void validarCamposAltaGrupo(String nombreUsuario, String nombre) throws Exception {
+	public void validarCamposAltaGrupo(long idUsuario, String nombre) throws Exception {
 		
 		if( grupoRepository.recuperarPorNombre(nombre)!=null) {
 			throw new Exception("Nombre de grupo existente");
 		}
 		
-		if( usuarioRepository.recuperarPorNombreUsuario(nombreUsuario)==null ) {
+		if( usuarioRepository.findById(idUsuario)==null ) {
 			throw new Exception("Nombre usuario inexistente");
 		}
 					

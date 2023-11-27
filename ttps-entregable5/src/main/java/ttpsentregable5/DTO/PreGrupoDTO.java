@@ -2,16 +2,16 @@ package ttpsentregable5.DTO;
 
 public class PreGrupoDTO {
 
-	private String nombreUsuario;
+	private Long idUsuario;
 	private String categoria;
 	private String nombre;
 	
 	
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	public String getCategoria() {
 		return categoria;
@@ -28,6 +28,6 @@ public class PreGrupoDTO {
 	
 	
 	public String toString() {
-		return this.getNombre() + "-" + this.getCategoria() + " creado por: " + this.getNombreUsuario();
+		return this.getNombre() + "-" + this.getCategoria() + " creado por: " + this.getIdUsuario();
 	}
 }
