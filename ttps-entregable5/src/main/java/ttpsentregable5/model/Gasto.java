@@ -31,7 +31,7 @@ public class Gasto {
 	private double monto;
 	
 	@Column
-	private File imagen;
+	private String imagen;
 	
 	@Column
 	private Date fecha;
@@ -70,10 +70,10 @@ public class Gasto {
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
-	public File getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
-	public void setImagen(File imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 	public Date getFecha() {

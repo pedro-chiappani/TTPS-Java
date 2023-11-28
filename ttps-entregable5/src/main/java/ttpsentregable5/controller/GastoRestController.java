@@ -119,7 +119,7 @@ public class GastoRestController {
 	public ResponseEntity<String> actualizarGasto(@PathVariable Long id, @RequestBody Map<String, Object> request) {
 		try {
 			
-			File imagen = (File)request.get("imagen");
+			String imagen = (String)request.get("imagen");
 			//Date fecha = (String)request.get("fecha");
 			String categoria = (String)request.get("categoria");
 			Long idUsuCarga = (Long)request.get("cargaGasto");

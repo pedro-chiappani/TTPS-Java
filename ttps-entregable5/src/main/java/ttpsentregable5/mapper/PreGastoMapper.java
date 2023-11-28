@@ -40,24 +40,24 @@ public abstract class PreGastoMapper {
 	@Mapping(source = "detalleDivisionGasto", target = "detalleDivisionGasto", qualifiedByName = "armarDetalleDivisionGasto")
 	public abstract Gasto toGasto(PreGastoDTO dto);
 	
-	@Named("idGrupoAGrupo")
-	Optional<Grupo> idGrupoAGrupo(long idGrupo) {		
-		return grupoRepository.findById(idGrupo);
-	}
-	
 	@Named("nomCategoriaACategoria")
 	Categoria nomCategoriaACategoria(String nombreCat) {
 		return categoriaRepository.recuperarPorNombreCategoriaGasto(nombreCat);
 	}
 	
+	@Named("idGrupoAGrupo")
+	Grupo idGrupoAGrupo(Long idGrupo) {		
+		return grupoRepository.findById(idGrupo).get();
+	}
+	
 	@Named("idCargaGastoAUsuarioCargaGasto")
-	Optional<Usuario> idCargaGastoAUsuarioCargaGasto(long idUsu) {
-		return usuarioRepository.findById(idUsu);
+	Usuario idCargaGastoAUsuarioCargaGasto(Long idUsu) {
+		return usuarioRepository.findById(idUsu).get();
 	}
 	
 	@Named("idRealizaGastoAUsuarioRealizaGasto")
-	Optional<Usuario> idRealizaGastoAUsuarioRealizaGasto(long idUsu) {
-		return usuarioRepository.findById(idUsu);
+	Usuario idRealizaGastoAUsuarioRealizaGasto(Long idUsu) {
+		return usuarioRepository.findById(idUsu).get();
 	}
 	
 	

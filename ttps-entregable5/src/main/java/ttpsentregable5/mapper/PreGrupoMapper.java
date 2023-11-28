@@ -26,7 +26,7 @@ public abstract class PreGrupoMapper {
 	protected UsuarioRepository usuarioRepository;
 	
 	@Mapping(source = "categoria", target = "categoria", qualifiedByName = "nomCategoriaACategoria")
-	@Mapping(source = "nombreUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
+	@Mapping(source = "idUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
 	public abstract Grupo toGrupo(PreGrupoDTO dto);
 	
 	@Named("nomCategoriaACategoria")

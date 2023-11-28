@@ -76,7 +76,6 @@ public class GastoService {
 	
 	public void completarDetalleGasto(Gasto gasto, PreGastoDTO gastoDTO) throws Exception {
 		
-		List<DetalleDivisionGasto> ddg;
 		for (ElementoDetalleGastoDTO elemDG : gastoDTO.getDetalleDivisionGasto() ) {
 			gasto.getDetalleDivisionGasto().add(new DetalleDivisionGasto(gasto, usuarioRepository.findById(elemDG.getIdUsu()).get(), elemDG.getValor()));			
 		}
