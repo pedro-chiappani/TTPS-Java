@@ -2,6 +2,7 @@ package ttpsentregable5.model;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -50,9 +52,11 @@ public class Gasto {
 	@JoinColumn(name = "usuario_realiza_id")
 	private Usuario realizaGasto;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "divisiones_gasto_id")
-	private DivisionGasto divisionGasto;
+	@Column
+	private int tipoDivisionGasto; //1-Fijo, 2-Porcentaje, 3-Igual
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gasto")
+	private List<DetalleDivisionGasto> detalleDivisionGasto;
 	
 	public Long getId() {
 		return id;
@@ -102,14 +106,20 @@ public class Gasto {
 	public void setRealizaGasto(Usuario realizaGasto) {
 		this.realizaGasto = realizaGasto;
 	}
-
-	public DivisionGasto getDivisionGasto() {
-		return divisionGasto;
+	public int getTipoDivisionGasto() {
+		return tipoDivisionGasto;
 	}
-
-	public void setDivisionGasto(DivisionGasto divisionGasto) {
-		this.divisionGasto = divisionGasto;
+	public void setTipoDivisionGasto(int tipo) {
+		this.tipoDivisionGasto = tipo;
 	}
+	public List<DetalleDivisionGasto> getDetalleDivisionGasto() {
+		return detalleDivisionGasto;
+	}
+	public void setDetalleDivisionGasto(List<DetalleDivisionGasto> detalleDivisionGasto) {
+		this.detalleDivisionGasto = detalleDivisionGasto;
+	}
+	
 
+	
 
 }

@@ -1,6 +1,7 @@
 package ttpsentregable5.DTO;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,7 +15,7 @@ public class PreGastoDTO {
 	private Long cargaGasto;
 	private Long realizaGasto;
 	private Long tipoDivisionGasto;
-	//private List<ElementoDetalleDTO> detalleDivisionGasto;
+	private List<ElementoDetalleGastoDTO> detalleDivisionGasto;
 	
 	//Ejemplo msj: suponiendo que el grupo1 tiene 3 miembros: idusu1,idusu2,idusu5 y idusu8
 			//{
@@ -51,7 +52,7 @@ public class PreGastoDTO {
 	
 	public double getMonto() {
 		return monto;
-	}
+	}	
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
@@ -97,7 +98,12 @@ public class PreGastoDTO {
 	public void setTipoDivisionGasto(Long tipoDivisionGasto) {
 		this.tipoDivisionGasto = tipoDivisionGasto;
 	}
-	
+	public List<ElementoDetalleGastoDTO> getDetalleDivisionGasto() {
+		return detalleDivisionGasto;
+	}
+	public void setDetalleDivisionGasto(List<ElementoDetalleGastoDTO> detalleDivisionGasto) {
+		this.detalleDivisionGasto = detalleDivisionGasto;
+	}
 	
 	
 	

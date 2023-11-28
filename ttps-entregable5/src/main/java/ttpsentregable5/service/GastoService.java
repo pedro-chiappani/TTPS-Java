@@ -16,7 +16,6 @@ public class GastoService {
 	
 	
 	public Gasto guardar(Gasto gasto) {
-		
 		gastoRepository.save(gasto);
 		return gasto;
 	}

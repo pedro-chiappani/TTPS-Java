@@ -98,7 +98,7 @@ public class GrupoRestController {
 	}
 	
 	
-	@PutMapping("/id")
+	@PutMapping("/{id}")
 	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody Map<String, String> request) {
 		try {
 			

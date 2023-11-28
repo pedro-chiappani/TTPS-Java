@@ -24,8 +24,8 @@ public class DetalleDivisionGasto {
 
 
 	@ManyToOne
-	@JoinColumn(name="division_gasto_id", nullable=false)
-	private DivisionGasto divisionGasto;
+	@JoinColumn(name="gasto_id", nullable=false)
+	private Gasto gasto;
 
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -34,6 +34,38 @@ public class DetalleDivisionGasto {
 
 	@Column
 	private double valor;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Gasto getGasto() {
+		return gasto;
+	}
+
+	public void setGasto(Gasto gasto) {
+		this.gasto = gasto;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
 
 	//1-Fijo, 2-Porcentaje, 3-Igual
 
@@ -47,4 +79,7 @@ public class DetalleDivisionGasto {
 	 	2(porcentaje) - un valor que representa un porcentaje, que sirve para evaluar el monto a pagar de un gasto
 	 	3(monto igual)- un valor que representa un monto, cuyo monto es igual entre los usuaroios q comparten el gasto
 	*/
+	
+	
+	
 }
