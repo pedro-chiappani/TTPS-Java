@@ -1,6 +1,8 @@
 package ttpsentregable5.model;
 
 
+import java.util.Optional;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +37,15 @@ public class DetalleDivisionGasto {
 	@Column
 	private double valor;
 
+	
+	public DetalleDivisionGasto(Gasto unGasto, Usuario unUsu, double unValor) {
+		this.setGasto(unGasto);
+		this.setUsuario(unUsu);
+		this.setValor(unValor);
+	}
+	
+	
+
 	public Long getId() {
 		return id;
 	}
@@ -58,7 +69,7 @@ public class DetalleDivisionGasto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
+		
 	public double getValor() {
 		return valor;
 	}

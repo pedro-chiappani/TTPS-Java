@@ -110,7 +110,7 @@ public class GrupoRestController {
 				return new ResponseEntity<>("Envie algun dato para actualizar", HttpStatus.BAD_REQUEST);
 			}
 			
-			 // Verificar si el grupo existe
+			// Verificar si el grupo existe
 			Grupo grupo = grupoService.obtenerPorId(id);
 
 			

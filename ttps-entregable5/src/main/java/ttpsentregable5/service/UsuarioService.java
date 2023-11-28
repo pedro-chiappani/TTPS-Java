@@ -1,11 +1,13 @@
 package ttpsentregable5.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.UsuarioRepository;
 
@@ -24,6 +26,14 @@ public class UsuarioService {
 	
 	public Usuario crear(Usuario usuario) {
 		return usuarioRepository.save(usuario);
+	}
+	
+	public Usuario obtenerPorId(Long id) throws Exception {
+		Optional<Usuario> usu = usuarioRepository.findById(id);
+		if (!usu.isPresent()) {
+			throw new Exception("No se encontro el usuario");
+		}	
+		return usu.get();
 	}
 	
 	public boolean validarCredencialesLogin(String nombreUsuario, String clave) {

@@ -23,6 +23,15 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario {
 	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false, name="usuario_id")

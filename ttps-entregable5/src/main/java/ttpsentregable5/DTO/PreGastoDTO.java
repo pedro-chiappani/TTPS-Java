@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class PreGastoDTO {
 
-	private double monto;
+	private Double monto;
 	private String imagen;
 	private Date fecha;
 	private Long idGrupo;
@@ -50,10 +50,10 @@ public class PreGastoDTO {
 	
 	
 	
-	public double getMonto() {
+	public Double getMonto() {
 		return monto;
 	}	
-	public void setMonto(double monto) {
+	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
 	public String getImagen() {

@@ -14,6 +14,7 @@ import ttpsentregable5.DTO.PreGastoDTO;
 import ttpsentregable5.DTO.PreGrupoDTO;
 import ttpsentregable5.model.Categoria;
 import ttpsentregable5.model.DetalleDivisionGasto;
+import ttpsentregable5.model.Gasto;
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.CategoriaRepository;
@@ -37,7 +38,7 @@ public abstract class PreGastoMapper {
 	@Mapping(source = "cargaGasto", target = "cargaGasto", qualifiedByName = "idCargaGastoAUsuarioCargaGasto")
 	@Mapping(source = "realizaGasto", target = "realizaGasto", qualifiedByName = "idRealizaGastoAUsuarioRealizaGasto")
 	@Mapping(source = "detalleDivisionGasto", target = "detalleDivisionGasto", qualifiedByName = "armarDetalleDivisionGasto")
-	public abstract Grupo toGasto(PreGastoDTO dto);
+	public abstract Gasto toGasto(PreGastoDTO dto);
 	
 	@Named("idGrupoAGrupo")
 	Optional<Grupo> idGrupoAGrupo(long idGrupo) {		
