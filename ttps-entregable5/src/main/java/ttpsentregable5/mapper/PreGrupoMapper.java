@@ -29,14 +29,14 @@ public abstract class PreGrupoMapper {
 	@Mapping(source = "idUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
 	public abstract Grupo toGrupo(PreGrupoDTO dto);
 	
-	@Named("nomCategoriaACategoria")
+	@Named("nomCategoriaACategoria") 
 	Categoria nomCategoriaACategoria(String nombreCat) {
 		return categoriaRepository.recuperarPorNombreCategoriaGrupo(nombreCat);
 	}
 	
 	@Named("agregarUsuario")
-	List<Usuario> agregarUsuario(String nombreUsu) {
-		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsu);
+	List<Usuario> agregarUsuario(Long idUsuario) throws Exception{
+		Usuario usu = usuarioRepository.findById(idUsuario).get();
 		return Arrays.asList(usu);
 	}
 	

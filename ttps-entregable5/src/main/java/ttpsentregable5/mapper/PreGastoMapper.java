@@ -1,5 +1,6 @@
 package ttpsentregable5.mapper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,8 @@ public abstract class PreGastoMapper {
 	
 	@Named("armarDetalleDivisionGasto")
 	List<DetalleDivisionGasto> armarDetalleDivisionGasto(List<ElementoDetalleGastoDTO> detalleDivision) {
-		return null; //el detalle se realiza en otro mapper, se inicializa la lista en null
+		List<DetalleDivisionGasto> list = new ArrayList<>();
+		return list; //el detalle se realiza en otro mapper, se inicializa la lista en null
 	}
 	
 	

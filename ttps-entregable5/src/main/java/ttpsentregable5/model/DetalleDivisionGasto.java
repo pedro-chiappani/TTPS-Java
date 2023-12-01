@@ -30,13 +30,16 @@ public class DetalleDivisionGasto {
 	private Gasto gasto;
 
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 	@Column
 	private double valor;
 
+	public DetalleDivisionGasto() {
+		
+	}
 	
 	public DetalleDivisionGasto(Gasto unGasto, Usuario unUsu, double unValor) {
 		this.setGasto(unGasto);

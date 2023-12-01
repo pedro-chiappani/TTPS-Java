@@ -52,6 +52,12 @@ public class GrupoRestController {
 		return new ResponseEntity<List<Grupo>>(grupos, HttpStatus.OK);
 	}
 	
+	
+//	{
+//	  "idUsuario":"1",
+//	  "categoria":"nombreCategoria",
+//	  "nombre":"nombreGrupo"
+//	}
 	@PostMapping("/crearGrupo")
 	public ResponseEntity<String> crearGrupo(@RequestBody PreGrupoDTO grupoDTO) {
 			
@@ -66,13 +72,10 @@ public class GrupoRestController {
 			}
 			
 			//Validacion
-			grupoService.validarCamposAltaGrupo(grupoDTO.getIdUsuario(), grupoDTO.getNombre());
-				
+			grupoService.validarCamposAltaGrupo(grupoDTO.getIdUsuario(), grupoDTO.getNombre(), grupoDTO.getCategoria());
+			
 			//Mapeo
 			Grupo grupo = grupoMapper.toGrupo(grupoDTO);
-			
-//			System.out.println("Grupo: " + grupo.toString());
-//			System.out.println("usuariosgrupo: " + grupo.getUsuarios().size() + "//" + grupo.getUsuarios().get(0).toString());
 			
 			this.grupoService.guardar(grupo);
 			
@@ -90,6 +93,9 @@ public class GrupoRestController {
 			Grupo gru = grupoService.obtenerPorId(id);
 			if (gru.getGastos().isEmpty())
 				return new ResponseEntity<List<Gasto>>(HttpStatus.NO_CONTENT);
+			
+			System.out.println(gru.getGastos().size());
+			
 			return new ResponseEntity<List<Gasto>>(gru.getGastos(), HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -79,31 +79,31 @@ public class GastoRestController {
 	public ResponseEntity<String> registrarGasto(@RequestBody PreGastoDTO gastoDTO) {
 			
 		try {
-			
+			System.out.println("1");
 			//Validar campos completos
 			if( gastoDTO.getMonto() == null
 					|| gastoDTO.getImagen() == null
 					|| gastoDTO.getFecha() == null
 					|| gastoDTO.getIdGrupo() == null
 					|| gastoDTO.getCategoria() == null
-					|| gastoDTO.getIdGrupo() == null
 					|| gastoDTO.getCargaGasto() == null
 					|| gastoDTO.getRealizaGasto() == null
 					|| gastoDTO.getTipoDivisionGasto() == null){
 				
 				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			}
-			
+			System.out.println("2");
 			//Validacion
 			gastoService.validarCamposAltaGasto(gastoDTO);
-				
+			System.out.println("3");
 			//Mapeo
 			Gasto gasto = gastoMapper.toGasto(gastoDTO);
 			gastoService.completarDetalleGasto(gasto, gastoDTO);
 			
+			System.out.println("4");
 			this.gastoService.guardar(gasto);
-			
-			return new ResponseEntity<>("Grupo creado", HttpStatus.CREATED);
+			System.out.println("5");
+			return new ResponseEntity<>("Gasto creado", HttpStatus.CREATED);
 			
 		} catch ( Exception e ) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -119,16 +119,19 @@ public class GastoRestController {
 	public ResponseEntity<String> actualizarGasto(@PathVariable Long id, @RequestBody Map<String, Object> request) {
 		try {
 			
-			String imagen = (String)request.get("imagen");
-			//Date fecha = (String)request.get("fecha");
-			String categoria = (String)request.get("categoria");
-			Long idUsuCarga = (Long)request.get("cargaGasto");
-			Long idUsuRealiza = (Long)request.get("realizaGasto"); 
+			System.out.println("0.1");
 			
-			if( imagen == null && categoria == null && idUsuCarga==null && idUsuRealiza==null){
+			String imagen = (String)request.get("imagen");
+			String categoria = (String)request.get("categoria");
+			Long idUsuCarga = Long.valueOf( (Integer) request.get("cargaGasto"));
+			Long idUsuRealiza = Long.parseLong(request.get("realizaGasto").toString()); 
+			
+			if( imagen == null || categoria == null || idUsuCarga==null || idUsuRealiza==null){
 				
 				return new ResponseEntity<>("Envie algun dato para actualizar", HttpStatus.BAD_REQUEST);
 			}
+			
+			System.out.println("0.2");
 			
 			// Verificar si el grupo existe
 			Gasto gasto = gastoService.obtenerPorId(id);
@@ -141,6 +144,8 @@ public class GastoRestController {
 				gasto.setCargaGasto(nuevoCargaGasto);			
 			}
 			
+			System.out.println("0");
+			
 			Usuario nuevoRealizaGasto = usuarioService.obtenerPorId(idUsuRealiza);
 			if (nuevoRealizaGasto == null) {
 				return new ResponseEntity<>("Usuario de realiza de gasto inexistente", HttpStatus.BAD_REQUEST);
@@ -148,6 +153,7 @@ public class GastoRestController {
 				gasto.setRealizaGasto(nuevoRealizaGasto);			
 			}
 			
+			System.out.println("1");
 			
 			// Verificar categoria
 			Categoria nuevaCategoria = categoriaService.obtenerCategoriaDeGastoPorNombre(categoria);
@@ -157,13 +163,15 @@ public class GastoRestController {
 				gasto.setCategoria(nuevaCategoria);				
 			}
 			
+			System.out.println("2");
+			
             // Actualizar los campos faltantes
 			gasto.setImagen(imagen);
 						           
             // Guardar el grupo actualizado en la base de datos
             gastoService.guardar(gasto);
 			
-			return new ResponseEntity<>("Grupo actualzado", HttpStatus.OK);
+			return new ResponseEntity<>("Gasto actualzado", HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}

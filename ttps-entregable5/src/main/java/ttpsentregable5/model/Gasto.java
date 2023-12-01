@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,10 +36,11 @@ public class Gasto {
 	private String imagen;
 	
 	@Column
-	private Date fecha;
+	private String fecha;
 	
 	@ManyToOne
 	@JoinColumn(name="group_id", nullable=false)
+	@JsonIgnore
 	private Grupo grupo;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -46,16 +49,19 @@ public class Gasto {
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_carga_id")
+	@JsonIgnore
 	private Usuario cargaGasto;
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_realiza_id")
+	@JsonIgnore
 	private Usuario realizaGasto;
 	
 	@Column
 	private int tipoDivisionGasto; //1-Fijo, 2-Porcentaje, 3-Igual
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gasto")
+	@JsonIgnore
 	private List<DetalleDivisionGasto> detalleDivisionGasto;
 	
 	public Long getId() {
@@ -76,10 +82,10 @@ public class Gasto {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public Grupo getGrupo() {
