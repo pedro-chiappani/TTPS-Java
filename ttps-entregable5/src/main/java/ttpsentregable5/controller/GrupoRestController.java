@@ -58,12 +58,13 @@ public class GrupoRestController {
 					|| grupodto.getIdUsuario()==null) {
 				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			}
-			grupoService.validarCamposAltaGrupo(grupodto.getIdUsuario(), grupodto.getNombre());
+			grupoService.validarCamposAltaGrupo(grupodto.getIdUsuario(), grupodto.getNombre(), grupodto.getCategoria());
 			
 			Grupo grupo = grupoMapper.grupoMapper(grupodto);
 			grupoService.guardar(grupo);
 			return new ResponseEntity<>("Grupo Creado", HttpStatus.CREATED);
 		} catch (Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}

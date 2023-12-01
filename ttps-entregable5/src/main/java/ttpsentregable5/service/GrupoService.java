@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ttpsentregable5.model.Grupo;
 import ttpsentregable5.model.Usuario;
+import ttpsentregable5.repository.CategoriaRepository;
 import ttpsentregable5.repository.GrupoRepository;
 import ttpsentregable5.repository.UsuarioRepository;
 
@@ -21,6 +22,9 @@ public class GrupoService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 	
 	public List<Grupo> listarGrupos(){
 		return grupoRepository.findAll();
@@ -42,14 +46,20 @@ public class GrupoService {
 		return grupo;
 	}
 	
-	public void validarCamposAltaGrupo(long idUsuario, String nombre) throws Exception {
+	public void validarCamposAltaGrupo(long idUsuario, String nombre, String categoria) throws Exception {
+		Optional<Grupo> gru = grupoRepository.recuperarPorNombre(nombre);
 		
-		if( grupoRepository.recuperarPorNombre(nombre)!=null) {
+		if (gru.isPresent()) {
 			throw new Exception("Nombre de grupo existente");
 		}
 		
-		if( usuarioRepository.findById(idUsuario)==null ) {
-			throw new Exception("Nombre usuario inexistente");
+		Optional<Usuario> usu = usuarioRepository.findById(idUsuario);
+		if (!usu.isPresent()) {
+			throw new Exception("No se encontro el usuario");
+		}	
+		
+		if (categoriaRepository.recuperarPorNombreCategoriaGrupo(categoria) == null) {
+			throw new Exception("Categoria Inexistente");
 		}
 					
 		

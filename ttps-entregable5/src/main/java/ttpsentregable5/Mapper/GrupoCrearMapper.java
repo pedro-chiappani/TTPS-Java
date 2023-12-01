@@ -15,30 +15,32 @@ import ttpsentregable5.model.Usuario;
 import ttpsentregable5.repository.CategoriaRepository;
 import ttpsentregable5.repository.GrupoRepository;
 import ttpsentregable5.repository.UsuarioRepository;
+import ttpsentregable5.service.CategoriaService;
+import ttpsentregable5.service.UsuarioService;
 
 
 @Mapper
 public abstract class GrupoCrearMapper{
 	
 	@Autowired
-	protected CategoriaRepository categoriaRepository;
+	protected CategoriaService categoriaService;
 	
 	@Autowired
-	protected UsuarioRepository usuarioRepository;
+	protected UsuarioService usuarioService;
 	
 	
 	@Mapping(source = "categoria", target = "categoria", qualifiedByName = "nomCategoriaACategoria")
-	@Mapping(source = "nombreUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
+	@Mapping(source = "idUsuario", target = "usuarios", qualifiedByName = "agregarUsuario")
     public abstract Grupo grupoMapper(GrupoCrearDTO dto);
 	
 	@Named("nomCategoriaACategoria")
-	Categoria nomCategoriaACategoria(String nombreCat) {
-		return categoriaRepository.recuperarPorNombreCategoriaGrupo(nombreCat);
+	Categoria nomCategoriaACategoria(String nombreCat) throws Exception {
+		return categoriaService.obtenerCategoriaDeGrupoPorNombre(nombreCat);
 	}
 	
 	@Named("agregarUsuario")
-	List<Usuario> agregarUsuario(String nombreUsu) {
-		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsu);
+	List<Usuario> agregarUsuario(Long idUsuario) throws Exception {
+		Usuario usu = usuarioService.obtenerPorId(idUsuario);
 		return Arrays.asList(usu);
 	}
 }

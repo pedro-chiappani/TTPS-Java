@@ -2,6 +2,9 @@ package ttpsentregable5.model;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -25,31 +29,40 @@ public class Gasto {
 	@Column(nullable = false, name="gasto_id")
 	private Long id;
 	
+	@Column
 	private double monto;
 	
-	private File imagen;
+	@Column
+	private String imagen;
 	
-	private Date fecha;
+	@Column
+	private String fecha;
 	
 	@ManyToOne
 	@JoinColumn(name="group_id", nullable=false)
+	@JsonIgnore
 	private Grupo grupo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "categoria_id")
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria_id")
 	private Categoria categoria;	
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_carga_id")
+	@JsonIgnore
 	private Usuario cargaGasto;
 	
 	@ManyToOne
 	@JoinColumn(name = "usuario_realiza_id")
+	@JsonIgnore
 	private Usuario realizaGasto;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "divisiones_gasto_id")
-	private DivisionGasto divisionGasto;
+	@Column
+	@JsonIgnore
+	private int tipoDivisionGasto; //1-Fijo, 2-Porcentaje, 3-Igual
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gasto")
+	private List<DetalleDivisionGasto> detalleDivisionGasto;
 	
 	public Long getId() {
 		return id;
@@ -63,16 +76,16 @@ public class Gasto {
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
-	public File getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
-	public void setImagen(File imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public Grupo getGrupo() {
@@ -99,14 +112,20 @@ public class Gasto {
 	public void setRealizaGasto(Usuario realizaGasto) {
 		this.realizaGasto = realizaGasto;
 	}
-
-	public DivisionGasto getDivisionGasto() {
-		return divisionGasto;
+	public int getTipoDivisionGasto() {
+		return tipoDivisionGasto;
 	}
-
-	public void setDivisionGasto(DivisionGasto divisionGasto) {
-		this.divisionGasto = divisionGasto;
+	public void setTipoDivisionGasto(int tipo) {
+		this.tipoDivisionGasto = tipo;
 	}
+	public List<DetalleDivisionGasto> getDetalleDivisionGasto() {
+		return detalleDivisionGasto;
+	}
+	public void setDetalleDivisionGasto(List<DetalleDivisionGasto> detalleDivisionGasto) {
+		this.detalleDivisionGasto = detalleDivisionGasto;
+	}
+	
 
+	
 
 }
