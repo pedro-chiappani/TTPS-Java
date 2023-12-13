@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { GeneralRoutingModule } from './general-routing.module';
 
 import { HomeComponent } from './pages/home/home.component';
@@ -34,7 +35,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     GeneralRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
     // FlexLayoutModule,
   ]
 })
