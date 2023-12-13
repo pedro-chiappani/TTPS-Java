@@ -1,9 +1,10 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { GrupoComponent } from './pages/grupo/grupo.component';
 import { GastoComponent } from './pages/gasto/gasto.component';
-import { HomeComponent } from './pages/heroes-home/home.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
 
 // import { AgregarComponent } from './pages/agregar/agregar.component';
 // import { BuscarComponent } from './pages/buscar/buscar.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
         component: GrupoComponent
       },
       {
+        path: 'creargrupo',
+        component: CrearGrupoComponent
+      },
+      {
         path: 'gasto',
         component: GastoComponent
       },
@@ -40,7 +45,7 @@ const routes: Routes = [
       // },
       {
         path: '**',
-        redirectTo: 'grupo'
+        redirectTo: 'home'
       }
     ]
   }

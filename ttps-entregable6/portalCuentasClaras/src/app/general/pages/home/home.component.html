@@ -7,7 +7,7 @@
 
             <span class="spacer"></span>
 
-            <button mat-icon-button mat-raised-button
+            <button mat-icon-button
                     (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
@@ -15,31 +15,36 @@
 
         <mat-nav-list>
             
-            <a routerLink="./listado"
+            <!-- <a routerLink="./listado"
                mat-list-item
                (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>label</mat-icon>
-                Listado heroes
+                Home
+            </a> -->
+            <a routerLink="./grupo"
+               mat-list-item
+               (click)="sidenav.toggle()">
+                <mat-icon>assignment_ind</mat-icon>                
+                Grupos
             </a>
-            <a routerLink="./agregar"
+            <a routerLink="./creargrupo"
                mat-list-item
                (click)="sidenav.toggle()">
                 <mat-icon mat-list-icon>add</mat-icon>
-                Agregar heroe
+                Crear Grupo
             </a>
-            <a routerLink="./buscar"
+            <a routerLink="./gasto"
                mat-list-item
                (click)="sidenav.toggle()">
-                <mat-icon mat-list-icon>search</mat-icon>
-                Buscar heroe
+                <mat-icon mat-list-icon>assignment_ind</mat-icon>
+                Gastos
             </a>
-
         </mat-nav-list>
 
     </mat-sidenav>
 
     <mat-toolbar>
-        <button mat-icon-button mat-raised-button
+        <button mat-icon-button
                 (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>

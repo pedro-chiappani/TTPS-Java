@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grupo',
-  templateUrl: './grupo.component.html',
+  templateUrl: './creargrupo.component.html',
   styles: [
   ]
 })
-export class GrupoComponent implements OnInit {
+export class CrearGrupoComponent implements OnInit {
 
   constructor() { }
 

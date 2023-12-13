@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GeneralRoutingModule } from './general-routing.module';
 
-import { HomeComponent } from './pages/heroes-home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { GastoComponent } from './pages/gasto/gasto.component';
 import { GrupoComponent } from './pages/grupo/grupo.component';
 
