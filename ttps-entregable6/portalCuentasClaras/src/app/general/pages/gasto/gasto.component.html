@@ -1,0 +1,36 @@
+
+<form (ngSubmit)="submitForm()" fxLayout="column" fxLayoutAlign="center">
+    <mat-form-field>
+      <input matInput placeholder="Monto" [(ngModel)]="gasto.monto" name="monto" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Imagen" [(ngModel)]="gasto.imagen" name="imagen" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Fecha" [(ngModel)]="gasto.fecha" name="fecha" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field>
+        <input matInput placeholder="Grupo" [(ngModel)]="gasto.grupo" name="grupo" required>
+      </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput placeholder="Carga Gasto" [(ngModel)]="gasto.cargaGasto" name="cargaGasto" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realizaGasto" name="realizaGasto" required>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Tipo de División de Gasto" [(ngModel)]="gasto.tipoDivisionGasto" name="tipoDivisionGasto" required>
+    </mat-form-field>
+  
+    <!-- Agrega más campos según tus necesidades -->
+  
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </form>
