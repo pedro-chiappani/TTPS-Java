@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ttpsentregable5.DTO.LoginDTO;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.UsuarioService;
 
@@ -64,16 +65,10 @@ public class UsuarioRestController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<Map<String, String>> loginUsuario(@RequestBody Map<String, String> request) {
-		
-		String nombreUsuario = request.get("nombreUsuario");
-		String clave = request.get("clave");
-		
-		System.out.println(nombreUsuario + ' ' + clave);
-		
+	public ResponseEntity<Map<String, String>> loginUsuario(@RequestBody LoginDTO loginDTO) {					
 		Map<String, String> response = new HashMap<>();
 		
-		if( usuarioService.validarCredencialesLogin(nombreUsuario, clave) ) {
+		if( usuarioService.validarCredencialesLogin(loginDTO.getNombreUsuario(), loginDTO.getClave()) ) {
 
 			response.put("mensaje", "Inicio de sesion Exitoso");
 			return new ResponseEntity<>(response, HttpStatus.OK);

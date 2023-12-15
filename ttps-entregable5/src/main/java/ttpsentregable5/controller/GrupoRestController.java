@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttpsentregable5.DTO.PreGrupoDTO;
+import ttpsentregable5.DTO.UpdtGrupoDTO;
 import ttpsentregable5.mapper.PreGrupoMapper;
 import ttpsentregable5.model.Categoria;
 import ttpsentregable5.model.Gasto;
@@ -105,13 +106,11 @@ public class GrupoRestController {
 	
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody Map<String, String> request) {
+	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody UpdtGrupoDTO grupoDTO) {
 		try {
 			
-			String nombre = request.get("nombre");
-			String categoria = request.get("categoria");
 			
-			if( nombre == null && categoria == null){
+			if( grupoDTO.getNombre() == null && grupoDTO.getCategoria() == null){
 				
 				return new ResponseEntity<>("Envie algun dato para actualizar", HttpStatus.BAD_REQUEST);
 			}
@@ -121,18 +120,15 @@ public class GrupoRestController {
 
 			
 			// Verificar categoria
-			Categoria nuevaCategoria = categoriaService.obtenerCategoriaDeGrupoPorNombre(categoria);
+			Categoria nuevaCategoria = categoriaService.obtenerCategoriaDeGrupoPorNombre(grupoDTO.getCategoria());
 			if (nuevaCategoria == null) {
 				return new ResponseEntity<>("Categoria de grupo inexistente", HttpStatus.BAD_REQUEST);
 			}else {
 				grupo.setCategoria(nuevaCategoria);				
 			}
 			
-            // Actualizar los campos del grupo
-			if (nombre != null) {
-				grupo.setNombre(nombre);		
-			}
-						           
+            grupo.setNombre(grupoDTO.getNombre());		
+									           
             // Guardar el grupo actualizado en la base de datos
             grupoService.guardar(grupo);
 			
