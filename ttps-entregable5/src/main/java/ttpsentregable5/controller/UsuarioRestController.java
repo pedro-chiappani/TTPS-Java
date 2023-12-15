@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ttpsentregable5.DTO.LoginDTO;
+import ttpsentregable5.model.Token;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.UsuarioService;
+import ttpsentregable5.service.TokenServices;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping(value = "/usuarios", produces=MediaType.APPLICATION_JSON_VALUE)
 public class UsuarioRestController {
@@ -25,7 +29,12 @@ public class UsuarioRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@Autowired
+	private TokenServices tokenServices;
 	
+	private final int EXPIRATION_IN_SEC = 100;
+	
+	@CrossOrigin("http://localhost:4200/") 
 	@GetMapping("/listarUsuarios")
 	public ResponseEntity<List<Usuario>> listAllUsers() {
 		List<Usuario> usuarios = usuarioService.listarUsuarios();
@@ -36,7 +45,7 @@ public class UsuarioRestController {
 	}
 
 
-	
+	@CrossOrigin("http://localhost:4200/") 
 	@PostMapping("/registrarUsuario")
 	public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
 			
@@ -63,22 +72,25 @@ public class UsuarioRestController {
 		}	   
 	}
 	
-	
+	@CrossOrigin("http://localhost:4200/") 
 	@PostMapping("/login")
-	public ResponseEntity<Map<String, String>> loginUsuario(@RequestBody LoginDTO loginDTO) {					
-		Map<String, String> response = new HashMap<>();
+	public ResponseEntity<?> loginUsuario(@RequestBody LoginDTO loginDTO) {					
 		
-		if( usuarioService.validarCredencialesLogin(loginDTO.getNombreUsuario(), loginDTO.getClave()) ) {
-
-			response.put("mensaje", "Inicio de sesion Exitoso");
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		} else {
-			response.put("mensaje", "Credenciales Incorrectas");
-			return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-		}
+		
+		if(isLoginSuccess(loginDTO.getNombreUsuario(), loginDTO.getClave())) {
+            String token = tokenServices.generateToken(loginDTO.getNombreUsuario(), EXPIRATION_IN_SEC);
+            
+            return ResponseEntity.ok(new Token(token));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
+        }
+		
 		
 		
 	}
 
+	private boolean isLoginSuccess(String username, String password) {
+		return usuarioService.validarCredencialesLogin(username, password);
+	}
 
 }

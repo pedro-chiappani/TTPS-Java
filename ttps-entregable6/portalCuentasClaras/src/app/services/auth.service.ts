@@ -1,15 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { Heroe } from '../interfaces/heroes.interface';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-@Injectable()
-export class AuthService {
+import { User } from '../models/User';
 
-  constructor(private http: HttpClient) {}
+@Injectable({ providedIn: 'root' })
+export class AuthenticationService {
 
-//   getHeroes(): Observable<Heroe[]> {
-//     return this.http.get<Heroe[]>('http://localhost:3000/heroes');
-//   }
 
+  constructor(private http: HttpClient) {
+
+  }
+
+  login(username: string, password: string): Observable<any> {
+
+    return this.http.post<any>('http://localhost:8081/usuarios/login', { "nombreUsuario": username, "clave": password })
+      .subscribe(response => {
+        localStorage.setItem('token', response.token);
+      });
+  }
+
+  logout(): void {
+    // remove token from local storage
+    localStorage.removeItem('token');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    // check if a token exists
+    return !!this.getToken();
+  }
 }

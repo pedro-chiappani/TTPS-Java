@@ -1,15 +1,21 @@
 <div class="overlay">
     <div class="example-form">
-        <form>
+        <form (ngSubmit)="login()">
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Usuario" [(ngModel)]="username" name="username" required>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <input matInput type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" required>
+                <input matInput type="password" placeholder="Contraseña" [(ngModel)]="password" name="password"
+                    required>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" (click)="onSubmit()">Iniciar sesión</button>
+            <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
         </form>
+        
+        <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </div>
     </div>
+
 </div>

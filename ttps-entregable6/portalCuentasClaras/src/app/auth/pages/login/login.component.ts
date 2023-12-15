@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -32,20 +34,23 @@ import { Component, OnInit } from '@angular/core';
     `
   ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
-  ngOnInit(): void {
+  login(): void {
+    this.authService.login(this.username, this.password).subscribe(response => {
+      // Maneja la respuesta del servidor en caso de éxito
+
+      this.errorMessage = '';  // Reinicia el mensaje de error en caso de éxito
+    }, error => {
+      // Maneja el error y muestra un mensaje
+      console.log(error);
+      this.errorMessage = error.error;
+    });
   }
-
-  username='';
-  password='';
-
-  onSubmit(){
-    console.log(this.username);
-    console.log(this.password);
-  }
-
 
 }
