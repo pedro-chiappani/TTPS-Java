@@ -22,6 +22,10 @@
             </mat-form-field>
 
             <button mat-raised-button color="primary" (click)="onSubmit()">Registrar</button>
+
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
         </form>
     </div>
 </div>

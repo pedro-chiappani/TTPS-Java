@@ -26,6 +26,7 @@ public class JWTAuthenticationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
+		
 		// El login del usuarios es publico
 		if ("/jwt/auth".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
 			chain.doFilter(request, response);

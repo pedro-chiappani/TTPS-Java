@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/auth.service';
 
 
@@ -39,18 +40,20 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   login(): void {
-    this.authService.login(this.username, this.password).subscribe(response => {
-      // Maneja la respuesta del servidor en caso de éxito
-
-      this.errorMessage = '';  // Reinicia el mensaje de error en caso de éxito
-    }, error => {
-      // Maneja el error y muestra un mensaje
-      console.log(error);
-      this.errorMessage = error.error;
-    });
+    this.authService.login(this.username, this.password).subscribe(
+      response => {
+        // Maneja la respuesta del servidor en caso de éxito
+        this.errorMessage = '';  // Reinicia el mensaje de error en caso de éxito
+        this.router.navigate(['/general/grupo']);
+      },
+      error => {
+        // Maneja el error y muestra un mensaje
+        this.errorMessage = error.error;
+      }
+    );
   }
 
 }
