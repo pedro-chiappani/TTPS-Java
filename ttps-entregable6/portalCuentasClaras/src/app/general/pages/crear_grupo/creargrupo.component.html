@@ -1,1 +1,13 @@
-<p>crear grupo works!</p>
+<form (ngSubmit)="submitForm()" fxLayout="column" fxLayoutAlign="center">
+  <mat-form-field>
+    <input matInput placeholder="Categoria" [(ngModel)]="categoria" name="categoria" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Nombre" [(ngModel)]="nombreGrupo" name="nombreGrupo" required>
+  </mat-form-field>
+
+
+
+  <button mat-raised-button color="primary" type="submit">Guardar</button>
+</form>

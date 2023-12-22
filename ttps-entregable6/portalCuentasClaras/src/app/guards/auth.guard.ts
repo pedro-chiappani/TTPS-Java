@@ -12,7 +12,8 @@ export class AuthGuard  {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
-        if (currentUser && currentUser != '{}') {
+        console.log(currentUser)
+        if (currentUser && currentUser !== '') {
             // si esta logeado lo dejo activar la ruta
             return true;
         }

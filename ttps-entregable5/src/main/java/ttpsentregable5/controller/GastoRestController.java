@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +29,7 @@ import ttpsentregable5.service.CategoriaService;
 import ttpsentregable5.service.GastoService;
 import ttpsentregable5.service.UsuarioService;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping(value = "/gastos", produces=MediaType.APPLICATION_JSON_VALUE)
 public class GastoRestController {
@@ -75,6 +77,7 @@ public class GastoRestController {
 //					}
 //				}
 //			}
+	@CrossOrigin("http://localhost:4200/")
 	@PostMapping("/cargarGasto")
 	public ResponseEntity<String> registrarGasto(@RequestBody GastoCrearDTO gastoDTO) {
 			
@@ -115,6 +118,7 @@ public class GastoRestController {
 	//por lo tanto el monto no se puede cambiar, se relaciona directamente con esto
 	
 	//Cambiar el grupo no existe, tema monto y distribucion otro endpoint
+	@CrossOrigin("http://localhost:4200/")
 	@PutMapping("/{id}")
 	public ResponseEntity<String> actualizarGasto(@PathVariable Long id, @RequestBody Map<String, Object> request) {
 		try {

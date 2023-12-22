@@ -12,7 +12,8 @@ export class AuthenticationService {
     public currentUser: Observable<String>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<String>(localStorage.getItem('currentUser') || '{}');
+        console.log(localStorage.getItem('user'))
+        this.currentUserSubject = new BehaviorSubject<String>(localStorage.getItem('token') || '');
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -23,7 +24,9 @@ export class AuthenticationService {
     login(username: string, password: string): Observable<any> {
         return this.http.post<any>("http://localhost:8080/usuarios/login", { "nombreUsuario": username, "clave":password })
             .pipe(map(response => {
-                localStorage.setItem('currentUser', response.token);
+                console.log(response);
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('user', response.username)
                 this.currentUserSubject.next(response.token);
                 return response;
             }))
@@ -31,7 +34,8 @@ export class AuthenticationService {
 
     logout() {
         // elimino las credenciales del localstorage al deslogearme
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.currentUserSubject.next('');
     }
     register(username: string, password: string, email: string, name: string, lastname: string) {

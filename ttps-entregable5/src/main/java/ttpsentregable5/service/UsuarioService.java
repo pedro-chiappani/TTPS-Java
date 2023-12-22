@@ -36,6 +36,14 @@ public class UsuarioService {
 		return usu.get();
 	}
 	
+	public Usuario obtenerPorNombre(String nom) throws Exception {
+		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nom);
+		if (usu == null) {
+			throw new Exception("No se encontro el usuario");
+		}	
+		return usu;
+	}
+	
 	public boolean validarCredencialesLogin(String nombreUsuario, String clave) {
 		
 		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsuario);

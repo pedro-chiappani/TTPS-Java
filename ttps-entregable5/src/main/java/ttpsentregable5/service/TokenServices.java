@@ -2,6 +2,10 @@ package ttpsentregable5.service;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import ttpsentregable5.model.Usuario;
+import ttpsentregable5.repository.UsuarioRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -18,6 +22,8 @@ public class TokenServices {
 
     final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
+    @Autowired
+    UsuarioRepository usuarioRepository;
     /**
      * Genera el token de authorizacion para el usuario
      *
@@ -28,8 +34,8 @@ public class TokenServices {
     public String generateToken(String username, int segundos) {
 
         Date exp = getExpiration(new Date(), segundos);
-
-        return Jwts.builder().setSubject(username).signWith(key).setExpiration(exp).compact();
+        Usuario usu = usuarioRepository.recuperarPorNombreUsuario(username);
+        return Jwts.builder().setSubject(String.valueOf(usu.getId())).signWith(key).setExpiration(exp).compact();
     }
 
     /**

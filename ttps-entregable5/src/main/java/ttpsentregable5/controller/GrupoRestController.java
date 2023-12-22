@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.CategoriaService;
 import ttpsentregable5.service.GrupoService;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping(value = "/grupos", produces = MediaType.APPLICATION_JSON_VALUE)
 public class GrupoRestController {
@@ -37,6 +39,7 @@ public class GrupoRestController {
 	@Autowired
 	private GrupoCrearMapper grupoMapper;
 
+	@CrossOrigin("http://localhost:4200/")
 	@GetMapping("/listarGrupos")
 	public ResponseEntity<List<Grupo>> listAllGrupos() {
 		List<Grupo> grupos = grupoService.listarGrupos();
@@ -45,7 +48,8 @@ public class GrupoRestController {
 		}
 		return new ResponseEntity<List<Grupo>>(grupos, HttpStatus.OK);
 	}
-
+	
+	@CrossOrigin("http://localhost:4200/")
 	@PostMapping("/crearGrupo")
 	public ResponseEntity<String> crearGrupo(@RequestBody GrupoCrearDTO grupodto) {
 		try {
@@ -68,7 +72,8 @@ public class GrupoRestController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@CrossOrigin("http://localhost:4200/")
 	@GetMapping("/{id}/gastos")
 	public ResponseEntity<List<Gasto>> listarGastos(@PathVariable("id") Long id) {
 		try {
@@ -82,6 +87,7 @@ public class GrupoRestController {
 		}
 	}
 	
+	@CrossOrigin("http://localhost:4200/")
 	@PutMapping("/{id}")
 	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody Map<String, String> request){
 		try {

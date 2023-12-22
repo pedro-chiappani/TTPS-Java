@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { GeneralRoutingModule } from './general-routing.module';
 
 import { HomeComponent } from './pages/home/home.component';
@@ -8,6 +9,7 @@ import { GastoComponent } from './pages/gasto/gasto.component';
 import { GrupoComponent } from './pages/grupo/grupo.component';
 
 import { MaterialModule } from '../material/material.module';
+import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
 
 // import { HeroesRoutingModule } from './heroes-routing.module';
 
@@ -26,17 +28,19 @@ import { MaterialModule } from '../material/material.module';
   declarations: [
     HomeComponent,
     GastoComponent,
-    GrupoComponent
+    GrupoComponent,
+    CrearGrupoComponent
     // AgregarComponent,
     // ListadoComponent,
     // HeroeTarjetaComponent,
-    // ImagenPipe    
+    // ImagenPipe
   ],
   imports: [
     CommonModule,
     GeneralRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule
     // FlexLayoutModule,
   ]
 })

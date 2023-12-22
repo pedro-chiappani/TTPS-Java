@@ -37,7 +37,7 @@ public class UsuarioRestController {
 	
 	private final int EXPIRATION_IN_SEC = 100;
 
-	
+	@CrossOrigin("http://localhost:4200/")
 	@GetMapping("/listarUsuarios")
 	public ResponseEntity<List<Usuario>> listAllUsers() {
 		List<Usuario> usuarios = usuarioService.listarUsuarios();
@@ -47,6 +47,7 @@ public class UsuarioRestController {
 		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
 		}
 
+	@CrossOrigin("http://localhost:4200/")
 	@PostMapping("/registrarUsuario")
 	public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
 			
@@ -73,11 +74,12 @@ public class UsuarioRestController {
 	
 	@CrossOrigin("http://localhost:4200/")
 	@PostMapping("/login")
-	public ResponseEntity<?> authenticate(@RequestBody LoginDTO userpass) {
+	public ResponseEntity<?> authenticate(@RequestBody LoginDTO userpass) throws Exception {
 
         if(isLoginSuccess(userpass.getNombreUsuario(), userpass.getClave())) {
             String token = tokenServices.generateToken(userpass.getNombreUsuario(), EXPIRATION_IN_SEC);
-            return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, userpass.getNombreUsuario()));
+            Usuario us = usuarioService.obtenerPorNombre(userpass.getNombreUsuario());
+            return ResponseEntity.ok(new Credentials(token, EXPIRATION_IN_SEC, String.valueOf(us.getId())));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
         }
