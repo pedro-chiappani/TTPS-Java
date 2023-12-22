@@ -74,13 +74,11 @@ public class UsuarioRestController {
 	
 	@CrossOrigin("http://localhost:4200/") 
 	@PostMapping("/login")
-	public ResponseEntity<?> loginUsuario(@RequestBody LoginDTO loginDTO) {					
-		
-		
+	public ResponseEntity<?> loginUsuario(@RequestBody LoginDTO loginDTO) throws Exception {					
 		if(isLoginSuccess(loginDTO.getNombreUsuario(), loginDTO.getClave())) {
+			Usuario usuario = usuarioService.obtenerPorNombreUsuario(loginDTO.getNombreUsuario());
             String token = tokenServices.generateToken(loginDTO.getNombreUsuario(), EXPIRATION_IN_SEC);
-            
-            return ResponseEntity.ok(new Token(token));
+			return ResponseEntity.ok(new Token(usuario.getId(), token));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
         }

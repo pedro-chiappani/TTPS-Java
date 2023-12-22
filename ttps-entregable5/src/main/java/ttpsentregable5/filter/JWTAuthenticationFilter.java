@@ -42,23 +42,10 @@ public class JWTAuthenticationFilter implements Filter {
 			HttpServletResponse res = (HttpServletResponse) response;
 			res.setStatus(HttpStatus.FORBIDDEN.value());
 			
-			Long userId = getUserIdFromToken(token);
-	        req.setAttribute("usuarioId", userId);
-			System.out.println("id de usuario: " + userId);
 			return;
 		}
 		chain.doFilter(request, response);
 	}
 
 	
-	 private Long getUserIdFromToken(String token) {
-	        try {
-	        	Key key = TokenServices.getKey();
-	            Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
-	            return Long.parseLong(claims.getSubject());
-	        } catch (Exception e) {
-	            // Manejar cualquier excepción que pueda ocurrir al parsear el token
-	            return null; // o lanzar una excepción según tus necesidades
-	        }
-	    }
 }

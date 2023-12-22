@@ -12,7 +12,7 @@ export class AuthenticationService {
   public currentToken: Observable<String>;
 
   constructor(private http: HttpClient) {
-    this.currentTokenSubject = new BehaviorSubject<String>(localStorage.getItem('token') || "");
+    this.currentTokenSubject = new BehaviorSubject<String>(localStorage.getItem('token')? JSON.parse(localStorage.getItem("token")!):null);
     this.currentToken = this.currentTokenSubject.asObservable();
   }
 
@@ -26,6 +26,7 @@ export class AuthenticationService {
       .pipe(
         map(response => {
           localStorage.setItem('token', response.token);
+          localStorage.setItem('userid', response.usuarioId);
           this.currentTokenSubject.next(response.token);
           return response; // Devuelve la respuesta si es necesario
         })
@@ -35,6 +36,7 @@ export class AuthenticationService {
   logout(): void {
     // remove token from local storage
     localStorage.removeItem('token');
+    localStorage.removeItem('userid');
   }
 
   getToken(): string | null {

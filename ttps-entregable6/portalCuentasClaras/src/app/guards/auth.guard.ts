@@ -12,9 +12,8 @@ export class AuthGuard  {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-        console.log('entrooo');
+        
         const currentToken = this.authenticationService.currentTokenValue;
-        console.log(currentToken);
         if (currentToken && currentToken!=='') {
             // si esta logeado lo dejo activar la ruta
             return true;

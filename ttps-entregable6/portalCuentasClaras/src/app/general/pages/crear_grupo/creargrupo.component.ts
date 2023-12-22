@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { GruposService } from '../../../services/grupos.service';
 
 
 @Component({
@@ -32,11 +33,22 @@ export class CrearGrupoComponent {
   errorMessage: string ='';
 
 
-  constructor() { }
+  constructor(private grupoService: GruposService, private router: Router) { }
 
 
   submitForm() {
-    // Aquí puedes enviar el objeto gasto al servidor o realizar otras acciones
-    console.log('Gasto enviado:');
+  
+    this.grupoService.crearGrupo(this.categoria, this.nombreGrupo).subscribe(
+      response => {
+        // Maneja la respuesta del servidor en caso de éxito
+        this.errorMessage = '';  // Reinicia el mensaje de error en caso de éxito
+        this.router.navigate(['/general/grupo']);
+      },
+      error => {
+        // Maneja el error y muestra un mensaje
+        this.errorMessage = error.error;
+      }
+    );
+  
   }
 }

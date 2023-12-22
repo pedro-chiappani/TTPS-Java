@@ -40,7 +40,7 @@ public class UsuarioService {
 		
 		Usuario usu = usuarioRepository.recuperarPorNombreUsuario(nombreUsuario);
 		
-		if (usu != null) {
+		if (usu == null) {
 			throw new Exception("No se encontro el usuario");
 		}	
 		return usu;

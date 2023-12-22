@@ -2,6 +2,8 @@ package ttpsentregable5.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,12 +38,15 @@ public class Grupo {
 	private Categoria categoria;
 	
 	@ManyToMany(mappedBy = "grupos", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Usuario> usuarios;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")
+	@JsonIgnore
 	private List<Gasto> gastos;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "grupo")
+	@JsonIgnore
 	private List<Pago> pagos;
 	
 

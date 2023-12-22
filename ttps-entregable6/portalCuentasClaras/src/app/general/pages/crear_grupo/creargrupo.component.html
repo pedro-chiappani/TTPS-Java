@@ -8,7 +8,9 @@
       <input matInput placeholder="Nombre" [(ngModel)]="nombreGrupo" name="nombreGrupo" required>
     </mat-form-field>
   
-    
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
   
     <button mat-raised-button color="primary" type="submit">Guardar</button>
   </form>

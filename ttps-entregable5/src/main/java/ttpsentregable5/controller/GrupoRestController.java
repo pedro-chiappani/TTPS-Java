@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import ttpsentregable5.model.Usuario;
 import ttpsentregable5.service.CategoriaService;
 import ttpsentregable5.service.GrupoService;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping(value = "/grupos", produces=MediaType.APPLICATION_JSON_VALUE)
 public class GrupoRestController {
@@ -40,7 +42,7 @@ public class GrupoRestController {
 	@Autowired
 	private PreGrupoMapper grupoMapper;
 	
-	
+	@CrossOrigin("http://localhost:4200/") 
 	@GetMapping("/listarGrupos")
 	public ResponseEntity<List<Grupo>> listarGrupos() {
 		List<Grupo> grupos = grupoService.listarGrupos();
@@ -59,9 +61,12 @@ public class GrupoRestController {
 //	  "categoria":"nombreCategoria",
 //	  "nombre":"nombreGrupo"
 //	}
+	@CrossOrigin("http://localhost:4200/") 
 	@PostMapping("/crearGrupo")
 	public ResponseEntity<String> crearGrupo(@RequestBody PreGrupoDTO grupoDTO) {
-			
+		System.out.println(grupoDTO.getCategoria());
+		System.out.println(grupoDTO.getNombre());
+		System.out.println(grupoDTO.getIdUsuario());
 		try {
 			
 			//Validar campos completos
@@ -87,7 +92,7 @@ public class GrupoRestController {
 		}	   
 	}
 	
-	
+	@CrossOrigin("http://localhost:4200/") 
 	@GetMapping("/{id}/gastos")
 	public ResponseEntity<List<Gasto>> listarGastos(@PathVariable("id") Long id) {
 		try {
@@ -104,7 +109,7 @@ public class GrupoRestController {
 		}
 	}
 	
-	
+	@CrossOrigin("http://localhost:4200/") 
 	@PutMapping("/{id}")
 	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody UpdtGrupoDTO grupoDTO) {
 		try {
