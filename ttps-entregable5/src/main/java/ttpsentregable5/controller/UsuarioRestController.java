@@ -52,11 +52,11 @@ public class UsuarioRestController {
 		try {
 			
 			//Validar campos completos
-			if( usuario.getNombreUsuario()==null 
-					|| usuario.getClave()==null
-					|| usuario.getEmail()==null
-					|| usuario.getNombre()==null
-					|| usuario.getApellido()==null){
+			if( usuario.getNombreUsuario()=="" 
+					|| usuario.getClave()==""
+					|| usuario.getEmail()==""
+					|| usuario.getNombre()==""
+					|| usuario.getApellido()==""){
 				
 				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			}
@@ -65,7 +65,7 @@ public class UsuarioRestController {
 			usuarioService.validarCredencialesRegistrar(usuario.getNombreUsuario(), usuario.getClave(), usuario.getEmail());
 				
 			this.usuarioService.crear(usuario);
-			return new ResponseEntity<>("Usuario creado", HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 			
 		} catch ( Exception e ) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

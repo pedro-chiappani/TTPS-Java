@@ -18,8 +18,13 @@ const routes: Routes = [
     component: ErrorPageComponent
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'general'
+  },
+  {
     path: '**',
-    //component: ErrorPageComponent
+    pathMatch: 'full',
     redirectTo: '404'
   }
 ];
