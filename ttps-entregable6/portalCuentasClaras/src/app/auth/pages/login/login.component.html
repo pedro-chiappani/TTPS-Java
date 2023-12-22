@@ -10,7 +10,9 @@
             </mat-form-field>
 
             <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+
         </form>
+        <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
     </div>
 </div>
 <!-- <div class="alert alert-info">

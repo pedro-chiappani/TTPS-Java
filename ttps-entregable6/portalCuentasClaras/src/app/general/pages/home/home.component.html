@@ -3,7 +3,7 @@
 
     <mat-sidenav #sidenav mode="push">
         <mat-toolbar color="primary">
-            <span>Menu</span>    
+            <span>Menu</span>
 
             <span class="spacer"></span>
 
@@ -14,7 +14,7 @@
         </mat-toolbar>
 
         <mat-nav-list>
-            
+
             <!-- <a routerLink="./listado"
                mat-list-item
                (click)="sidenav.toggle()">
@@ -24,7 +24,7 @@
             <a routerLink="./grupo"
                mat-list-item
                (click)="sidenav.toggle()">
-                <mat-icon>assignment_ind</mat-icon>                
+                <mat-icon>assignment_ind</mat-icon>
                 Grupos
             </a>
             <a routerLink="./creargrupo"
@@ -51,7 +51,7 @@
 
         <span class="spacer"></span>
 
-        <button mat-raised-button>
+        <button mat-raised-button (click)="logout()">
             Logout
         </button>
     </mat-toolbar>

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './services/auth.service';
-import { User } from './models';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ import { User } from './models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  currentUser: User = new User();
+  currentUser: String;
   title = 'CuentasClaras';
 
   constructor(
@@ -18,10 +17,12 @@ export class AppComponent {
     private authenticationService: AuthenticationService
 ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    if (this.currentUser && this.currentUser != '{}'){
+      this.router.navigate(['/general'])
+    }else{
+      this.router.navigate(['/auth/login'])
+    }
 }
-logout() {
-  this.authenticationService.logout();
-  this.router.navigate(['/login']);
-}
+
 }
 

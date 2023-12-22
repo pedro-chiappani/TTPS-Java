@@ -8,43 +8,30 @@ import { User } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    private currentUserSubject: BehaviorSubject<String>;
+    public currentUser: Observable<String>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+        this.currentUserSubject = new BehaviorSubject<String>(localStorage.getItem('currentUser') || '{}');
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): String {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-      console.log("en login", username, password)
-        return this.http.post<User>("http://localhost:8080/usuarios/login", { "nombreUsuario": username, "clave":password })
-            // .pipe(map(credentials => {
-            //   console.log(credentials)
-            //     // login successful si hay un token en la respuesta
-            //     console.log("asdf")
-            //     if (credentials && credentials.token) {
-
-            //       console.log("a")
-            //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-            //         localStorage.setItem('token', JSON.stringify(credentials));
-            //         this.currentUserSubject.next(credentials);
-            //     }
-
-            //     return credentials;
-            // }))
-            .subscribe(token => {
-              console.log(token);
-              localStorage.setItem('token', JSON.stringify(token.token))});
-    }
+    login(username: string, password: string): Observable<any> {
+        return this.http.post<any>("http://localhost:8080/usuarios/login", { "nombreUsuario": username, "clave":password })
+            .pipe(map(response => {
+                localStorage.setItem('currentUser', response.token);
+                this.currentUserSubject.next(response.token);
+                return response;
+            }))
+        }
 
     logout() {
         // elimino las credenciales del localstorage al deslogearme
         localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(new User());
+        this.currentUserSubject.next('');
     }
 }

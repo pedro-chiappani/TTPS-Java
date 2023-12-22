@@ -37,15 +37,26 @@ import { first } from 'rxjs/operators';
   ]
 })
 export class LoginComponent {
-  username: string;
-  password: string;
-  errorMessage: string;
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
   constructor(
       private authenticationService: AuthenticationService,
+      private router: Router
 
   ) { }
     login(): void {
-      this.authenticationService.login(this.username, this.password)
+      this.authenticationService.login(this.username, this.password).subscribe(
+        response => {
+          this.errorMessage = '';
+          this.router.navigate(['general/grupo'])
+
+        },
+        error => {
+          console.log(error);
+          this.errorMessage = error.error;
+        }
+      );
     }
 }
