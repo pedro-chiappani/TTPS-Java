@@ -34,4 +34,12 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next('');
     }
+    register(username: string, password: string, email: string, name: string, lastname: string) {
+        return this.http.post<any>('http://localhost:8081/usuarios/registrarUsuario', { "nombreUsuario": username, "clave": password , "nombre":name, "apellido":lastname, "email":email})
+          .pipe(
+            map(response => {
+              return response; // Devuelve la respuesta si es necesario
+            })
+          );
+      }
 }

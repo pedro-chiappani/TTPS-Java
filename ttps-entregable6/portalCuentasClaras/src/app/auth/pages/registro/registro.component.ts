@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -21,12 +23,12 @@ import { Component, OnInit } from '@angular/core';
       background-color: rgba(0, 0, 0, 0.1);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .example-form .example-full-width{
       width:100%;
-      margin-bottom:15px;    
+      margin-bottom:15px;
     }
 
     `
@@ -34,11 +36,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private authService: AuthenticationService, private router: Router) { }
   ngOnInit(): void {
   }
-
+  errorMessage='';
   username='';
   password='';
   email='';
@@ -46,8 +47,18 @@ export class RegistroComponent implements OnInit {
   lastname='';
 
   onSubmit(){
-    console.log(this.username);
-    console.log(this.password);
+    this.authService.register(this.username, this.password, this.email, this.name, this.lastname ).subscribe(
+      response => {
+        // Maneja la respuesta del servidor en caso de éxito
+        this.errorMessage = '';  // Reinicia el mensaje de error en caso de éxito
+        this.router.navigate(['/auth/login']);
+      },
+      error => {
+        // Maneja el error y muestra un mensaje
+        console.log(error);
+        this.errorMessage = error.error;
+      }
+    );
   }
 
 }
