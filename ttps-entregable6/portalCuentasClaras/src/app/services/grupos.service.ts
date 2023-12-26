@@ -18,4 +18,14 @@ export class GruposService {
     );
   }
 
+  listarGrupos(): Observable<any>{
+    return this.http.get<any>('http://localhost:8080/grupos/listarGrupos')
+    .pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    )
+  }
+
 }

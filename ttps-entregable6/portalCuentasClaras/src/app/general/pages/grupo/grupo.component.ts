@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GruposService } from '../../../services/grupos.service';
 
 @Component({
   selector: 'app-grupo',
@@ -8,10 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   ]
 })
 export class GrupoComponent implements OnInit {
-
-  constructor() { }
+  grupos: any[];
+  constructor(private grupoService: GruposService, private router: Router) { }
 
   ngOnInit(): void {
+    // console.log(this.grupoService.listarGrupos());
+    // console.log(this.grupos);
   }
 
 
