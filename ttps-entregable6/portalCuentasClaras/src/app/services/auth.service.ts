@@ -12,7 +12,7 @@ export class AuthenticationService {
     public currentUser: Observable<String>;
 
     constructor(private http: HttpClient) {
-        console.log(localStorage.getItem('user'))
+        // console.log(localStorage.getItem('user'))
         this.currentUserSubject = new BehaviorSubject<String>(localStorage.getItem('token') || '');
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -24,7 +24,7 @@ export class AuthenticationService {
     login(username: string, password: string): Observable<any> {
         return this.http.post<any>("http://localhost:8080/usuarios/login", { "nombreUsuario": username, "clave":password })
             .pipe(map(response => {
-                console.log(response);
+                // console.log(response);
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('user', response.username)
                 this.currentUserSubject.next(response.token);

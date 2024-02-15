@@ -89,7 +89,6 @@ public class GastoRestController {
 					|| gastoDTO.getFecha() == null
 					|| gastoDTO.getIdGrupo() == null
 					|| gastoDTO.getCategoria() == null
-					|| gastoDTO.getIdGrupo() == null
 					|| gastoDTO.getCargaGasto() == null
 					|| gastoDTO.getRealizaGasto() == null
 					|| gastoDTO.getTipoDivisionGasto() == null){

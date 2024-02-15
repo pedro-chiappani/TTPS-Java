@@ -10,6 +10,8 @@ import { GrupoComponent } from './pages/grupo/grupo.component';
 
 import { MaterialModule } from '../material/material.module';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
+import { DetalleGrupoComponent } from './pages/detalle_grupo/detallegrupo.component';
+
 
 // import { HeroesRoutingModule } from './heroes-routing.module';
 
@@ -29,7 +31,8 @@ import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
     HomeComponent,
     GastoComponent,
     GrupoComponent,
-    CrearGrupoComponent
+    CrearGrupoComponent,
+    DetalleGrupoComponent,
     // AgregarComponent,
     // ListadoComponent,
     // HeroeTarjetaComponent,

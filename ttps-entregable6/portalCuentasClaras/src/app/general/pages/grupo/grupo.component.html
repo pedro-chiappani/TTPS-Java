@@ -1,1 +1,10 @@
-<p>grupo works!</p>
+<div>
+    <h1>Listado de Grupos</h1>
+    <ul>
+      <li *ngFor="let grupo of grupos">
+        <a [routerLink]="['/general/grupo', grupo.id]">{{ grupo.nombre }}</a>
+        <button (click)="editarGrupo(grupo)">Editar</button>
+        <button (click)="eliminarGrupo(grupo)">Eliminar</button>
+      </li>
+    </ul>
+  </div>

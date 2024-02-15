@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { GastosService } from '../../../services/gastos.service';
 
 
 
@@ -8,7 +9,7 @@ import { NgForm } from '@angular/forms';
   selector: 'app-alta-gasto',
   templateUrl: './gasto.component.html',
   styles: `
-  
+
     form {
       display: flex;
       flex-direction: column;
@@ -31,10 +32,18 @@ export class GastoComponent {
     monto: null,
     imagen: '',
     fecha: null,
+    idGrupo: null,
+    categoria: null,
+    carga: null,
+    realiza: null,
+    tipoDiv: null,
     // Agrega más propiedades según tus necesidades
   };
 
+  constructor(private gastoService: GastosService, private route: Route) { }
+
   submitForm() {
+    this.gastoService.crearGasto(this.gasto)
     // Aquí puedes enviar el objeto gasto al servidor o realizar otras acciones
     console.log('Gasto enviado:', this.gasto);
   }

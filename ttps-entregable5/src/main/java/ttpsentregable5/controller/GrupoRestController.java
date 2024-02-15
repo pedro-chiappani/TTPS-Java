@@ -80,6 +80,7 @@ public class GrupoRestController {
 			Grupo gru = grupoService.obtenerPorId(id);
 			if (gru.getGastos().isEmpty())
 				return new ResponseEntity<List<Gasto>>(HttpStatus.NO_CONTENT);
+			
 			return new ResponseEntity<List<Gasto>>(gru.getGastos(), HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

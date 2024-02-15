@@ -12,7 +12,7 @@ export class GruposService {
     return this.http.post<any>('http://localhost:8080/grupos/crearGrupo', {"idUsuario": localStorage.getItem('user'), "categoria": categoria, "nombre": nombre})
     .pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         return response;
       })
     );
@@ -23,6 +23,16 @@ export class GruposService {
     .pipe(
       map(response => {
         console.log(response);
+        return response;
+      })
+    )
+  }
+
+  obtenerGrupo(id: number): Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/grupos/${id}/gastos`)
+    .pipe(
+      map(response => {
+        console.log('gastos', response);
         return response;
       })
     )
