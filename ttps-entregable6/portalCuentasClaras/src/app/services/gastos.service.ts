@@ -13,7 +13,7 @@ export class GastosService {
 //     return this.http.get<Heroe[]>('http://localhost:3000/heroes');
 //   }
 crearGasto(monto:number, imagen: string, fecha: Date, idGrupo:number, categoria:string, carga: string, realiza:string, tipoDiv: string): Observable<any>{
-  return this.http.post<any>('http://localhost:8080/gastos/cargarGastos', {"monto": monto, "imagen": imagen, "fecha": fecha, "idGrupo": idGrupo, "categoria":categoria, "cargaGasto": carga, "realizaGasto": realiza, "tipoDivisionGasto": tipoDiv, })
+  return this.http.post<any>('http://localhost:8080/gastos/cargarGasto', {"monto": monto, "imagen": imagen, "fecha": fecha, "idGrupo": idGrupo, "categoria":categoria, "cargaGasto": carga, "realizaGasto": realiza, "tipoDivisionGasto": tipoDiv, })
   .pipe(
     map(response => {
       console.log(response);

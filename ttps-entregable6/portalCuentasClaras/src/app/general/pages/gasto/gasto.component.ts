@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { GastosService } from '../../../services/gastos.service';
+import { GruposService } from '../../../services/grupos.service';
 
 
 
@@ -28,6 +29,7 @@ import { GastosService } from '../../../services/gastos.service';
   `
 })
 export class GastoComponent {
+  grupos: any[] = [];
   gasto: any = {
     monto: null,
     imagen: '',
@@ -40,11 +42,26 @@ export class GastoComponent {
     // Agrega más propiedades según tus necesidades
   };
 
-  constructor(private gastoService: GastosService, private route: Route) { }
+  constructor(private gastoService: GastosService, private grupoService: GruposService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.grupoService.listarGrupos().subscribe((grupos: any[]) =>  {
+      this.grupos = grupos;
+    })
+  }
 
   submitForm() {
-    this.gastoService.crearGasto(this.gasto)
-    // Aquí puedes enviar el objeto gasto al servidor o realizar otras acciones
+  this.gastoService.crearGasto(this.gasto.monto, this.gasto.imagen, this.gasto.fecha,
+                              this.gasto.idGrupo, this.gasto.categoria, this.gasto.carga,
+                               this.gasto.realiza, this.gasto.tipoDiv).subscribe(
+    response => {
+      console.log("manda", response)
+    },
+    error => {
+      console.log("no manda", error)
+    }
+  )
+    // Aquí puedes enviar el objeto gasto al servidor o realizar otras accione
     console.log('Gasto enviado:', this.gasto);
   }
 }
