@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { GastosService } from '../../../services/gastos.service';
 import { GruposService } from '../../../services/grupos.service';
+import { User } from '../../../models';
+import { CategoriaService } from '../../../services/categoria.service';
 
 
 
@@ -30,6 +32,7 @@ import { GruposService } from '../../../services/grupos.service';
 })
 export class GastoComponent {
   grupos: any[] = [];
+  categorias: any[] = [];
   gasto: any = {
     monto: null,
     imagen: '',
@@ -42,11 +45,17 @@ export class GastoComponent {
     // Agrega más propiedades según tus necesidades
   };
 
-  constructor(private gastoService: GastosService, private grupoService: GruposService, private router: Router) {}
+  constructor(private gastoService: GastosService, private categoriaService: CategoriaService, private grupoService: GruposService, private router: Router) {}
 
   ngOnInit(): void {
-    this.grupoService.listarGrupos().subscribe((grupos: any[]) =>  {
+    let u = localStorage.getItem("user")!
+    console.log("user", u)
+    this.grupoService.listarGruposUsuario(u).subscribe((grupos: any[]) =>  {
       this.grupos = grupos;
+    })
+
+    this.categoriaService.obtenerCatGastos().subscribe((cats: any[]) => {
+      this.categorias = cats;
     })
   }
 

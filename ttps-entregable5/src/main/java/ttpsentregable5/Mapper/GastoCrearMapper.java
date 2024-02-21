@@ -42,6 +42,7 @@ public abstract class GastoCrearMapper {
 	
 	@Named("idGrupoAGrupo")
 	Grupo idGrupoAGrupo(long idGrupo) {		
+		System.out.println(idGrupo);
 		return grupoRepository.findById(idGrupo).get();
 	}
 	

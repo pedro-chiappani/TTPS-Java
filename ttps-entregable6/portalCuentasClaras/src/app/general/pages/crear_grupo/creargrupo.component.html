@@ -1,6 +1,9 @@
 <form (ngSubmit)="submitForm()" fxLayout="column" fxLayoutAlign="center">
   <mat-form-field>
-    <input matInput placeholder="Categoria" [(ngModel)]="categoria" name="categoria" required>
+    <mat-label>Selecciona una categoria</mat-label>
+    <mat-select [(ngModel)]="categoria" name="grupo">
+      <mat-option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field>

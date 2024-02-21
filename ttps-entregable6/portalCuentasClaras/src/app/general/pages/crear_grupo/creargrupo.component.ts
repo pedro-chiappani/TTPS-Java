@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { GastosService } from '../../../services/gastos.service';
 import { GruposService } from '../../../services/grupos.service';
+import { CategoriaService } from '../../../services/categoria.service';
 
 @Component({
   selector: 'app-grupo',
@@ -26,12 +27,18 @@ import { GruposService } from '../../../services/grupos.service';
   ]
 })
 export class CrearGrupoComponent {
+  categorias: any[] = [];
   nombreGrupo: string ='';
   errorMessage: string ='';
   categoria = '';
 
-  constructor(private grupoService: GruposService, private router: Router) { }
+  constructor(private grupoService: GruposService, private categoriaService: CategoriaService, private router: Router) { }
 
+  ngOnInit(): void {
+    this.categoriaService.obtenerCatGastos().subscribe((cats: any[]) => {
+      this.categorias = cats;
+    })
+  }
 
   submitForm() {
 

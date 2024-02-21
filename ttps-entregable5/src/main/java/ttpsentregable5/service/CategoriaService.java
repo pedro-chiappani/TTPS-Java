@@ -1,5 +1,6 @@
 package ttpsentregable5.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,16 @@ public class CategoriaService {
 	
 	public Categoria obtenerCategoriaDeGastoPorNombre(String nombre) {
 		return categoriaRepository.recuperarPorNombreCategoriaGasto(nombre);
+	}
+	
+	public List<Categoria> obtenerCategoriaGasto(){
+		
+		return categoriaRepository.obtenerCategoriasGasto();
+	}
+	
+	public List<Categoria> obtenerCategoriaGrupo(){
+		categoriaRepository.findAll().stream().forEach((cat) -> System.out.println(cat.getNombre()));
+		categoriaRepository.obtenerCategoriasGrupo().stream().forEach((c) -> System.out.println(c) );;
+		return categoriaRepository.obtenerCategoriasGrupo();
 	}
 }

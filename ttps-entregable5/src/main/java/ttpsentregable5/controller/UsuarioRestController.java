@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ttpsentregable5.model.Usuario;
 import ttpsentregable5.DTO.LoginDTO;
 import ttpsentregable5.model.Credentials;
+import ttpsentregable5.model.Grupo;
 import ttpsentregable5.repository.UsuarioRepository;
 import ttpsentregable5.service.TokenServices;
 import ttpsentregable5.service.UsuarioService;
@@ -46,6 +47,13 @@ public class UsuarioRestController {
 		}
 		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
 		}
+	
+	@CrossOrigin("http://localhost:4200/")
+	@GetMapping("/{id}/grupos")
+	public ResponseEntity<List<Grupo>> listUserGroups(@PathVariable("id") Long id) throws Exception{
+		List<Grupo> grupos = usuarioService.listarGrupos(id);
+		return new ResponseEntity<List<Grupo>>(grupos, HttpStatus.OK);
+	}
 
 	@CrossOrigin("http://localhost:4200/")
 	@PostMapping("/registrarUsuario")

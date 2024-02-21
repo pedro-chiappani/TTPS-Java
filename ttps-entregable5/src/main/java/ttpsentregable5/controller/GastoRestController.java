@@ -82,7 +82,7 @@ public class GastoRestController {
 	public ResponseEntity<String> registrarGasto(@RequestBody GastoCrearDTO gastoDTO) {
 			
 		try {
-			
+			System.out.println("arranca");
 			//Validar campos completos
 			if( gastoDTO.getMonto() == null
 					|| gastoDTO.getImagen() == null
@@ -95,13 +95,14 @@ public class GastoRestController {
 				
 				return new ResponseEntity<>("Complete todos los campos", HttpStatus.BAD_REQUEST);
 			}
-			
+			System.out.println("valida");
 			//Validacion
 			gastoService.validarCamposAltaGasto(gastoDTO);
-				
+			System.out.println("Mapea");
 			//Mapeo
 			Gasto gasto = gastoMapper.toGasto(gastoDTO);
 			gastoService.completarDetalleGasto(gasto, gastoDTO);
+			System.out.println("completa");
 			
 			this.gastoService.guardar(gasto);
 			

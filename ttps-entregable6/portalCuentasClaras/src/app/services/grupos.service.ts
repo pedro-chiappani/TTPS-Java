@@ -28,6 +28,16 @@ export class GruposService {
     )
   }
 
+  listarGruposUsuario(id: string): Observable<any>{
+    return this.http.get<any>(`http://localhost:8080/usuarios/${id}/grupos`)
+    .pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    )
+  }
+
   obtenerGrupo(id: number): Observable<any>{
     return this.http.get<any>(`http://localhost:8080/grupos/${id}/gastos`)
     .pipe(

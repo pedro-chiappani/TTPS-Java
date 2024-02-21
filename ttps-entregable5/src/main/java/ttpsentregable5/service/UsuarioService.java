@@ -23,6 +23,12 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 	
+	public List<Grupo> listarGrupos(Long id) throws Exception{
+		Usuario usu = this.obtenerPorId(id);
+		
+		return usu.getGrupos();
+	}
+	
 	
 	public Usuario crear(Usuario usuario) {
 		return usuarioRepository.save(usuario);
