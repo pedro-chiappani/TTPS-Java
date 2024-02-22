@@ -16,7 +16,7 @@
 
     <mat-form-field>
       <mat-label>Selecciona un grupo</mat-label>
-      <mat-select [(ngModel)]="gasto.idGrupo" name="grupo">
+      <mat-select [(ngModel)]="gasto.idGrupo" (selectionChange)="fetchUsers(gasto.idGrupo)" name="grupo">
         <mat-option *ngFor="let group of grupos" [value]="group.id">{{ group.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -25,9 +25,9 @@
         <input matInput placeholder="Grupo" [(ngModel)]="gasto.idGrupo" name="grupo" required>
       </mat-form-field> -->
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <input matInput placeholder="Categoria" [(ngModel)]="gasto.categoria" name="grupo" required>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <mat-form-field>
         <mat-label>Selecciona una categoria</mat-label>
@@ -36,13 +36,27 @@
         </mat-select>
       </mat-form-field>
 
-    <mat-form-field>
+    <!-- <mat-form-field>
       <input matInput placeholder="Carga Gasto" [(ngModel)]="gasto.carga" name="cargaGasto" required>
+    </mat-form-field> -->
+
+    <mat-form-field>
+      <mat-label>Quien Realiza?</mat-label>
+      <mat-select [(ngModel)]="gasto.realiza" name="realiza">
+        <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realiza" name="realizaGasto" required>
+      <mat-label>Quien Carga?</mat-label>
+      <mat-select [(ngModel)]="gasto.carga" name="carga">
+        <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+      </mat-select>
     </mat-form-field>
+
+    <!-- <mat-form-field>
+      <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realiza" name="realizaGasto" required>
+    </mat-form-field> -->
 
     <mat-form-field>
       <input matInput placeholder="Tipo de División de Gasto" [(ngModel)]="gasto.tipoDiv" name="tipoDivisionGasto" required>

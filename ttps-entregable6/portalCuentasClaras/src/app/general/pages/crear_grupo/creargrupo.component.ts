@@ -35,7 +35,7 @@ export class CrearGrupoComponent {
   constructor(private grupoService: GruposService, private categoriaService: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
-    this.categoriaService.obtenerCatGastos().subscribe((cats: any[]) => {
+    this.categoriaService.obtenerCatGrupos().subscribe((cats: any[]) => {
       this.categorias = cats;
     })
   }

@@ -30,6 +30,11 @@ public class GrupoService {
 		return grupoRepository.findAll();
 	}
 	
+	public List<Usuario> listarUsuariosGrupo(Long id){
+		System.out.println(grupoRepository.obtenerUsuariosGrupo(id));
+		return grupoRepository.obtenerUsuariosGrupo(id);
+	}
+	
 	public Grupo obtenerPorId(Long id) throws Exception {
 		Optional<Grupo> gru = grupoRepository.findById(id);
 		if (!gru.isPresent()) {

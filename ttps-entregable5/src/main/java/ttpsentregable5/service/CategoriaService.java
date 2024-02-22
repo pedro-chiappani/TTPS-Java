@@ -37,8 +37,6 @@ public class CategoriaService {
 	}
 	
 	public List<Categoria> obtenerCategoriaGrupo(){
-		categoriaRepository.findAll().stream().forEach((cat) -> System.out.println(cat.getNombre()));
-		categoriaRepository.obtenerCategoriasGrupo().stream().forEach((c) -> System.out.println(c) );;
 		return categoriaRepository.obtenerCategoriasGrupo();
 	}
 }

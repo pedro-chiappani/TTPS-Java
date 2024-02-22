@@ -66,8 +66,10 @@ public class GastoService {
 		
 		//Validar usuarios detalle division gasto sean todos los del id de grupo
 		List<Long> idUsuariosGrupo = grupo.getUsuarios().stream().map(Usuario::getId).collect(Collectors.toList());
-		System.out.println(gastoDTO.getDetalleDivisionGasto());
+		System.out.println(idUsuariosGrupo);
+		
 		List<Long> idUsuariosDetalleGasto = gastoDTO.getDetalleDivisionGasto().stream().map(ElementoDetalleGastoDTO::getIdUsu).collect(Collectors.toList());
+		gastoDTO.getDetalleDivisionGasto().stream().forEach((d) -> System.out.println(d.getIdUsu()));
 		if( !idUsuariosGrupo.containsAll(idUsuariosDetalleGasto) ) {
 			throw new Exception("Los usuarios del detalle no pertenecen al grupo que indica");
 		}

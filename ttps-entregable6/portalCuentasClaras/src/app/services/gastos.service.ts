@@ -16,7 +16,15 @@ crearGasto(monto:number, imagen: string, fecha: Date, idGrupo:number, categoria:
   return this.http.post<any>('http://localhost:8080/gastos/cargarGasto',
        {"monto": monto, "imagen": imagen, "fecha": fecha, "idGrupo": idGrupo,
         "categoria":categoria, "cargaGasto": carga, "realizaGasto": realiza,
-         "tipoDivisionGasto": tipoDiv, "divisiongasto": '{{"usu1":1,"valor":1000}}'})
+         "tipoDivisionGasto": tipoDiv, "detalleDivisionGasto": [{
+          "usu1": 1,
+          "valor": 500
+        },
+        {
+          "usu2": 2,
+          "valor": 500
+        }
+    ]})
   .pipe(
     map(response => {
       console.log(response);

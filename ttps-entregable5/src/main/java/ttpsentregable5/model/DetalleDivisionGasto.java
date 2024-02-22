@@ -30,7 +30,7 @@ public class DetalleDivisionGasto {
 	private Gasto gasto;
 
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 

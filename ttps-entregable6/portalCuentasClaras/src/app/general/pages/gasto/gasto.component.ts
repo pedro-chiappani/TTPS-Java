@@ -32,6 +32,7 @@ import { CategoriaService } from '../../../services/categoria.service';
 })
 export class GastoComponent {
   grupos: any[] = [];
+  users: any[] = [];
   categorias: any[] = [];
   gasto: any = {
     monto: null,
@@ -39,8 +40,8 @@ export class GastoComponent {
     fecha: null,
     idGrupo: null,
     categoria: null,
-    carga: null,
     realiza: null,
+    carga: null,
     tipoDiv: null,
     // Agrega más propiedades según tus necesidades
   };
@@ -57,6 +58,12 @@ export class GastoComponent {
     this.categoriaService.obtenerCatGastos().subscribe((cats: any[]) => {
       this.categorias = cats;
     })
+  }
+
+  fetchUsers(groupId: any) {
+    this.grupoService.listarUsuariosGrupo(groupId).subscribe(users => {
+      this.users = users;
+    });
   }
 
   submitForm() {

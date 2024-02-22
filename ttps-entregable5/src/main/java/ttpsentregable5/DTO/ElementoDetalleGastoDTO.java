@@ -2,14 +2,14 @@ package ttpsentregable5.DTO;
 
 public class ElementoDetalleGastoDTO {
 
-	private long idUsu;
+	private Long idUsu;
 	private double valor;
 	
 	
-	public long getIdUsu() {
+	public Long getIdUsu() {
 		return idUsu;
 	}
-	public void setIdUsu(long idUsu) {
+	public void setIdUsu(Long idUsu) {
 		this.idUsu = idUsu;
 	}
 	public double getValor() {
@@ -19,4 +19,7 @@ public class ElementoDetalleGastoDTO {
 		this.valor = valor;
 	}
 	
+	public String toString() {
+		return "" + this.idUsu + this.valor;
+	}
 }

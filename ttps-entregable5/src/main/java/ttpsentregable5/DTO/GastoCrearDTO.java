@@ -102,6 +102,7 @@ public class GastoCrearDTO {
 		return detalleDivisionGasto;
 	}
 	public void setDetalleDivisionGasto(List<ElementoDetalleGastoDTO> detalleDivisionGasto) {
+		detalleDivisionGasto.stream().forEach((d) -> System.out.println(d.toString()));
 		this.detalleDivisionGasto = detalleDivisionGasto;
 	}
 	
