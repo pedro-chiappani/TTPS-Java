@@ -73,4 +73,12 @@ public class UsuarioService {
 		
 	}
 	
+	public List<Grupo> recuperarGruposPorUsuarioId(Long usuId) throws Exception {
+		List<Grupo> gru = usuarioRepository.recuperarGruposPorUsuarioId(usuId);
+		if (gru == null) {
+			throw new Exception("No se encontro el grupo");
+		}	
+		return gru;
+	}
+	
 }

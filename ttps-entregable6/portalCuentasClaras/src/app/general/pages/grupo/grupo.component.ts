@@ -50,7 +50,7 @@ export class GrupoComponent implements OnInit {
   }
 
   listarGastos(grupo: Grupo) {
-    this.router.navigate(['/general/gastosPorGrupo', grupo.id, grupo.nombre]);
+    this.router.navigate(['/general/gastosPorGrupo', grupo.id]);
   }
 
   editarGrupo(grupo: Grupo) {

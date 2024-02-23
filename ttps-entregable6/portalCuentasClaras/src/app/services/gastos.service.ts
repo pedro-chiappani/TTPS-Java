@@ -10,7 +10,8 @@ export class GastosService {
   constructor(private http: HttpClient) {}
 
   listarGastosPorGrupo(idGrupo:number): Observable<any>{
-    return this.http.get<any>('http://localhost:8081/grupos/listarGastosPorGrupo/${idGrupo}')
+    console.log("id de grupo" + idGrupo);
+    return this.http.get<any>(`http://localhost:8081/grupos/${idGrupo}/gastos`)
     .pipe(
       map(response => {
         console.log(response);

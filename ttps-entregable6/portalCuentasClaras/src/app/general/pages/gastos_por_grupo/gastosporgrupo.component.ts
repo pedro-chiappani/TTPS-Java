@@ -7,9 +7,25 @@ import { GastosService } from '../../../services/gastos.service';
 @Component({
   selector: 'app-alta-gasto',
   templateUrl: './gastosporgrupo.component.html',
-  styles: `
-  
+  styles: 
   `
+      .list-item-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      
+      .mat-list-item {
+        margin-bottom: 10px;
+      }
+
+      .button-margin {
+        margin-right: 8px; 
+        margin-top: 8px;
+      }
+
+    `
 })
 export class GastoPorGrupoComponent implements OnInit {
   idGrupo: number=0;
@@ -37,9 +53,16 @@ export class GastoPorGrupoComponent implements OnInit {
         }
       );
   }
-  agregarGasto() {
-    // Aquí puedes redirigir a la página de agregar gasto para este grupo
-    // Por ejemplo: this.router.navigate(['/agregargasto', this.idGrupo]);
+
+
+  editarGasto(gasto:any) {
+    // Lógica para editar el grupo
+    console.log('Editando gasto:', gasto);
+  }
+
+  eliminarGasto(gasto:any) {
+    // Lógica para eliminar el grupo
+    console.log('Eliminando gasto:', gasto);
   }
 
 }

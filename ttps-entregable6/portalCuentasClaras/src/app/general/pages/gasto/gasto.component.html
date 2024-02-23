@@ -41,6 +41,7 @@
     
     <div *ngIf="gasto.tipoDivisionGasto === '1'">
       <div *ngFor="let usuario of usuariosDelGrupo">
+        {{usuario.id}}
         <mat-form-field>
           Monto Fijo: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
         </mat-form-field>
@@ -49,6 +50,7 @@
 
     <div *ngIf="gasto.tipoDivisionGasto === '2'">
       <div *ngFor="let usuario of usuariosDelGrupo">
+        {{usuario.id}}
         <mat-form-field>
           Porcentaje: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
         </mat-form-field>

@@ -20,7 +20,8 @@ export class GruposService {
   }
 
   listarGrupos(): Observable<any>{
-    return this.http.get<any>(`http://localhost:8081/grupos/listarGruposDeUsuario/${localStorage.getItem("userid")}`)
+    console.log(localStorage.getItem("userid"));
+    return this.http.get<any>(`http://localhost:8081/usuarios/${localStorage.getItem("userid")}/grupos`)
     .pipe(
       map(response => {
         console.log(response);
