@@ -5,6 +5,7 @@ import { GrupoComponent } from './pages/grupo/grupo.component';
 import { GastoComponent } from './pages/gasto/gasto.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
+import { GastoPorGrupoComponent} from './pages/gastos_por_grupo/gastosporgrupo.component';
 
 // import { AgregarComponent } from './pages/agregar/agregar.component';
 // import { BuscarComponent } from './pages/buscar/buscar.component';
@@ -28,8 +29,8 @@ const routes: Routes = [
         component: CrearGrupoComponent
       },
       {
-        path: 'gasto',
-        component: GastoComponent
+        path: 'gastosPorGrupo/:idGrupo',
+        component: GastoPorGrupoComponent
       },
       // {
       //   path: 'editar/:id',

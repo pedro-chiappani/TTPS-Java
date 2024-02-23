@@ -8,7 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { GastoComponent } from './pages/gasto/gasto.component';
 import { GrupoComponent } from './pages/grupo/grupo.component';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
-
+import { GastoPorGrupoComponent} from './pages/gastos_por_grupo/gastosporgrupo.component';
 
 // import { HeroesRoutingModule } from './heroes-routing.module';
 
@@ -28,7 +28,8 @@ import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
     HomeComponent,
     GastoComponent,
     GrupoComponent,
-    CrearGrupoComponent
+    CrearGrupoComponent,
+    GastoPorGrupoComponent
     // AgregarComponent,
     // ListadoComponent,
     // HeroeTarjetaComponent,

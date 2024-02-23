@@ -19,17 +19,25 @@ import { AuthenticationService } from '../../../services/auth.service';
       align-items: center;
       justify-content: center;
     }
-
+    
     .example-form {
       background-color: rgba(0, 0, 0, 0.1);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex; /* Cambio importante */
+      flex-direction: column; /* Cambio importante */
     }
     
-    .example-form .example-full-width{
-      width:100%;
-      margin-bottom:15px;    
+    .example-form .example-full-width {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    
+    /* Agregamos un contenedor para los botones */
+    .buttons-container {
+      display: flex;
+      justify-content: space-between; /* Los botones se distribuyen horizontalmente */
     }
 
     `
@@ -55,5 +63,10 @@ export class LoginComponent {
       }
     );
   }
+
+  onClick(){
+
+  }
+
 
 }

@@ -9,14 +9,14 @@ export class GastosService {
 
   constructor(private http: HttpClient) {}
 
-  // crearGrupo(categoria: string, nombre: string): Observable<any>{
-  //   return this.http.post<any>('http://localhost:8081/grupos/crearGrupo', { "idUsuario": localStorage.getItem("userid"), "categoria": categoria, "nombre": nombre })
-  //   .pipe(
-  //     map(response => {
-  //       console.log(response);
-  //       return response; // Devuelve la respuesta si es necesario
-  //     })
-  //   );
-  // }
+  listarGastosPorGrupo(idGrupo:number): Observable<any>{
+    return this.http.get<any>('http://localhost:8081/grupos/listarGastosPorGrupo/${idGrupo}')
+    .pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    )
+  }
 
 }

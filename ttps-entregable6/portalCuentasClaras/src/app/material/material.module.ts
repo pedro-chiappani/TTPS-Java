@@ -21,7 +21,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatCardModule, 
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ]
 })
 export class MaterialModule { }

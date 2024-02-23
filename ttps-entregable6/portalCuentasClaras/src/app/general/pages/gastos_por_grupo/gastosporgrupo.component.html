@@ -1,0 +1,13 @@
+<div>
+     
+    <!-- Lista de grupos -->
+    <mat-list>
+      <mat-list-item *ngFor="let gasto of gastos" class="mat-list-item">
+        <div class="list-item-content">
+          <span>{{ gasto.nombre }}</span>
+          <!-- Puedes mostrar más detalles del gasto aquí -->
+        </div>
+        <!-- Puedes agregar botones para editar o eliminar gasto si es necesario -->
+      </mat-list-item>
+    </mat-list>
+  </div>

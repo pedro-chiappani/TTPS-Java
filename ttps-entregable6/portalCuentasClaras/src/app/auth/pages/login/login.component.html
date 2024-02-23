@@ -10,8 +10,12 @@
                     required>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+            <div class="buttons-container">
+                <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+                <button mat-raised-button color="primary" routerLink="/auth/registro">Registrar</button>
+            </div>
         </form>
+        
         
         <div *ngIf="errorMessage" class="error-message">
             {{ errorMessage }}

@@ -78,6 +78,7 @@ public class UsuarioRestController {
 		if(isLoginSuccess(loginDTO.getNombreUsuario(), loginDTO.getClave())) {
 			Usuario usuario = usuarioService.obtenerPorNombreUsuario(loginDTO.getNombreUsuario());
             String token = tokenServices.generateToken(loginDTO.getNombreUsuario(), EXPIRATION_IN_SEC);
+            
 			return ResponseEntity.ok(new Token(usuario.getId(), token));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario o password incorrecto");
