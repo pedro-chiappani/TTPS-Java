@@ -38,6 +38,15 @@ public class GrupoService {
 		return gru.get();
 	}
 	
+	
+	public List<Grupo> recuperarGruposPorUsuarioId(Long usuId) throws Exception {
+		List<Grupo> gru = grupoRepository.recuperarGruposPorUsuarioId(usuId);
+		if (gru == null) {
+			throw new Exception("No se encontro el grupo");
+		}	
+		return gru;
+	}
+	
 	public Grupo guardar(Grupo grupo) {
 		Usuario usuario = usuarioRepository.recuperarPorNombreUsuario(grupo.getUsuarios().get(0).getNombreUsuario());
 		usuario.getGrupos().add(grupo);

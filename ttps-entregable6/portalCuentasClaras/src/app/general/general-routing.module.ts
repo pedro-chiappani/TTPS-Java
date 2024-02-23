@@ -32,18 +32,10 @@ const routes: Routes = [
         path: 'gastosPorGrupo/:idGrupo',
         component: GastoPorGrupoComponent
       },
-      // {
-      //   path: 'editar/:id',
-      //   component: AgregarComponent
-      // },
-      // {
-      //   path: 'buscar',
-      //   component: BuscarComponent
-      // },
-      // {
-      //   path: ':id',
-      //   component: HeroeComponent
-      // },
+      {
+        path: 'crearGasto',
+        component: GastoComponent
+      },
       {
         path: '**',
         redirectTo: 'home'

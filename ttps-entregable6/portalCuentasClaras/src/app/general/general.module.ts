@@ -10,6 +10,9 @@ import { GrupoComponent } from './pages/grupo/grupo.component';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
 import { GastoPorGrupoComponent} from './pages/gastos_por_grupo/gastosporgrupo.component';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 // import { HeroesRoutingModule } from './heroes-routing.module';
 
 // import { BuscarComponent } from './pages/buscar/buscar.component';
@@ -39,7 +42,9 @@ import { GastoPorGrupoComponent} from './pages/gastos_por_grupo/gastosporgrupo.c
     CommonModule,
     GeneralRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
     // FlexLayoutModule,
   ]
 })

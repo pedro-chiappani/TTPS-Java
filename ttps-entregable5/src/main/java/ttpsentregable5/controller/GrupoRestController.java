@@ -56,6 +56,19 @@ public class GrupoRestController {
 	}
 	
 	
+	@CrossOrigin("http://localhost:4200/") 
+	@GetMapping("/listarGruposDeUsuario/{id}")
+	public ResponseEntity<List<Grupo>> listarGruposDeUsuario(@PathVariable("id") Long id) throws Exception {
+		List<Grupo> grupos = grupoService.recuperarGruposPorUsuarioId(id);
+			
+		
+		if(grupos.isEmpty()){
+			return new ResponseEntity<List<Grupo>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Grupo>>(grupos, HttpStatus.OK);
+	}
+	
+	
 //	{
 //	  "idUsuario":"1",
 //	  "categoria":"nombreCategoria",

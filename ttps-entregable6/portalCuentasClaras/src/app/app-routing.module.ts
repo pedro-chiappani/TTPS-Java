@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'general',
     loadChildren: () => import('./general/general.module').then(m => m.GeneralModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: '404',

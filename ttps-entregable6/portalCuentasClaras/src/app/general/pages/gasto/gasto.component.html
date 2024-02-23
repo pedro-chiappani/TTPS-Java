@@ -26,10 +26,39 @@
       <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realizaGasto" name="realizaGasto" required>
     </mat-form-field>
   
-    <mat-form-field>
+    <!-- <mat-form-field>
       <input matInput placeholder="Tipo de División de Gasto" [(ngModel)]="gasto.tipoDivisionGasto" name="tipoDivisionGasto" required>
-    </mat-form-field>
+    </mat-form-field> -->
   
+    <mat-form-field>
+      <mat-label>Detalle de División de Gasto</mat-label>
+      <mat-select [(ngModel)]="gasto.tipoDivisionGasto" name="tipoDivisionGasto" required>
+        <mat-option value="1">Fijo</mat-option>
+        <mat-option value="2">Porcentaje</mat-option>
+        <mat-option value="3">Igual</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <div *ngIf="gasto.tipoDivisionGasto === '1'">
+      <div *ngFor="let usuario of usuariosDelGrupo">
+        <mat-form-field>
+          Monto Fijo: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="gasto.tipoDivisionGasto === '2'">
+      <div *ngFor="let usuario of usuariosDelGrupo">
+        <mat-form-field>
+          Porcentaje: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <div *ngIf="gasto.tipoDivisionGasto === '3'">
+      <p>El gasto se dividirá igualmente entre todos los usuarios.</p>
+    </div>
+    
     <!-- Agrega más campos según tus necesidades -->
   
     <button mat-raised-button color="primary" type="submit">Guardar</button>
