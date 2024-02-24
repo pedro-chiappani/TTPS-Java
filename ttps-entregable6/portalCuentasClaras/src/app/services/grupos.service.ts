@@ -22,7 +22,7 @@ export class GruposService {
     return this.http.put<any>(`http://localhost:8080/grupos/${id}`, {"categoria": categoria, "nombre": nombre})
     .pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         return response;
       })
     );
@@ -32,7 +32,7 @@ export class GruposService {
     return this.http.get<any>('http://localhost:8080/grupos/listarGrupos')
     .pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         return response;
       })
     )
@@ -42,7 +42,7 @@ export class GruposService {
     return this.http.get<any>(`http://localhost:8080/grupos/${id}/usuarios`)
     .pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         return response;
       })
     )
@@ -52,7 +52,7 @@ export class GruposService {
     return this.http.get<any>(`http://localhost:8080/usuarios/${id}/grupos`)
     .pipe(
       map(response => {
-        console.log(response);
+        // console.log(response);
         return response;
       })
     )
@@ -62,7 +62,7 @@ export class GruposService {
     return this.http.get<any>(`http://localhost:8080/grupos/${id}/gastos`)
     .pipe(
       map(response => {
-        console.log('gastos', response);
+        // console.log('gastos', response);
         return response;
       })
     )

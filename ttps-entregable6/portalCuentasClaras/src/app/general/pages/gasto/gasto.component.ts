@@ -57,7 +57,7 @@ export class GastoComponent {
 
   ngOnInit(): void {
     let u = localStorage.getItem("user")!
-    console.log("user", u)
+    // console.log("user", u)
 
 
     this.grupoService.listarGruposUsuario(u).subscribe((grupos: any[]) =>  {
@@ -88,21 +88,18 @@ export class GastoComponent {
   }
 
   actualizarUsuariosDelGrupo(users: any){
-    console.log("entra")
+    // console.log("entra")
     this.usuariosDelGrupo = []
     for (let u of users) {
       this.usuariosDelGrupo.push({id: u.id, valor:0, nombre:u.nombre})
     }
-    console.log("udg", this.usuariosDelGrupo)
+    // console.log("udg", this.usuariosDelGrupo)
   }
 
-  fetchUsuariosDelGrupo(){
-    console.log(this.usuariosDelGrupo)
-  }
 
   fetchUsers(groupId: any) {
     this.grupoService.listarUsuariosGrupo(groupId).subscribe(users => {
-      console.log("users", users)
+      // console.log("users", users)
       this.actualizarUsuariosDelGrupo(users)
       this.users = users;
     });
@@ -114,7 +111,7 @@ export class GastoComponent {
       // Aquí puedes iterar sobre los usuarios y obtener los valores ingresados
       this.usuariosDelGrupo.forEach(usuario => {
         this.detalleGasto.push({"idUsu": usuario.id, "valor": usuario.valor})
-        console.log(`Valor para ${usuario.id}: ${usuario.valor}`);
+        // console.log(`Valor para ${usuario.id}: ${usuario.valor}`);
         // Aquí puedes almacenar los valores en tu objeto de gasto o enviarlos al backend
       });
 
@@ -123,7 +120,7 @@ export class GastoComponent {
       this.usuariosDelGrupo.forEach(usuario => {
 
         this.detalleGasto.push({"idUsu": usuario.id, "valor": parseInt(this.gasto.monto) * (usuario.valor/100)})
-        console.log(`Usuario: ${usuario.id} - Porcentaje: ${usuario.valor}`);
+        // console.log(`Usuario: ${usuario.id} - Porcentaje: ${usuario.valor}`);
         // Aquí puedes almacenar los valores en tu objeto de gasto o enviarlos al backend
       });
       // Aquí puedes almacenar el porcentaje en tu objeto de gasto o enviarlo al backend
@@ -136,7 +133,7 @@ export class GastoComponent {
         this.detalleGasto.push({"idUsu": usuario.id, "valor": valorIgual})
 
       })
-      console.log(`Valor igual para todos: ${valorIgual}`);
+      // console.log(`Valor igual para todos: ${valorIgual}`);
       // Aquí puedes almacenar el valor igual en tu objeto de gasto o enviarlo al backend
 
     }
@@ -148,13 +145,14 @@ export class GastoComponent {
                               this.gasto.idGrupo, this.gasto.categoria, this.gasto.carga,
                                this.gasto.realiza, this.gasto.tipoDiv, this.detalleGasto).subscribe(
     response => {
-      console.log("manda", response)
+      // console.log("manda", response)
     },
     error => {
-      console.log("no manda", error)
+      console.log(error)
     }
   )
     // Aquí puedes enviar el objeto gasto al servidor o realizar otras accione
-    console.log('Gasto enviado:', this.gasto);
+    // console.log('Gasto enviado:', this.gasto);
+    this.router.navigate(['/general/grupo', this.gasto.idGrupo])
   }
 }

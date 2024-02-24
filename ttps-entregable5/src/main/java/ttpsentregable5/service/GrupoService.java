@@ -51,6 +51,12 @@ public class GrupoService {
 		return grupo;
 	}
 	
+	public Grupo actualizar(Grupo grupo) {
+		System.out.println("actualizando");
+		grupoRepository.save(grupo);
+		return grupo;
+	}
+	
 	public void validarCamposAltaGrupo(long idUsuario, String nombre, String categoria) throws Exception {
 		Optional<Grupo> gru = grupoRepository.recuperarPorNombre(nombre);
 		

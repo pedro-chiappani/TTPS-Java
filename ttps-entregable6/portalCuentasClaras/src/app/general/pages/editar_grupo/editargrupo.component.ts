@@ -50,13 +50,14 @@ export class EditarGrupoComponent {
     this.grupoService.editarGrupo(this.categoria, this.nombreGrupo, this.idGrupo).subscribe(
       response => {
         this.errorMessage = '';
-        console.log("asda")
-        this.router.navigate(['/general/grupo'])
+        // console.log("asda")
+
       },
       error => {
         this.errorMessage = error.error;
       }
     )
+    this.router.navigate(['/general/grupo'])
   }
 }
 

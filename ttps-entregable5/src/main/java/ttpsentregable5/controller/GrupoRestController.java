@@ -121,7 +121,7 @@ public class GrupoRestController {
 			if (nombre != null)
 				grupo.setNombre(nombre);
 			
-			grupoService.guardar(grupo);
+			grupoService.actualizar(grupo);
 			
 			return new ResponseEntity<>("Grupo Actualizado", HttpStatus.OK);
 		} catch (Exception e) {

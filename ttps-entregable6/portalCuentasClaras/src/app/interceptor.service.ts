@@ -9,7 +9,7 @@ export class TokenInterceptor implements HttpInterceptor {
 constructor(private http: HttpClient){
 }
 intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log(`TokenInterceptor - ${req.url}`);
+    // console.log(`TokenInterceptor - ${req.url}`);
     let authReq: HttpRequest<any> = req.clone({
     setHeaders:{
     Authorization : `Bearer ${localStorage.getItem("token")}`

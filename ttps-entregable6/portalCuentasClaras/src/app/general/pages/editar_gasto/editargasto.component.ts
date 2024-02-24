@@ -50,13 +50,13 @@ export class EditarGastoComponent {
     this.gastoService.editarGasto(this.categoria, this.imagen, this.idGrupo).subscribe(
       response => {
         this.errorMessage = '';
-        console.log("asda")
-        this.router.navigate(['/general/grupo'])
+        // console.log("asda")
       },
       error => {
         this.errorMessage = error.error;
       }
     )
+    this.router.navigate(['/general/grupo'])
   }
 }
 

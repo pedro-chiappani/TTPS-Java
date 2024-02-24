@@ -52,7 +52,7 @@ public class UsuarioRestController {
 	@GetMapping("/{id}/grupos")
 	public ResponseEntity<List<Grupo>> listUserGroups(@PathVariable("id") Long id) throws Exception{
 		List<Grupo> grupos = usuarioService.listarGrupos(id);
-		System.out.println(grupos);
+//		System.out.println(grupos);
 		return new ResponseEntity<List<Grupo>>(grupos, HttpStatus.OK);
 	}
 

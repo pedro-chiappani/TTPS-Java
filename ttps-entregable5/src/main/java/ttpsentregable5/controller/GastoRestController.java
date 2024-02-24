@@ -103,7 +103,7 @@ public class GastoRestController {
 			//Mapeo
 			Gasto gasto = gastoMapper.toGasto(gastoDTO);
 			gastoService.completarDetalleGasto(gasto, gastoDTO);
-			System.out.println("completa");
+//			System.out.println("completa");
 			
 			this.gastoService.guardar(gasto);
 			

@@ -66,10 +66,10 @@ public class TokenServices {
                     .setSigningKey(key)
                     .parseClaimsJws(token).getBody();
 
-            System.out.println("ID: " + claims.getId());
-            System.out.println("Subject: " + claims.getSubject());
-            System.out.println("Issuer: " + claims.getIssuer());
-            System.out.println("Expiration: " + claims.getExpiration());
+//            System.out.println("ID: " + claims.getId());
+//            System.out.println("Subject: " + claims.getSubject());
+//            System.out.println("Issuer: " + claims.getIssuer());
+//            System.out.println("Expiration: " + claims.getExpiration());
 
             return true;
         } catch (ExpiredJwtException exp) {
