@@ -1,0 +1,19 @@
+<div>
+    <mat-list>
+      <mat-list-item *ngFor="let gasto of gastos" class="mat-list-item">
+        <div class="list-item-content">
+          <span> Categoria: {{ gasto.categoria.nombre }} - {{ gasto.fecha }} - ${{ gasto.monto }} </span>
+          <div>
+
+            <button mat-raised-button color="primary" (click)="editarGasto(gasto)" class="button-margin">
+              <mat-icon>edit</mat-icon> Editar
+            </button>
+            <button mat-raised-button color="primary" (click)="eliminarGasto(gasto)" class="button-margin">
+              <mat-icon>delete</mat-icon> Eliminar
+            </button>
+          </div>
+        </div>
+        <hr>
+      </mat-list-item>
+    </mat-list>
+  </div>

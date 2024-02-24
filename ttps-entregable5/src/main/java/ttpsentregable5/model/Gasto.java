@@ -62,6 +62,7 @@ public class Gasto {
 	private int tipoDivisionGasto; //1-Fijo, 2-Porcentaje, 3-Igual
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "gasto")
+	@JsonIgnore
 	private List<DetalleDivisionGasto> detalleDivisionGasto;
 	
 	public Long getId() {

@@ -18,6 +18,16 @@ export class GruposService {
     );
   }
 
+  editarGrupo(categoria: string, nombre: string, id:number): Observable<any>{
+    return this.http.put<any>(`http://localhost:8080/grupos/${id}`, {"categoria": categoria, "nombre": nombre})
+    .pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    );
+  }
+
   listarGrupos(): Observable<any>{
     return this.http.get<any>('http://localhost:8080/grupos/listarGrupos')
     .pipe(

@@ -121,15 +121,15 @@ public class GastoRestController {
 	//Cambiar el grupo no existe, tema monto y distribucion otro endpoint
 	@CrossOrigin("http://localhost:4200/")
 	@PutMapping("/{id}")
-	public ResponseEntity<String> actualizarGasto(@PathVariable Long id, @RequestBody Map<String, Object> request) {
+	public ResponseEntity<String> actualizarGasto(@PathVariable Long id, @RequestBody Map<String, String> request) {
 		try {
 			
 			String imagen = (String)request.get("imagen");
 			String categoria = (String)request.get("categoria");
-			Long idUsuCarga = Long.parseLong(request.get("cargaGasto").toString());
-			Long idUsuRealiza = Long.parseLong(request.get("realizaGasto").toString()); 
+//			Long idUsuCarga = Long.parseLong(request.get("cargaGasto").toString());
+//			Long idUsuRealiza = Long.parseLong(request.get("realizaGasto").toString()); 
 			
-			if( imagen == null || categoria == null || idUsuCarga==null || idUsuRealiza==null){
+			if( imagen == null || categoria == null){
 				
 				return new ResponseEntity<>("Envie algun dato para actualizar", HttpStatus.BAD_REQUEST);
 			}
@@ -138,19 +138,19 @@ public class GastoRestController {
 			Gasto gasto = gastoService.obtenerPorId(id);
 			
 			// Verificar si los usuarios existen y pertenecen al grupo del gasto
-			Usuario nuevoCargaGasto = usuarioService.obtenerPorId(idUsuCarga);
-			if (nuevoCargaGasto == null) {
-				return new ResponseEntity<>("Usuario de carga de gasto inexistente", HttpStatus.BAD_REQUEST);
-			}else {
-				gasto.setCargaGasto(nuevoCargaGasto);			
-			}
-			
-			Usuario nuevoRealizaGasto = usuarioService.obtenerPorId(idUsuRealiza);
-			if (nuevoRealizaGasto == null) {
-				return new ResponseEntity<>("Usuario de realiza de gasto inexistente", HttpStatus.BAD_REQUEST);
-			}else {
-				gasto.setRealizaGasto(nuevoRealizaGasto);			
-			}
+//			Usuario nuevoCargaGasto = usuarioService.obtenerPorId(idUsuCarga);
+//			if (nuevoCargaGasto == null) {
+//				return new ResponseEntity<>("Usuario de carga de gasto inexistente", HttpStatus.BAD_REQUEST);
+//			}else {
+//				gasto.setCargaGasto(nuevoCargaGasto);			
+//			}
+//			
+//			Usuario nuevoRealizaGasto = usuarioService.obtenerPorId(idUsuRealiza);
+//			if (nuevoRealizaGasto == null) {
+//				return new ResponseEntity<>("Usuario de realiza de gasto inexistente", HttpStatus.BAD_REQUEST);
+//			}else {
+//				gasto.setRealizaGasto(nuevoRealizaGasto);			
+//			}
 			
 			
 			// Verificar categoria

@@ -4,10 +4,29 @@ import { GruposService } from '../../../services/grupos.service';
 import { HttpClient } from '@angular/common/http';
 import { Grupo } from '../../../models/grupo';
 
+
 @Component({
   selector: 'app-grupo',
   templateUrl: './grupo.component.html',
   styles: [
+    `
+      .list-item-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .mat-list-item {
+        margin-bottom: 10px;
+      }
+
+      .button-margin {
+        margin-right: 8px;
+        margin-top: 8px;
+      }
+
+    `
   ]
 })
 export class GrupoComponent implements OnInit {
@@ -16,11 +35,16 @@ export class GrupoComponent implements OnInit {
   constructor(private grupoService: GruposService, private router: Router) {}
 
   ngOnInit() {
+    this.grupos = [];
     this.obtenerGrupos();
   }
 
+  listarGastos(grupo: Grupo) {
+    this.router.navigate(['/general/grupo', grupo.id]);
+  }
+
   obtenerGrupos() {
-    this.grupoService.listarGrupos()
+    this.grupoService.listarGruposUsuario(localStorage.getItem('user')!)
       .subscribe(
         (data) => {
           this.grupos = data;
@@ -30,11 +54,11 @@ export class GrupoComponent implements OnInit {
         }
       );
   }
-
   editarGrupo(grupo: Grupo) {
-    // Lógica para editar el grupo
-    console.log('Editando grupo:', grupo);
+    this.router.navigate(['/general/editargrupo', grupo.id]);
   }
+
+
 
   eliminarGrupo(grupo: Grupo) {
     // Lógica para eliminar el grupo

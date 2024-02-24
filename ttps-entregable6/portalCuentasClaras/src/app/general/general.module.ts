@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { GeneralRoutingModule } from './general-routing.module';
 
@@ -11,6 +11,9 @@ import { GrupoComponent } from './pages/grupo/grupo.component';
 import { MaterialModule } from '../material/material.module';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
 import { DetalleGrupoComponent } from './pages/detalle_grupo/detallegrupo.component';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { EditarGrupoComponent } from './pages/editar_grupo/editargrupo.component';
+import { EditarGastoComponent } from './pages/editar_gasto/editargasto.component';
 
 
 // import { HeroesRoutingModule } from './heroes-routing.module';
@@ -33,6 +36,8 @@ import { DetalleGrupoComponent } from './pages/detalle_grupo/detallegrupo.compon
     GrupoComponent,
     CrearGrupoComponent,
     DetalleGrupoComponent,
+    EditarGrupoComponent,
+    EditarGastoComponent
     // AgregarComponent,
     // ListadoComponent,
     // HeroeTarjetaComponent,
@@ -43,7 +48,11 @@ import { DetalleGrupoComponent } from './pages/detalle_grupo/detallegrupo.compon
     GeneralRoutingModule,
     MaterialModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
     // FlexLayoutModule,
   ]
 })
