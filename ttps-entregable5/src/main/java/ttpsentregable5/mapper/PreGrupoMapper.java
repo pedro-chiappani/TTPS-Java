@@ -2,6 +2,7 @@ package ttpsentregable5.mapper;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -30,7 +31,7 @@ public abstract class PreGrupoMapper {
 	public abstract Grupo toGrupo(PreGrupoDTO dto);
 	
 	@Named("nomCategoriaACategoria") 
-	Categoria nomCategoriaACategoria(String nombreCat) {
+	Optional<Categoria> nomCategoriaACategoria(String nombreCat) {
 		return categoriaRepository.recuperarPorNombreCategoriaGrupo(nombreCat);
 	}
 	

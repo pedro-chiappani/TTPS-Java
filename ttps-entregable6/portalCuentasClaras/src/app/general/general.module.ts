@@ -9,6 +9,8 @@ import { GastoComponent } from './pages/gasto/gasto.component';
 import { GrupoComponent } from './pages/grupo/grupo.component';
 import { CrearGrupoComponent } from './pages/crear_grupo/creargrupo.component';
 import { GastoPorGrupoComponent} from './pages/gastos_por_grupo/gastosporgrupo.component';
+import { EditarGastoComponent } from './pages/editar_gasto/editargasto.component';
+import { EditarGrupoComponent } from './pages/editar_grupo/editargrupo.component';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,7 +34,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GastoComponent,
     GrupoComponent,
     CrearGrupoComponent,
-    GastoPorGrupoComponent
+    GastoPorGrupoComponent,
+    EditarGastoComponent,
+    EditarGrupoComponent
     // AgregarComponent,
     // ListadoComponent,
     // HeroeTarjetaComponent,

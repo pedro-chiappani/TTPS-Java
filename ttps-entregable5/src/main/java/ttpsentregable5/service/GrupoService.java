@@ -26,8 +26,22 @@ public class GrupoService {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
+	
+	
+	public Grupo actualizar(Grupo grupo) {
+		System.out.println("actualizando");
+		grupoRepository.save(grupo);
+		return grupo;
+	}
+	
+	
 	public List<Grupo> listarGrupos(){
 		return grupoRepository.findAll();
+	}
+	
+	public List<Usuario> listarUsuariosGrupo(Long id){
+		System.out.println(grupoRepository.obtenerUsuariosGrupo(id));
+		return grupoRepository.obtenerUsuariosGrupo(id);
 	}
 	
 	public Grupo obtenerPorId(Long id) throws Exception {
@@ -37,6 +51,8 @@ public class GrupoService {
 		}	
 		return gru.get();
 	}
+	
+	
 	
 	
 	

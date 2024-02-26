@@ -55,7 +55,7 @@ export class GrupoComponent implements OnInit {
 
   editarGrupo(grupo: Grupo) {
     // Lógica para editar el grupo
-    console.log('Editando grupo:', grupo);
+    this.router.navigate(['/general/editargrupo', grupo.id]);
   }
 
   eliminarGrupo(grupo: Grupo) {

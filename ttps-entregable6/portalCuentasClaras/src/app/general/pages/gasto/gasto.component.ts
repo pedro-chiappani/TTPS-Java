@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GastosService } from '../../../services/gastos.service';
+import { GruposService } from '../../../services/grupos.service';
+import { User } from '../../../models/User';
+import { CategoriaService } from '../../../services/categoria.service';
 
 interface UsuarioDetalle {
-  id: string; 
-  valor: number; 
+  id: string;
+  valor: number;
+  nombre: string;
 }
 
 @Component({
   selector: 'app-alta-gasto',
   templateUrl: './gasto.component.html',
   styles: `
-  
+
     form {
       display: flex;
       flex-direction: column;
@@ -30,54 +36,121 @@ interface UsuarioDetalle {
   `
 })
 export class GastoComponent {
-  
-  
-  
+  grupos: any[] = [];
+  users: any[] = [];
+  categorias: any[] = [];
+  detalleGasto: any[] = [];
   gasto: any = {
     monto: null,
     imagen: '',
     fecha: null,
+    idGrupo: null,
+    categoria: null,
+    realiza: null,
+    carga: null,
+    tipoDiv: null,
     // Agrega más propiedades según tus necesidades
   };
-
   usuariosDelGrupo: UsuarioDetalle[] = [];
 
-  constructor(){
-    this.usuariosDelGrupo.push({ id: 'usuario1', valor: 0 });
-    this.usuariosDelGrupo.push({ id: 'usuario2', valor: 0 });
-    this.usuariosDelGrupo.push({ id: 'usuario3', valor: 0 });
+  constructor(private fb: FormBuilder, private gastoService: GastosService, private categoriaService: CategoriaService, private grupoService: GruposService, private router: Router) {}
+
+  ngOnInit(): void {
+    
+
+    this.grupoService.listarGrupos().subscribe((grupos: any[]) =>  {
+      this.grupos = grupos;
+    })
+
+    this.categoriaService.obtenerCatGastos().subscribe((cats: any[]) => {
+      this.categorias = cats;
+    })
+  }
+
+
+
+  createMontoFijoFormGroup(): FormGroup {
+    return this.fb.group({
+      // Define form controls for Monto Fijo
+      usuario: ['', Validators.required],
+      monto: ['', Validators.required],
+    });
+  }
+
+  createPorcentajeFormGroup(): FormGroup {
+    return this.fb.group({
+      // Define form controls for Porcentaje
+      usuario: ['', Validators.required],
+      porcentaje: ['', Validators.required],
+    });
+  }
+
+  actualizarUsuariosDelGrupo(users: any){
+    // console.log("entra")
+    this.usuariosDelGrupo = []
+    for (let u of users) {
+      this.usuariosDelGrupo.push({id: u.id, valor:0, nombre:u.nombre})
+    }
+    // console.log("udg", this.usuariosDelGrupo)
+  }
+
+
+  fetchUsers(groupId: any) {
+    this.grupoService.listarUsuariosGrupo(groupId).subscribe(users => {
+      // console.log("users", users)
+      this.actualizarUsuariosDelGrupo(users)
+      this.users = users;
+    });
   }
 
   submitForm() {
-    // Aquí puedes enviar el objeto gasto al servidor o realizar otras acciones
-    //console.log('Gasto enviado:', this.gasto);
+    if (this.gasto.tipoDiv === "1") {
 
-    if (this.gasto.tipoDivisionGasto === 'Fijo') {
-      
       // Aquí puedes iterar sobre los usuarios y obtener los valores ingresados
       this.usuariosDelGrupo.forEach(usuario => {
-        console.log(`Valor para ${usuario.id}: ${usuario.valor}`);
+        this.detalleGasto.push({"idUsu": usuario.id, "valor": usuario.valor})
+        // console.log(`Valor para ${usuario.id}: ${usuario.valor}`);
         // Aquí puedes almacenar los valores en tu objeto de gasto o enviarlos al backend
       });
 
-    } else if (this.gasto.tipoDivisionGasto === 'Porcentaje') {
-      
+    } else if (this.gasto.tipoDiv === "2") {
+
       this.usuariosDelGrupo.forEach(usuario => {
-        console.log(`Usuario: ${usuario.id} - Porcentaje: ${usuario.valor}`);
+
+        this.detalleGasto.push({"idUsu": usuario.id, "valor": parseInt(this.gasto.monto) * (usuario.valor/100)})
+        // console.log(`Usuario: ${usuario.id} - Porcentaje: ${usuario.valor}`);
         // Aquí puedes almacenar los valores en tu objeto de gasto o enviarlos al backend
       });
       // Aquí puedes almacenar el porcentaje en tu objeto de gasto o enviarlo al backend
 
-    } else if (this.gasto.tipoDivisionGasto === 'Igual') {
+    } else if (this.gasto.tipoDiv === "3") {
 
-      // Aquí puedes calcular el valor igual para todos los usuarios
-      const valorIgual = this.gasto.monto / this.usuariosDelGrupo.length;
-      console.log(`Valor igual para todos: ${valorIgual}`);
+      // Aquí pu
+      const valorIgual = this.gasto.monto / this.users.length;
+      this.usuariosDelGrupo.forEach(usuario => {
+        this.detalleGasto.push({"idUsu": usuario.id, "valor": valorIgual})
+
+      })
+      // console.log(`Valor igual para todos: ${valorIgual}`);
       // Aquí puedes almacenar el valor igual en tu objeto de gasto o enviarlo al backend
 
     }
 
 
+
+
+    this.gastoService.crearGasto(this.gasto.monto, this.gasto.imagen, this.gasto.fecha,
+                              this.gasto.idGrupo, this.gasto.categoria, this.gasto.carga,
+                               this.gasto.realiza, this.gasto.tipoDiv, this.detalleGasto).subscribe(
+    response => {
+      // console.log("manda", response)
+    },
+    error => {
+      console.log(error)
+    }
+  )
+    // Aquí puedes enviar el objeto gasto al servidor o realizar otras accione
+    // console.log('Gasto enviado:', this.gasto);
+    this.router.navigate(['/general/grupo', this.gasto.idGrupo])
   }
 }
-

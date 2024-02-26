@@ -1,67 +1,101 @@
 
 <form (ngSubmit)="submitForm()" fxLayout="column" fxLayoutAlign="center">
-    <mat-form-field>
-      <input matInput placeholder="Monto" [(ngModel)]="gasto.monto" name="monto" required>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Imagen" [(ngModel)]="gasto.imagen" name="imagen" required>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Fecha" [(ngModel)]="gasto.fecha" name="fecha" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  
-    <mat-form-field>
-        <input matInput placeholder="Grupo" [(ngModel)]="gasto.grupo" name="grupo" required>
-      </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput placeholder="Carga Gasto" [(ngModel)]="gasto.cargaGasto" name="cargaGasto" required>
-    </mat-form-field>
-  
-    <mat-form-field>
-      <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realizaGasto" name="realizaGasto" required>
-    </mat-form-field>
-  
-    <!-- <mat-form-field>
-      <input matInput placeholder="Tipo de División de Gasto" [(ngModel)]="gasto.tipoDivisionGasto" name="tipoDivisionGasto" required>
+  <mat-form-field>
+    <input matInput placeholder="Monto" [(ngModel)]="gasto.monto" name="monto" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Imagen" [(ngModel)]="gasto.imagen" name="imagen" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Fecha" [(ngModel)]="gasto.fecha" name="fecha" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Selecciona un grupo</mat-label>
+    <mat-select [(ngModel)]="gasto.idGrupo" (selectionChange)="fetchUsers(gasto.idGrupo)" name="grupo">
+      <mat-option *ngFor="let group of grupos" [value]="group.id">{{ group.nombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- <mat-form-field>
+      <input matInput placeholder="Grupo" [(ngModel)]="gasto.idGrupo" name="grupo" required>
     </mat-form-field> -->
-  
+
+    <!-- <mat-form-field>
+      <input matInput placeholder="Categoria" [(ngModel)]="gasto.categoria" name="grupo" required>
+    </mat-form-field> -->
+
     <mat-form-field>
-      <mat-label>Detalle de División de Gasto</mat-label>
-      <mat-select [(ngModel)]="gasto.tipoDivisionGasto" name="tipoDivisionGasto" required>
-        <mat-option value="1">Fijo</mat-option>
-        <mat-option value="2">Porcentaje</mat-option>
-        <mat-option value="3">Igual</mat-option>
+      <mat-label>Selecciona una categoria</mat-label>
+      <mat-select [(ngModel)]="gasto.categoria" name="grupo">
+        <mat-option *ngFor="let cat of categorias" [value]="cat.nombre">{{ cat.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>
-    
-    <div *ngIf="gasto.tipoDivisionGasto === '1'">
-      <div *ngFor="let usuario of usuariosDelGrupo">
-        {{usuario.id}}
-        <mat-form-field>
-          Monto Fijo: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
-        </mat-form-field>
-      </div>
-    </div>
 
-    <div *ngIf="gasto.tipoDivisionGasto === '2'">
-      <div *ngFor="let usuario of usuariosDelGrupo">
-        {{usuario.id}}
-        <mat-form-field>
-          Porcentaje: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
-        </mat-form-field>
-      </div>
+  <!-- <mat-form-field>
+    <input matInput placeholder="Carga Gasto" [(ngModel)]="gasto.carga" name="cargaGasto" required>
+  </mat-form-field> -->
+
+  <mat-form-field>
+    <mat-label>Quien Realiza?</mat-label>
+    <mat-select [(ngModel)]="gasto.realiza" name="realiza">
+      <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Quien Carga?</mat-label>
+    <mat-select [(ngModel)]="gasto.carga" name="carga">
+      <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- <mat-form-field>
+    <input matInput placeholder="Realiza Gasto" [(ngModel)]="gasto.realiza" name="realizaGasto" required>
+  </mat-form-field> -->
+
+  <!-- <mat-form-field>
+    <input matInput placeholder="Tipo de División de Gasto" [(ngModel)]="gasto.tipoDiv" name="tipoDivisionGasto"   required>
+  </mat-form-field> -->
+
+  <mat-form-field>
+    <mat-label>Detalle de División de Gasto</mat-label>
+    <mat-select [(ngModel)]="gasto.tipoDiv" name="tipoDivisionGasto" required>
+      <mat-option value="1">Fijo</mat-option>
+      <mat-option value="2">Porcentaje</mat-option>
+      <mat-option value="3">Igual</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="gasto.tipoDiv === '1'">
+    <div *ngFor="let usuario of usuariosDelGrupo">
+      {{usuario.nombre}}
+      <mat-form-field>
+        Monto Fijo: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
+      </mat-form-field>
     </div>
-    
-    <div *ngIf="gasto.tipoDivisionGasto === '3'">
-      <p>El gasto se dividirá igualmente entre todos los usuarios.</p>
+  </div>
+
+  <div *ngIf="gasto.tipoDiv === '2'">
+    <div *ngFor="let usuario of usuariosDelGrupo">
+      {{usuario.nombre}}
+      <mat-form-field>
+        Porcentaje: <input matInput [(ngModel)]="usuario.valor" name="{{usuario.id}}" required>
+      </mat-form-field>
     </div>
-    
-    <!-- Agrega más campos según tus necesidades -->
-  
-    <button mat-raised-button color="primary" type="submit">Guardar</button>
-  </form>
+  </div>
+
+  <div *ngIf="gasto.tipoDiv === '3'">
+    <p>El gasto se dividirá igualmente entre todos los usuarios.</p>
+  </div>
+
+
+
+  <!-- Agrega más campos según tus necesidades -->
+
+  <button mat-raised-button color="primary" type="submit">Guardar</button>
+</form>

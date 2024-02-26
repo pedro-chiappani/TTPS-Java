@@ -1,5 +1,9 @@
 package ttpsentregable5.service;
 
+import java.util.List;
+import java.util.Optional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +19,26 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
-	public Categoria obtenerCategoriaDeGrupoPorNombre(String nombre) {
-		return categoriaRepository.recuperarPorNombreCategoriaGrupo(nombre);
+	public Categoria obtenerCategoriaDeGrupoPorNombre(String nombre) throws Exception{
+		Optional<Categoria> cat = categoriaRepository.recuperarPorNombreCategoriaGrupo(nombre);
+		if (!cat.isPresent()) {
+			throw new Exception("No se encontro la categoria");
+		}
+		return cat.get();
 	}
 	
 	
 	public Categoria obtenerCategoriaDeGastoPorNombre(String nombre) {
 		return categoriaRepository.recuperarPorNombreCategoriaGasto(nombre);
 	}
+	
+	public List<Categoria> obtenerCategoriaGasto(){
+		
+		return categoriaRepository.obtenerCategoriasGasto();
+	}
+	
+	public List<Categoria> obtenerCategoriaGrupo(){
+		return categoriaRepository.obtenerCategoriasGrupo();
+	}
+	
 }

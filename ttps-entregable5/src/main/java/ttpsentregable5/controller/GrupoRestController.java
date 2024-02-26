@@ -110,6 +110,17 @@ public class GrupoRestController {
 		}
 	}
 	
+	
+	@CrossOrigin("http://localhost:4200/")
+	@GetMapping("/{id}/usuarios")
+	public ResponseEntity<List<Usuario>> listarUsuarios(@PathVariable("id") Long id){
+		List<Usuario> usus = grupoService.listarUsuariosGrupo(id);
+		if (usus.isEmpty())
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Usuario>>(usus, HttpStatus.OK);
+	}
+	
+	
 	@CrossOrigin("http://localhost:4200/") 
 	@PutMapping("/{id}")
 	public ResponseEntity<String> actualizarGrupo(@PathVariable Long id, @RequestBody UpdtGrupoDTO grupoDTO) {
@@ -136,7 +147,7 @@ public class GrupoRestController {
             grupo.setNombre(grupoDTO.getNombre());		
 									           
             // Guardar el grupo actualizado en la base de datos
-            grupoService.guardar(grupo);
+            grupoService.actualizar(grupo);
 			
 			return new ResponseEntity<>("Grupo actualzado", HttpStatus.OK);
 		} catch (Exception e) {

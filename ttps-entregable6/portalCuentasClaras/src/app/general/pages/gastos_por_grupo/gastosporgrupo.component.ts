@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { GastosService } from '../../../services/gastos.service';
 
@@ -32,7 +32,7 @@ export class GastoPorGrupoComponent implements OnInit {
   nombreGrupo: string="";
   gastos: any[]= [];
 
-  constructor(private gastosService: GastosService, private route: ActivatedRoute) {}
+  constructor(private gastosService: GastosService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -56,8 +56,7 @@ export class GastoPorGrupoComponent implements OnInit {
 
 
   editarGasto(gasto:any) {
-    // Lógica para editar el grupo
-    console.log('Editando gasto:', gasto);
+    this.router.navigate(['/general/editargasto', gasto.id]);
   }
 
   eliminarGasto(gasto:any) {
